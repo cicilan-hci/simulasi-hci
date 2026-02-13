@@ -1262,6 +1262,10 @@ function buildResultHTML() {
     </div>
     <div class="sep" style="margin:10px 0"></div>
     <div class="result-header-row">
+      <div class="result-label">Biaya Admin</div>
+      <div class="result-value">Rp 199.000</div>
+    </div>
+    <div class="result-header-row">
       <div class="result-label">Bunga / Bulan</div>
       <div class="result-value">${(bunga * 100).toFixed(2)}%</div>
     </div>
@@ -1293,10 +1297,11 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi) {
   const iconId = 'tenor-icon-' + tenor;
 
   // ===== Kalkulasi =====
+  const biayaAdmin = 199000;
   const ta = totalAsuransi + akujagaPerBulan * tenor;
   const base = pokok + ta;
   const bungaTotal = base * bunga * tenor;
-  const total = base + bungaTotal;
+  const total = base + bungaTotal + biayaAdmin;
   const cicilan = total / tenor;
 
   const stdLabel = 'Cicilan per Bulan';
@@ -1304,7 +1309,8 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi) {
     <div class="option-cicilan">${rupiah(cicilan)}<span style="font-size:13px;color:var(--muted);font-family:var(--font)">/bln</span></div>
     <div class="option-total">Total Pembayaran: ${rupiah(total)}</div>
     <div class="calc-desc">
-      (Pokok + Proteksi) × bunga ${(bunga*100).toFixed(2)}% × ${tenor} bulan<br>
+      (Pokok + Proteksi + Admin) × bunga ${(bunga*100).toFixed(2)}% × ${tenor} bulan<br>
+      Biaya Admin: <code>${rupiah(biayaAdmin)}</code> dibagi ${tenor} bulan<br>
       Total ÷ ${tenor} = <code>${rupiah(cicilan)}/bln</code>
     </div>
   </div>`;
