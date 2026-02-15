@@ -255,6 +255,171 @@
     color: var(--accent2);
   }
 
+  /* RUNNING TEXT / PROMO BANNER */
+  .running-text-container {
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    padding: 10px 0;
+    margin: 0 0 20px 0;
+    border-radius: 0;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+  }
+
+  .running-text-wrapper {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll-left 6.7s linear infinite;
+    gap: 20px;
+  }
+
+  .running-text-wrapper:hover {
+    animation-play-state: paused;
+  }
+
+  .running-text-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 5px;
+    flex-shrink: 0;
+  }
+
+  .running-text-item span {
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .running-text-separator {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+    margin: 0 8px;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  :root.dark-mode .running-text-container {
+    background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  }
+
+  /* ACTIVITY LOG STYLES */
+  .activity-log-container {
+    margin-top: 20px;
+    padding: 18px;
+    background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 100%);
+    border: 2px solid #22c55e;
+    border-radius: 16px;
+  }
+
+  .activity-log-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #16a34a;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .activity-log-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .activity-log-item {
+    padding: 12px;
+    background: white;
+    border: 1px solid #dcfce7;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .activity-log-item:hover {
+    background: #f0fdf4;
+    border-color: #22c55e;
+    transform: translateX(4px);
+    box-shadow: 0 2px 6px rgba(34, 197, 94, 0.15);
+  }
+
+  .activity-log-item:active {
+    transform: translateX(2px);
+  }
+
+  .activity-log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .activity-log-nominal {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .activity-log-date {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .activity-log-details {
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .activity-log-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .activity-log-empty {
+    padding: 12px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  /* DARK MODE ACTIVITY LOG */
+  :root.dark-mode .activity-log-container {
+    background: linear-gradient(135deg, #164e63 0%, #0f172a 100%);
+    border-color: #06b6d4;
+  }
+
+  :root.dark-mode .activity-log-title {
+    color: #22d3ee;
+  }
+
+  :root.dark-mode .activity-log-item {
+    background: var(--surface2);
+    border-color: #164e63;
+  }
+
+  :root.dark-mode .activity-log-item:hover {
+    background: var(--surface);
+    border-color: #06b6d4;
+  }
+
   /* TENOR RECOMMENDATION STYLES */
   .tenor-recommendation {
     margin-top: 20px;
@@ -1543,6 +1708,41 @@
   <!-- DARK MODE TOGGLE -->
   <button class="dark-mode-toggle" id="darkModeBtn" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
 
+  <!-- RUNNING TEXT PROMO -->
+  <div class="running-text-container">
+    <div class="running-text-wrapper">
+      <div class="running-text-item">
+        <span>Bunga Spesial 0% Tenor 14 Bulan+BEBAS BIAYA Admin+BEBAS BIAYA Bulanan.</span>
+        <span class="running-text-separator">-</span>
+        <span>Galaxy S25 Series</span>
+        <span class="running-text-separator">-</span>
+        <span>Galaxy Z Flip7</span>
+        <span class="running-text-separator">-</span>
+        <span>Galaxy Z Fold7</span>
+        <span class="running-text-separator">-</span>
+        <span>Galaxy Tab S10 Series</span>
+        <span class="running-text-separator">-</span>
+        <span>Galaxy Tab S11 Series</span>
+        <span class="running-text-separator">-</span>
+      </div>
+      <!-- Duplicate untuk loop seamless -->
+      <div class="running-text-item">
+        <span>Bunga Spesial 0% Tenor 14 Bulan+BEBAS BIAYA Admin+BEBAS BIAYA Bulanan.</span>
+        <span class="running-text-separator">-</span>
+        <span>Galaxy S25 Series</span>
+        <span class="running-text-separator">-</span>
+        <span>Galaxy Z Flip7</span>
+        <span class="running-text-separator">-</span>
+        <span>Galaxy Z Fold7</span>
+        <span class="running-text-separator">-</span>
+        <span>Galaxy Tab S10 Series</span>
+        <span class="running-text-separator">-</span>
+        <span>Galaxy Tab S11 Series</span>
+        <span class="running-text-separator">-</span>
+      </div>
+    </div>
+  </div>
+
   <!-- HEADER -->
   <div class="header">
     <div class="header-badge">💳 Kredit</div>
@@ -1585,6 +1785,7 @@
       <div class="card">
         <div class="card-title" id="nominalTitle">💰 Harga Barang</div>
         <div class="nominal-display empty" id="nominalDisplay">Masukkan harga...</div>
+        
         
         <!-- INPUT PENDAPATAN KONSUMEN -->
         <div class="income-input-container" style="margin: 20px 0; padding: 16px; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border);">
@@ -1638,6 +1839,14 @@
           <button class="numpad-btn zero" onclick="numpadInput('0')">0</button>
           <button class="numpad-btn del" onclick="numpadDel()">⌫</button>
           <button class="numpad-btn next-btn" onclick="goToProteksi()">Lanjut →</button>
+        </div>
+      </div>
+
+      <!-- ACTIVITY LOG / RIWAYAT CICILAN -->
+      <div class="activity-log-container" id="activityLogContainer">
+        <div class="activity-log-title">📊 Riwayat Cek Cicilan Terakhir</div>
+        <div class="activity-log-list" id="activityLogList">
+          <div class="activity-log-empty">Belum ada riwayat</div>
         </div>
       </div>
     </div>
@@ -2134,6 +2343,9 @@ function selectTenorManual() {
 function buildAndShowResult() {
   const el = document.getElementById('resultContent');
   el.innerHTML = buildResultHTML();
+  
+  // Save to activity log
+  saveActivityLog();
 }
 
 function buildResultHTML() {
@@ -2348,6 +2560,7 @@ function resetAll() {
   document.querySelectorAll('.tenor-preset').forEach(b => b.classList.remove('selected'));
   renderToggles();
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
+  displayActivityLog();
   showScreen(1);
 }
 
@@ -2443,10 +2656,135 @@ window.addEventListener('load', function() {
   }
 });
 
+/* ========== ACTIVITY LOG ========== */
+function saveActivityLog() {
+  const harga = parseInt(state.hargaBarang) || 0;
+  const cash = parseInt(state.cash) || 0;
+  const nominal = harga - cash;
+  
+  if (!harga || !nominal) return;
+  
+  const activity = {
+    id: Date.now(),
+    harga: harga,
+    cash: cash,
+    nominal: nominal,
+    bunga: state.bunga,
+    asuransi: state.asuransi,
+    pendapatan: state.income,
+    date: new Date().toLocaleDateString('id-ID'),
+    time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+  };
+  
+  // Get existing activities
+  let activities = [];
+  try {
+    const stored = localStorage.getItem('cicilan_activities');
+    if (stored) {
+      activities = JSON.parse(stored);
+    }
+  } catch (e) {
+    console.error('Error loading activities:', e);
+  }
+  
+  // Add new activity to the beginning
+  activities.unshift(activity);
+  
+  // Keep only last 10 activities
+  activities = activities.slice(0, 10);
+  
+  // Save to localStorage
+  try {
+    localStorage.setItem('cicilan_activities', JSON.stringify(activities));
+  } catch (e) {
+    console.error('Error saving activities:', e);
+  }
+  
+  // Update display
+  displayActivityLog();
+}
+
+function displayActivityLog() {
+  const listEl = document.getElementById('activityLogList');
+  if (!listEl) return;
+  
+  let activities = [];
+  try {
+    const stored = localStorage.getItem('cicilan_activities');
+    if (stored) {
+      activities = JSON.parse(stored);
+    }
+  } catch (e) {
+    console.error('Error loading activities:', e);
+  }
+  
+  if (activities.length === 0) {
+    listEl.innerHTML = '<div class="activity-log-empty">Belum ada riwayat</div>';
+    return;
+  }
+  
+  let html = '';
+  activities.forEach(activity => {
+    const asuransiText = activity.asuransi.length > 0 ? activity.asuransi.join(', ') : 'Tanpa';
+    const pendapatanText = activity.pendapatan ? `📊 ${rupiah(activity.pendapatan)}/bln` : '';
+    
+    html += `<div class="activity-log-item" onclick="loadActivityLog(${activity.id})">
+      <div class="activity-log-header">
+        <div class="activity-log-nominal">${rupiah(activity.nominal)}</div>
+        <div class="activity-log-date">${activity.time}</div>
+      </div>
+      <div class="activity-log-details">
+        <div class="activity-log-detail-item">💰 ${rupiah(activity.harga)}</div>
+        <div class="activity-log-detail-item">💵 ${rupiah(activity.cash || 0)}</div>
+        <div class="activity-log-detail-item">📈 ${(activity.bunga * 100).toFixed(1)}%</div>
+        ${pendapatanText ? `<div class="activity-log-detail-item">${pendapatanText}</div>` : ''}
+      </div>
+    </div>`;
+  });
+  
+  listEl.innerHTML = html;
+}
+
+function loadActivityLog(activityId) {
+  let activities = [];
+  try {
+    const stored = localStorage.getItem('cicilan_activities');
+    if (stored) {
+      activities = JSON.parse(stored);
+    }
+  } catch (e) {
+    console.error('Error loading activities:', e);
+    return;
+  }
+  
+  const activity = activities.find(a => a.id === activityId);
+  if (!activity) return;
+  
+  // Load activity data into state
+  state.hargaBarang = activity.harga.toString();
+  state.cash = activity.cash.toString();
+  state.nominal = activity.nominal;
+  state.bunga = activity.bunga;
+  state.asuransi = activity.asuransi;
+  state.income = activity.pendapatan;
+  
+  // Go to result screen
+  buildAndShowResult();
+  showScreen(5);
+  
+  // Show feedback
+  const msg = document.createElement('div');
+  msg.textContent = '✓ Data riwayat dimuat';
+  msg.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--accent);color:white;padding:10px 16px;border-radius:8px;font-size:12px;font-weight:600;z-index:10000;animation:slideUp 0.3s ease;';
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 2000);
+}
+
 // Init
 updateProgress(1);
 updateActionBar(1);
 updateHomeButton(1);
+displayActivityLog();
 </script>
 </body>
 </html>
