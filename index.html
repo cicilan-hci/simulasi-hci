@@ -132,6 +132,129 @@
     transform: translateY(0);
   }
 
+  /* CASH SLIDER STYLES */
+  .slider-container {
+    padding: 20px 0;
+    margin: 20px 0;
+  }
+
+  .slider-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+
+  .cash-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 10px;
+    background: var(--surface2);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  /* Slider thumb styling - Chrome, Safari, Edge */
+  .cash-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);
+    transition: all 0.2s ease;
+    border: 2px solid white;
+  }
+
+  .cash-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.6);
+  }
+
+  .cash-slider::-webkit-slider-thumb:active {
+    transform: scale(1.1);
+  }
+
+  /* Slider thumb styling - Firefox */
+  .cash-slider::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);
+    transition: all 0.2s ease;
+    border: 2px solid white;
+  }
+
+  .cash-slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.6);
+  }
+
+  .cash-slider::-moz-range-thumb:active {
+    transform: scale(1.1);
+  }
+
+  /* Slider track styling - Firefox */
+  .cash-slider::-moz-range-track {
+    background: transparent;
+    border: none;
+  }
+
+  .slider-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .slider-min {
+    color: var(--muted);
+  }
+
+  .slider-max {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* DARK MODE SLIDER */
+  :root.dark-mode .cash-slider {
+    background: var(--surface2);
+  }
+
+  :root.dark-mode .cash-slider::-webkit-slider-thumb {
+    border-color: #1a1f2e;
+  }
+
+  :root.dark-mode .cash-slider::-moz-range-thumb {
+    border-color: #1a1f2e;
+  }
+
+  :root.dark-mode .slider-container {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  :root.dark-mode .slider-label {
+    color: var(--muted);
+  }
+
+  :root.dark-mode .slider-min {
+    color: var(--muted);
+  }
+
+  :root.dark-mode .slider-max {
+    color: var(--accent2);
+  }
+
   /* DARK MODE STYLES */
   :root.dark-mode {
     --bg: #0f1419;
@@ -1278,6 +1401,26 @@
       <div class="card">
         <div class="card-title" id="nominalTitle">💰 Harga Barang</div>
         <div class="nominal-display empty" id="nominalDisplay">Masukkan harga...</div>
+        
+        <!-- SLIDER FOR CASH INPUT -->
+        <div class="slider-container" id="sliderContainer" style="display: none; margin: 20px 0;">
+          <div class="slider-label">Geser untuk mengubah uang muka:</div>
+          <input 
+            type="range" 
+            id="cashSlider" 
+            class="cash-slider"
+            min="0" 
+            max="100000000" 
+            step="100000"
+            value="0"
+            oninput="sliderCashInput(this.value)"
+          >
+          <div class="slider-values">
+            <div class="slider-min">Rp 0</div>
+            <div class="slider-max" id="sliderMaxLabel">Rp 0</div>
+          </div>
+        </div>
+        
         <div class="numpad">
           <button class="numpad-btn" onclick="numpadInput('1')">1</button>
           <button class="numpad-btn" onclick="numpadInput('2')">2</button>
@@ -1559,9 +1702,12 @@ function numpadDel() {
 function renderNominal() {
   const el = document.getElementById('nominalDisplay');
   const titleEl = document.getElementById('nominalTitle');
+  const sliderContainer = document.getElementById('sliderContainer');
+  const cashSlider = document.getElementById('cashSlider');
   
   if (inputMode === 'harga') {
     titleEl.textContent = '💰 Harga Barang';
+    sliderContainer.style.display = 'none';
     if (!state.hargaBarang) {
       el.textContent = 'Masukkan harga...';
       el.className = 'nominal-display empty';
@@ -1571,6 +1717,18 @@ function renderNominal() {
     }
   } else if (inputMode === 'cash') {
     titleEl.textContent = '💵 Uang Muka (Cash)';
+    sliderContainer.style.display = 'block';
+    
+    // Update slider max value berdasarkan harga barang
+    const maxCash = parseInt(state.hargaBarang) || 0;
+    cashSlider.max = maxCash;
+    
+    // Update slider current value
+    cashSlider.value = parseInt(state.cash) || 0;
+    
+    // Update max label di slider
+    document.getElementById('sliderMaxLabel').textContent = 'Rp ' + maxCash.toLocaleString('id-ID');
+    
     if (!state.cash) {
       el.textContent = 'Masukkan cash...';
       el.className = 'nominal-display empty';
@@ -1580,6 +1738,13 @@ function renderNominal() {
     }
   }
 }
+
+/* SLIDER CASH INPUT */
+function sliderCashInput(value) {
+  state.cash = value;
+  renderNominal();
+}
+
 function goToProteksi() {
   if (inputMode === 'harga') {
     if (!state.hargaBarang || parseInt(state.hargaBarang) < 100000) {
