@@ -1906,6 +1906,7 @@
       <div class="card">
         <div class="card-title">📈 Bunga per Bulan</div>
         <div class="bunga-grid">
+          <div class="bunga-btn" onclick="selectBunga(0)"><div class="bunga-rate">0%</div><div class="bunga-label">/ bulan</div></div>
           <div class="bunga-btn" onclick="selectBunga(0.0199)"><div class="bunga-rate">1.99%</div><div class="bunga-label">/ bulan</div></div>
           <div class="bunga-btn" onclick="selectBunga(0.0225)"><div class="bunga-rate">2.25%</div><div class="bunga-label">/ bulan</div></div>
           <div class="bunga-btn" onclick="selectBunga(0.0239)"><div class="bunga-rate">2.39%</div><div class="bunga-label">/ bulan</div></div>
@@ -2007,7 +2008,8 @@ let state = {
   pakaProteksi: null,
   bunga: null,
   tenorList: [3, 6, 9, 12, 15, 18, 24], // default tenor list
-  income: '' // pendapatan bulanan konsumen (opsional)
+  income: '', // pendapatan bulanan konsumen (opsional)
+  biayaAdmin: 299000 // biaya admin tunggal (akan berubah sesuai pilihan)
 };
 
 /* ========== STEP MANAGEMENT ========== */
@@ -2287,6 +2289,32 @@ function goToBunga() {
 /* ========== BUNGA ========== */
 function selectBunga(rate) {
   state.bunga = rate;
+  
+  // Auto-set biaya admin berdasarkan bunga dan harga barang
+  const harga = parseInt(state.hargaBarang) || 0;
+  
+  // Log untuk debug
+  console.log('selectBunga called with rate:', rate, 'harga:', harga);
+  
+  // Check bunga 0%
+  if (rate === 0 || rate < 0.01) {
+    // Bunga 0% → cek harga
+    console.log('Bunga 0% detected');
+    if (harga < 15000000) {
+      state.biayaAdmin = 299000;
+      console.log('Set biaya admin: 299000');
+    } else {
+      state.biayaAdmin = 399000;
+      console.log('Set biaya admin: 399000');
+    }
+  } else {
+    // Bunga > 0% → Rp 199.000
+    state.biayaAdmin = 199000;
+    console.log('Bunga > 0%, Set biaya admin: 199000');
+  }
+  
+  console.log('Final state.biayaAdmin:', state.biayaAdmin);
+  
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
   event.currentTarget.classList.add('selected');
   document.getElementById('bungaManualInput').value = '';
@@ -2310,12 +2338,37 @@ function selectBungaManual() {
   state.bunga = rate;
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
   
+  // Auto-set biaya admin berdasarkan bunga dan harga barang
+  const harga = parseInt(state.hargaBarang) || 0;
+  
+  console.log('selectBungaManual called with value:', value, 'rate:', rate, 'harga:', harga);
+  
+  // Check bunga 0%
+  if (value === 0) {
+    // Bunga 0% → cek harga
+    console.log('Bunga 0% detected');
+    if (harga < 15000000) {
+      state.biayaAdmin = 299000;
+      console.log('Set biaya admin: 299000');
+    } else {
+      state.biayaAdmin = 399000;
+      console.log('Set biaya admin: 399000');
+    }
+  } else {
+    // Bunga > 0% → Rp 199.000
+    state.biayaAdmin = 199000;
+    console.log('Bunga > 0%, Set biaya admin: 199000');
+  }
+  
+  console.log('Final state.biayaAdmin:', state.biayaAdmin);
+  
   setTimeout(() => {
     buildAndShowResult();
     showScreen(5);
   }, 200);
 }
 
+/* BIAYA ADMIN SELECTION */
 /* TENOR HANDLING */
 function selectTenorPreset(tenor) {
   document.querySelectorAll('.tenor-preset').forEach(b => b.classList.remove('selected'));
@@ -2386,7 +2439,7 @@ function buildResultHTML() {
     <div class="sep" style="margin:10px 0"></div>
     <div class="result-header-row">
       <div class="result-label">Biaya Admin</div>
-      <div class="result-value">Rp 199.000</div>
+      <div class="result-value">${rupiah(state.biayaAdmin)}</div>
     </div>
     <div class="result-header-row">
       <div class="result-label">Admin Bulanan</div>
@@ -2428,7 +2481,7 @@ function buildTenorRecommendation(tenors, pokok, bunga, akujagaPerBulan, totalAs
   const income = parseInt(state.income) || 0;
   if (!income) return '';
   
-  const biayaAdmin = 199000;
+  const biayaAdmin = state.biayaAdmin;
   const adminBulanan = 10000;
   
   let html = `<div class="tenor-recommendation show" style="margin-bottom: 20px;">
@@ -2486,7 +2539,7 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi) {
   const iconId = 'tenor-icon-' + tenor;
 
   // ===== Kalkulasi =====
-  const biayaAdmin = 199000;
+  const biayaAdmin = state.biayaAdmin;
   const adminBulanan = 10000;
   const ta = totalAsuransi + akujagaPerBulan * tenor;
   const base = pokok + ta;
@@ -2494,9 +2547,8 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi) {
   const total = base + bungaTotal + biayaAdmin + (adminBulanan * tenor);
   const cicilan = total / tenor;
 
-  const stdLabel = 'Cicilan per Bulan';
-  const stdHTML = `<div class="option-row" style="border:none;padding:12px 0">
-    <div class="option-cicilan">${rupiah(cicilan)}<span style="font-size:13px;color:var(--muted);font-family:var(--font)">/bln</span></div>
+  // Detail - hanya ditampilkan jika diklik
+  const detailHTML = `<div class="option-row" style="border:none;padding:12px 0">
     <div class="option-total">Total Pembayaran: ${rupiah(total)}</div>
     <div class="calc-desc">
       (Pokok + Proteksi + Admin) × bunga ${(bunga*100).toFixed(2)}% × ${tenor} bulan<br>
@@ -2508,11 +2560,11 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi) {
   let html = `<div class="tenor-card fade">
     <div class="tenor-header" onclick="toggleTenor(${tenor})">
       <div class="tenor-badge">${tenor} BLN</div>
-      <div class="tenor-title">Tenor ${tenor} Bulan</div>
-      <div class="tenor-toggle-icon" id="${iconId}">▼</div>
+      <div class="tenor-title" style="flex:1;margin-left:12px;"><strong>${rupiah(cicilan)}</strong><span style="font-size:12px;color:var(--muted);">/bln</span></div>
+      <div class="tenor-toggle-icon open" id="${iconId}">▲</div>
     </div>
-    <div class="tenor-body" id="${cardId}">
-      ${stdHTML}
+    <div class="tenor-body open" id="${cardId}" style="display:none;">
+      ${detailHTML}
     </div>
   </div>`;
 
@@ -2527,6 +2579,9 @@ function toggleTenor(tenor) {
   const isOpen = body.classList.contains('open');
   body.classList.toggle('open', !isOpen);
   icon.classList.toggle('open', !isOpen);
+  
+  // Update icon text
+  icon.textContent = isOpen ? '▼' : '▲';
 }
 
 /* ========== GO HOME / KEMBALI KE HALAMAN AWAL ========== */
@@ -2546,7 +2601,7 @@ function goHome() {
 
 /* ========== RESET ========== */
 function resetAll() {
-  state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24], income: '' };
+  state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24], income: '', biayaAdmin: 299000 };
   inputMode = 'harga';
   document.getElementById('nominalDisplay').textContent = 'Masukkan harga...';
   document.getElementById('nominalDisplay').className = 'nominal-display empty';
@@ -2672,6 +2727,7 @@ function saveActivityLog() {
     bunga: state.bunga,
     asuransi: state.asuransi,
     pendapatan: state.income,
+    biayaAdmin: state.biayaAdmin,
     date: new Date().toLocaleDateString('id-ID'),
     time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
   };
@@ -2767,6 +2823,7 @@ function loadActivityLog(activityId) {
   state.bunga = activity.bunga;
   state.asuransi = activity.asuransi;
   state.income = activity.pendapatan;
+  state.biayaAdmin = activity.biayaAdmin || 299000;
   
   // Go to result screen
   buildAndShowResult();
