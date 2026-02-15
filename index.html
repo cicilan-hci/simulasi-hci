@@ -446,6 +446,29 @@
   }
   .bunga-label { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 600; }
 
+  /* TENOR PRESET */
+  .tenor-preset {
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    transition: all 0.2s ease;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .tenor-preset:active { transform: scale(0.94); }
+  .tenor-preset.selected {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 4px 12px rgba(220,38,38,0.3);
+  }
+
   /* RESULT */
   .result-header {
     background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(239,68,68,0.08));
@@ -1078,10 +1101,42 @@
           <div class="bunga-btn" onclick="selectBunga(0.0390)"><div class="bunga-rate">3.90%</div><div class="bunga-label">/ bulan</div></div>
         </div>
       </div>
+      
+      <!-- MANUAL BUNGA INPUT -->
+      <div class="card" style="margin-top:14px;">
+        <div class="card-title">💡 Atau Input Manual</div>
+        <div style="display:flex;gap:10px;align-items:flex-end;">
+          <div style="flex:1;">
+            <label style="display:block;font-size:11px;color:var(--muted);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.04em;">Bunga (%) per Bulan</label>
+            <input type="number" id="bungaManualInput" placeholder="2.50" step="0.01" min="0" max="10" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:12px;font-size:16px;font-family:var(--mono);box-sizing:border-box;">
+          </div>
+          <button onclick="selectBungaManual()" style="padding:12px 20px;background:var(--accent);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;transition:0.2s;flex-shrink:0;" onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">Pakai</button>
+        </div>
+      </div>
     </div>
 
     <!-- STEP 4: RESULT -->
     <div class="screen" id="screen-result">
+      <!-- TENOR MANUAL INPUT -->
+      <div class="card" style="margin-bottom:14px;background:linear-gradient(135deg, rgba(220,38,38,0.05) 0%, rgba(220,38,38,0.02) 100%);">
+        <div class="card-title">⏰ Pilih Tenor (Bulan)</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;" id="tenorPresets">
+          <button class="tenor-preset" onclick="selectTenorPreset(3)">3</button>
+          <button class="tenor-preset" onclick="selectTenorPreset(6)">6</button>
+          <button class="tenor-preset" onclick="selectTenorPreset(9)">9</button>
+          <button class="tenor-preset" onclick="selectTenorPreset(12)">12</button>
+          <button class="tenor-preset" onclick="selectTenorPreset(15)">15</button>
+          <button class="tenor-preset" onclick="selectTenorPreset(18)">18</button>
+          <button class="tenor-preset" onclick="selectTenorPreset(24)">24</button>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-end;">
+          <div style="flex:1;">
+            <label style="display:block;font-size:11px;color:var(--muted);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.04em;">Atau Input Custom</label>
+            <input type="number" id="tenorManualInput" placeholder="12" step="1" min="1" max="60" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:12px;font-size:16px;font-family:var(--mono);box-sizing:border-box;">
+          </div>
+          <button onclick="selectTenorManual()" style="padding:12px 20px;background:var(--accent);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;transition:0.2s;flex-shrink:0;white-space:nowrap;" onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">Hitung</button>
+        </div>
+      </div>
       <div id="resultContent"></div>
     </div>
 
@@ -1134,7 +1189,8 @@ let state = {
   nominal: 0, // ini akan jadi pokok (hargaBarang - cash)
   asuransi: [],
   pakaProteksi: null,
-  bunga: null
+  bunga: null,
+  tenorList: [3, 6, 9, 12, 15, 18, 24] // default tenor list
 };
 
 /* ========== STEP MANAGEMENT ========== */
@@ -1362,13 +1418,57 @@ function selectBunga(rate) {
   state.bunga = rate;
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
   event.currentTarget.classList.add('selected');
+  document.getElementById('bungaManualInput').value = '';
   setTimeout(() => {
     buildAndShowResult();
     showScreen(5);
   }, 200);
 }
 
-/* ========== RESULT ========== */
+/* Input Manual Bunga */
+function selectBungaManual() {
+  const input = document.getElementById('bungaManualInput');
+  const value = parseFloat(input.value);
+  
+  if (!input.value || isNaN(value) || value < 0 || value > 10) {
+    alert('Masukkan bunga antara 0 - 10%');
+    return;
+  }
+  
+  const rate = value / 100;
+  state.bunga = rate;
+  document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
+  
+  setTimeout(() => {
+    buildAndShowResult();
+    showScreen(5);
+  }, 200);
+}
+
+/* TENOR HANDLING */
+function selectTenorPreset(tenor) {
+  document.querySelectorAll('.tenor-preset').forEach(b => b.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  state.tenorList = [tenor];
+  document.getElementById('tenorManualInput').value = '';
+  buildAndShowResult();
+}
+
+function selectTenorManual() {
+  const input = document.getElementById('tenorManualInput');
+  const value = parseInt(input.value);
+  
+  if (!input.value || isNaN(value) || value < 1 || value > 60) {
+    alert('Masukkan tenor antara 1 - 60 bulan');
+    return;
+  }
+  
+  document.querySelectorAll('.tenor-preset').forEach(b => b.classList.remove('selected'));
+  state.tenorList = [value];
+  buildAndShowResult();
+}
+
+
 function buildAndShowResult() {
   const el = document.getElementById('resultContent');
   el.innerHTML = buildResultHTML();
@@ -1437,8 +1537,8 @@ function buildResultHTML() {
   }
   html += `</div></div></div>`;
 
-  // Tenor 3, 6, 9, 12, 15, 18, 24
-  [3, 6, 9, 12, 15, 18, 24].forEach(tenor => {
+  // Gunakan tenor list dari state (bisa custom atau default)
+  state.tenorList.forEach(tenor => {
     html += buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi);
   });
 
@@ -1495,7 +1595,7 @@ function toggleTenor(tenor) {
 
 /* ========== RESET ========== */
 function resetAll() {
-  state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null };
+  state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24] };
   inputMode = 'harga';
   document.getElementById('nominalDisplay').textContent = 'Masukkan harga...';
   document.getElementById('nominalDisplay').className = 'nominal-display empty';
@@ -1503,6 +1603,9 @@ function resetAll() {
   document.getElementById('proteksiList').style.display = 'none';
   document.getElementById('ynYes').className = 'yn-btn';
   document.getElementById('ynNo').className = 'yn-btn';
+  document.getElementById('bungaManualInput').value = '';
+  document.getElementById('tenorManualInput').value = '';
+  document.querySelectorAll('.tenor-preset').forEach(b => b.classList.remove('selected'));
   renderToggles();
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
   showScreen(1);
