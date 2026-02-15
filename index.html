@@ -255,6 +255,141 @@
     color: var(--accent2);
   }
 
+  /* TENOR RECOMMENDATION STYLES */
+  .tenor-recommendation {
+    margin-top: 20px;
+    padding: 18px;
+    background: linear-gradient(135deg, #fef2f2 0%, #fef5f5 100%);
+    border: 2px solid var(--accent2);
+    border-radius: 16px;
+    display: none;
+  }
+
+  .tenor-recommendation.show {
+    display: block;
+    animation: slideUp 0.35s ease;
+  }
+
+  .tenor-rec-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .tenor-rec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 10px;
+  }
+
+  .tenor-rec-item {
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid transparent;
+    cursor: default;
+    transition: all 0.2s ease;
+  }
+
+  .tenor-rec-item.green {
+    background: #dcfce7;
+    border-color: #22c55e;
+  }
+
+  .tenor-rec-item.yellow {
+    background: #fef3c7;
+    border-color: #f59e0b;
+  }
+
+  .tenor-rec-item.red {
+    background: #fee2e2;
+    border-color: #ef4444;
+  }
+
+  .tenor-rec-item.recommended {
+    border-width: 3px;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+  }
+
+  .tenor-rec-tenor {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .tenor-rec-cicilan {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .tenor-rec-status {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  .tenor-rec-item.green .tenor-rec-status {
+    background: #22c55e;
+    color: white;
+  }
+
+  .tenor-rec-item.yellow .tenor-rec-status {
+    background: #f59e0b;
+    color: white;
+  }
+
+  .tenor-rec-item.red .tenor-rec-status {
+    background: #ef4444;
+    color: white;
+  }
+
+  .tenor-rec-reason {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-style: italic;
+  }
+
+  /* DARK MODE TENOR RECOMMENDATION */
+  :root.dark-mode .tenor-recommendation {
+    background: linear-gradient(135deg, #7f1d1d 0%, #5f1414 100%);
+    border-color: var(--accent2);
+  }
+
+  :root.dark-mode .tenor-rec-item.green {
+    background: #164e63;
+    border-color: #06b6d4;
+  }
+
+  :root.dark-mode .tenor-rec-item.yellow {
+    background: #78350f;
+    border-color: #f59e0b;
+  }
+
+  :root.dark-mode .tenor-rec-item.red {
+    background: #7f1d1d;
+    border-color: #ef4444;
+  }
+
+  :root.dark-mode .tenor-rec-tenor {
+    color: var(--text);
+  }
+
+  :root.dark-mode .tenor-rec-cicilan {
+    color: var(--muted);
+  }
+
   /* DARK MODE STYLES */
   :root.dark-mode {
     --bg: #0f1419;
@@ -1402,6 +1537,26 @@
         <div class="card-title" id="nominalTitle">💰 Harga Barang</div>
         <div class="nominal-display empty" id="nominalDisplay">Masukkan harga...</div>
         
+        <!-- INPUT PENDAPATAN KONSUMEN -->
+        <div class="income-input-container" style="margin: 20px 0; padding: 16px; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border);">
+          <div style="font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">
+            💵 Pendapatan Bulanan (Opsional)
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="color: var(--muted); font-size: 14px;">Rp</span>
+            <input 
+              type="text" 
+              id="incomeInput" 
+              placeholder="Contoh: 5.000.000" 
+              style="flex: 1; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 14px; font-weight: 600;"
+              oninput="updateIncomeInput(this.value)"
+            >
+          </div>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 6px;">
+            ℹ️ Untuk mendapatkan saran tenor yang sesuai
+          </div>
+        </div>
+        
         <!-- SLIDER FOR CASH INPUT -->
         <div class="slider-container" id="sliderContainer" style="display: none; margin: 20px 0;">
           <div class="slider-label">Geser untuk mengubah uang muka:</div>
@@ -1593,7 +1748,8 @@ let state = {
   asuransi: [],
   pakaProteksi: null,
   bunga: null,
-  tenorList: [3, 6, 9, 12, 15, 18, 24] // default tenor list
+  tenorList: [3, 6, 9, 12, 15, 18, 24], // default tenor list
+  income: '' // pendapatan bulanan konsumen (opsional)
 };
 
 /* ========== STEP MANAGEMENT ========== */
@@ -1736,6 +1892,21 @@ function renderNominal() {
       el.textContent = 'Rp ' + parseInt(state.cash).toLocaleString('id-ID');
       el.className = 'nominal-display';
     }
+  }
+}
+
+/* UPDATE INCOME INPUT */
+function updateIncomeInput(value) {
+  // Remove non-numeric characters
+  const cleanValue = value.replace(/\D/g, '');
+  state.income = cleanValue;
+  
+  // Update input display dengan formatting
+  const incomeInput = document.getElementById('incomeInput');
+  if (cleanValue) {
+    incomeInput.value = parseInt(cleanValue).toLocaleString('id-ID');
+  } else {
+    incomeInput.value = '';
   }
 }
 
@@ -1962,11 +2133,73 @@ function buildResultHTML() {
   }
   html += `</div></div></div>`;
 
+  // TENOR RECOMMENDATION BASED ON INCOME
+  if (state.income) {
+    html += buildTenorRecommendation(state.tenorList, pokok, bunga, akujagaPerBulan, totalAsuransi);
+  }
+
   // Gunakan tenor list dari state (bisa custom atau default)
   state.tenorList.forEach(tenor => {
     html += buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi);
   });
 
+  return html;
+}
+
+function buildTenorRecommendation(tenors, pokok, bunga, akujagaPerBulan, totalAsuransi) {
+  const income = parseInt(state.income) || 0;
+  if (!income) return '';
+  
+  const biayaAdmin = 199000;
+  const adminBulanan = 10000;
+  
+  let html = `<div class="tenor-recommendation show" style="margin-bottom: 20px;">
+    <div class="tenor-rec-title">💡 Saran Tenor untuk Anda</div>
+    <div class="tenor-rec-grid">`;
+  
+  let bestRecommendation = null;
+  
+  tenors.forEach(tenor => {
+    const ta = totalAsuransi + akujagaPerBulan * tenor;
+    const base = pokok + ta;
+    const bungaTotal = base * bunga * tenor;
+    const total = base + bungaTotal + biayaAdmin + (adminBulanan * tenor);
+    const cicilan = total / tenor;
+    
+    const persentase = (cicilan / income) * 100;
+    let status = '', statusText = '', color = '';
+    
+    // Determine affordability status
+    if (persentase < 20) {
+      color = 'green';
+      statusText = 'Sangat Aman ✓';
+      if (!bestRecommendation) bestRecommendation = tenor;
+    } else if (persentase < 30) {
+      color = 'yellow';
+      statusText = 'Terjangkau';
+      if (!bestRecommendation && color !== 'green') bestRecommendation = tenor;
+    } else {
+      color = 'red';
+      statusText = 'Berat';
+    }
+    
+    const isRecommended = bestRecommendation === tenor;
+    const recommendedClass = isRecommended ? 'recommended' : '';
+    
+    html += `<div class="tenor-rec-item ${color} ${recommendedClass}">
+      <div class="tenor-rec-tenor">${tenor} BLN</div>
+      <div class="tenor-rec-cicilan">${rupiah(cicilan)}/bln</div>
+      <div class="tenor-rec-status">${statusText}</div>
+      ${isRecommended ? '<div style="font-size: 10px; margin-top: 4px; color: var(--accent);">⭐ TERBAIK</div>' : ''}
+    </div>`;
+  });
+  
+  html += `</div>
+    <div class="tenor-rec-reason">
+      ℹ️ Cicilan ideal: 10-20% dari pendapatan bulanan. Cicilan &gt; 30% bisa memberatkan.
+    </div>
+  </div>`;
+  
   return html;
 }
 
@@ -2020,11 +2253,12 @@ function toggleTenor(tenor) {
 
 /* ========== RESET ========== */
 function resetAll() {
-  state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24] };
+  state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24], income: '' };
   inputMode = 'harga';
   document.getElementById('nominalDisplay').textContent = 'Masukkan harga...';
   document.getElementById('nominalDisplay').className = 'nominal-display empty';
   document.getElementById('nominalTitle').textContent = '💰 Harga Barang';
+  document.getElementById('incomeInput').value = '';
   document.getElementById('proteksiList').style.display = 'none';
   document.getElementById('ynYes').className = 'yn-btn';
   document.getElementById('ynNo').className = 'yn-btn';
