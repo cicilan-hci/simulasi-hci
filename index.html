@@ -430,6 +430,51 @@
     transform: scale(0.95);
   }
 
+  /* HOME BUTTON - FLOATING */
+  .home-button {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    z-index: 9999;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .home-button.show {
+    display: flex;
+  }
+
+  .home-button:hover {
+    background: var(--surface2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .home-button:active {
+    transform: scale(0.95);
+  }
+
+  /* DARK MODE HOME BUTTON */
+  :root.dark-mode .home-button {
+    border-color: var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  :root.dark-mode .home-button:hover {
+    background: var(--surface2);
+  }
+
   /* ENSURE TEXT VISIBILITY IN DARK MODE */
   :root.dark-mode .header {
     background: linear-gradient(135deg, #1a2332 0%, #0f1419 100%);
@@ -1475,6 +1520,7 @@
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
 </style>
 </head>
 <body>
@@ -1490,6 +1536,9 @@
 </div>
 
 <div class="app">
+
+  <!-- HOME BUTTON - FLOATING -->
+  <button class="home-button" id="homeBtn" onclick="goHome()" title="Kembali ke halaman depan">🏠</button>
 
   <!-- DARK MODE TOGGLE -->
   <button class="dark-mode-toggle" id="darkModeBtn" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
@@ -1770,6 +1819,7 @@ function showScreen(n) {
   }
   updateProgress(n);
   updateActionBar(n);
+  updateHomeButton(n);
   window.scrollTo(0, 0);
 }
 
@@ -1810,12 +1860,14 @@ function updateActionBar(step) {
   }
   if (step === 2) {
     bar.innerHTML = `
+      <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
       <button class="btn btn-secondary" onclick="showScreen(1)">←</button>
       <button class="btn btn-primary" onclick="goToProteksi()">Lanjut ke Proteksi →</button>`;
     return;
   }
   if (step === 3) {
     bar.innerHTML = `
+      <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
       <button class="btn btn-secondary" onclick="showScreen(2)">←</button>
       <button class="btn btn-primary" onclick="goToBunga()">Lanjut ke Bunga →</button>`;
     updateActionBarStep3();
@@ -1823,16 +1875,30 @@ function updateActionBar(step) {
   }
   if (step === 4) {
     bar.innerHTML = `
+      <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
       <button class="btn btn-secondary" onclick="showScreen(3)">←</button>
       <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;">Pilih bunga di atas</div>`;
     return;
   }
   if (step === 5) {
     bar.innerHTML = `
+      <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
       <button class="btn btn-ghost" onclick="showScreen(4)" style="flex:0 0 auto;padding:0 14px;">Bunga</button>
       <button class="btn btn-ghost" onclick="showScreen(3)" style="flex:0 0 auto;padding:0 14px;">Proteksi</button>
       <button class="btn btn-primary" onclick="resetAll()">🔄 Hitung Ulang</button>`;
     return;
+  }
+}
+
+/* UPDATE HOME BUTTON VISIBILITY */
+function updateHomeButton(step) {
+  const homeBtn = document.getElementById('homeBtn');
+  if (step === 1) {
+    // Hide home button on first screen
+    homeBtn.classList.remove('show');
+  } else {
+    // Show home button on screens 2-5
+    homeBtn.classList.add('show');
   }
 }
 
@@ -2251,6 +2317,21 @@ function toggleTenor(tenor) {
   icon.classList.toggle('open', !isOpen);
 }
 
+/* ========== GO HOME / KEMBALI KE HALAMAN AWAL ========== */
+function goHome() {
+  if (currentStep === 1) return;
+  
+  // Konfirmasi jika ada data yang sudah diinput
+  const hasData = state.hargaBarang || state.cash || state.income;
+  
+  if (hasData) {
+    const confirm = window.confirm('Anda yakin ingin kembali ke halaman awal? Data yang sudah diinput akan dihapus.');
+    if (!confirm) return;
+  }
+  
+  resetAll();
+}
+
 /* ========== RESET ========== */
 function resetAll() {
   state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24], income: '' };
@@ -2365,6 +2446,7 @@ window.addEventListener('load', function() {
 // Init
 updateProgress(1);
 updateActionBar(1);
+updateHomeButton(1);
 </script>
 </body>
 </html>
