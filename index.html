@@ -420,141 +420,6 @@
     border-color: #06b6d4;
   }
 
-  /* TENOR RECOMMENDATION STYLES */
-  .tenor-recommendation {
-    margin-top: 20px;
-    padding: 18px;
-    background: linear-gradient(135deg, #fef2f2 0%, #fef5f5 100%);
-    border: 2px solid var(--accent2);
-    border-radius: 16px;
-    display: none;
-  }
-
-  .tenor-recommendation.show {
-    display: block;
-    animation: slideUp 0.35s ease;
-  }
-
-  .tenor-rec-title {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-
-  .tenor-rec-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    gap: 10px;
-  }
-
-  .tenor-rec-item {
-    padding: 12px;
-    border-radius: 12px;
-    text-align: center;
-    border: 2px solid transparent;
-    cursor: default;
-    transition: all 0.2s ease;
-  }
-
-  .tenor-rec-item.green {
-    background: #dcfce7;
-    border-color: #22c55e;
-  }
-
-  .tenor-rec-item.yellow {
-    background: #fef3c7;
-    border-color: #f59e0b;
-  }
-
-  .tenor-rec-item.red {
-    background: #fee2e2;
-    border-color: #ef4444;
-  }
-
-  .tenor-rec-item.recommended {
-    border-width: 3px;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
-  }
-
-  .tenor-rec-tenor {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-
-  .tenor-rec-cicilan {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--muted);
-    margin-bottom: 4px;
-  }
-
-  .tenor-rec-status {
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-
-  .tenor-rec-item.green .tenor-rec-status {
-    background: #22c55e;
-    color: white;
-  }
-
-  .tenor-rec-item.yellow .tenor-rec-status {
-    background: #f59e0b;
-    color: white;
-  }
-
-  .tenor-rec-item.red .tenor-rec-status {
-    background: #ef4444;
-    color: white;
-  }
-
-  .tenor-rec-reason {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid var(--border);
-    font-style: italic;
-  }
-
-  /* DARK MODE TENOR RECOMMENDATION */
-  :root.dark-mode .tenor-recommendation {
-    background: linear-gradient(135deg, #7f1d1d 0%, #5f1414 100%);
-    border-color: var(--accent2);
-  }
-
-  :root.dark-mode .tenor-rec-item.green {
-    background: #164e63;
-    border-color: #06b6d4;
-  }
-
-  :root.dark-mode .tenor-rec-item.yellow {
-    background: #78350f;
-    border-color: #f59e0b;
-  }
-
-  :root.dark-mode .tenor-rec-item.red {
-    background: #7f1d1d;
-    border-color: #ef4444;
-  }
-
-  :root.dark-mode .tenor-rec-tenor {
-    color: var(--text);
-  }
-
-  :root.dark-mode .tenor-rec-cicilan {
-    color: var(--muted);
-  }
-
   /* DARK MODE STYLES */
   :root.dark-mode {
     --bg: #0f1419;
@@ -652,25 +517,6 @@
     color: var(--text);
   }
 
-  :root.dark-mode .nominal-display {
-    color: var(--text);
-    border-bottom-color: var(--accent);
-  }
-
-  :root.dark-mode .nominal-display.empty {
-    color: var(--muted);
-  }
-
-  :root.dark-mode .numpad-btn {
-    background: var(--surface2);
-    border-color: var(--border);
-    color: var(--text);
-  }
-
-  :root.dark-mode .numpad-btn:hover {
-    background: var(--border);
-  }
-
   :root.dark-mode .yn-btn {
     background: var(--surface2);
     border-color: var(--border);
@@ -725,9 +571,9 @@
   }
 
   :root.dark-mode .bunga-btn.selected {
-    background: var(--accent);
+    background: rgba(220,38,38,0.15);
     border-color: var(--accent);
-    color: white;
+    color: var(--text);
   }
 
   :root.dark-mode .tenor-preset {
@@ -955,221 +801,165 @@
   /* INPUT NOMINAL */
   .nominal-display {
     font-family: var(--mono);
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 500;
     color: var(--text);
     letter-spacing: -1px;
-    min-height: 44px;
-    padding: 10px 0 4px;
+    width: 100%;
+    padding: 10px 0 8px;
+    border: none;
     border-bottom: 2px solid var(--accent);
-    margin-bottom: 16px;
-    cursor: text;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    position: relative;
-  }
-  .nominal-display.empty { color: var(--muted); font-size: 22px; }
-  .nominal-display:focus {
+    border-radius: 0;
+    background: transparent;
     outline: none;
+    margin-bottom: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+  }
+  .nominal-display::placeholder {
+    color: var(--muted);
+    font-size: 20px;
+    font-weight: 400;
+  }
+  .nominal-display:focus {
     border-color: var(--accent2);
     box-shadow: 0 2px 8px rgba(220,38,38,0.12);
   }
-
-  /* NUMPAD */
-  .numpad {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-  .numpad-btn {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    height: 54px;
-    font-family: var(--mono);
-    font-size: 18px;
-    font-weight: 500;
+  :root.dark-mode .nominal-display {
     color: var(--text);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    display: flex; align-items: center; justify-content: center;
-    -webkit-user-select: none; user-select: none;
-    position: relative;
-    overflow: hidden;
-  }
-  .numpad-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 0; height: 0;
-    background: rgba(220,38,38,0.1);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-  .numpad-btn:active {
-    transform: scale(0.93);
-    background: var(--border);
-  }
-  .numpad-btn:active::before {
-    animation: ripple 0.6s ease-out;
-  }
-  @keyframes ripple {
-    to { width: 200px; height: 200px; opacity: 0; }
-  }
-  .numpad-btn.zero { grid-column: span 2; }
-  .numpad-btn.del {
-    color: var(--danger);
-    font-size: 22px;
-  }
-  .numpad-btn.next-btn {
-    grid-column: span 3;
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-    font-family: var(--font);
-    font-size: 15px;
-    font-weight: 700;
-    height: 52px;
-    border-radius: 16px;
-    letter-spacing: 0.02em;
-    margin-top: 6px;
-    position: relative;
-    box-shadow: 0 4px 12px rgba(220,38,38,0.25);
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .numpad-btn.next-btn:hover {
-    box-shadow: 0 6px 16px rgba(220,38,38,0.35);
-    transform: translateY(-1px);
-  }
-  .numpad-btn.next-btn:active {
-    transform: scale(0.97);
-    background: #b91c1c;
-    box-shadow: 0 2px 8px rgba(220,38,38,0.25);
+    background: transparent;
+    border-bottom-color: var(--accent);
   }
 
   /* TOGGLE BUTTONS */
-  .toggle-grid {
+  /* PROTEKSI COMPACT CHECKLIST */
+  .prot-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
+    margin-top: 10px;
   }
-  .toggle-btn {
+  .prot-item {
     display: flex;
     align-items: center;
-    gap: 14px;
-    background: var(--surface2);
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 10px;
     border: 1.5px solid var(--border);
-    border-radius: 16px;
-    padding: 14px 16px;
+    background: var(--surface2);
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.18s ease;
     -webkit-user-select: none; user-select: none;
-    position: relative;
   }
-  .toggle-btn:hover:not(.selected) {
-    border-color: rgba(220,38,38,0.3);
-    background: rgba(220,38,38,0.03);
-  }
-  .toggle-btn.selected {
+  .prot-item:active { transform: scale(0.98); }
+  .prot-item.selected {
     border-color: var(--accent2);
-    background: rgba(239,68,68,0.08);
-    transform: translateX(2px);
+    background: rgba(239,68,68,0.07);
   }
-  .toggle-btn.selected .toggle-check {
-    background: var(--accent2);
-    border-color: var(--accent2);
-    box-shadow: 0 0 10px rgba(239,68,68,0.3);
-  }
-  .toggle-btn.selected .toggle-check::after { opacity: 1; }
-  .toggle-check {
-    width: 22px; height: 22px;
-    border-radius: 8px;
+  .prot-item.prot-yn { font-weight: 600; font-size: 13px; }
+  .prot-check {
+    width: 18px; height: 18px;
+    border-radius: 5px;
     border: 2px solid var(--border);
     background: var(--surface);
     flex-shrink: 0;
-    transition: all 0.2s;
-    position: relative;
     display: flex; align-items: center; justify-content: center;
+    transition: all 0.18s;
+    font-size: 11px;
+    color: transparent;
   }
-  .toggle-check::after {
-    content: '✓';
+  .prot-item.selected .prot-check {
+    background: var(--accent2);
+    border-color: var(--accent2);
     color: white;
-    font-size: 13px;
-    font-weight: 800;
-    opacity: 0;
-    transition: opacity 0.2s;
   }
-  .toggle-info { flex: 1; }
-  .toggle-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .toggle-desc {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-  .toggle-price {
+  .prot-label { flex: 1; font-size: 13px; font-weight: 600; color: var(--text); }
+  .prot-sub { font-size: 11px; color: var(--muted); font-weight: 400; }
+  .prot-price {
     font-family: var(--mono);
-    font-size: 13px;
+    font-size: 12px;
     color: var(--accent3);
     font-weight: 500;
-    text-align: right;
     flex-shrink: 0;
   }
-
-  /* PROTEKSI YN */
-  .yn-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .yn-btn {
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: 16px;
-    padding: 18px 10px;
+  .prot-info-btn {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--border);
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center;
     cursor: pointer;
-    text-align: center;
-    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 2px;
+  }
+  .ec-tenor-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--surface2);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
     -webkit-user-select: none; user-select: none;
   }
-  .yn-btn:active { transform: scale(0.95); }
-  .yn-btn.yn-yes { border-color: var(--accent2); background: rgba(239,68,68,0.07); }
-  .yn-btn.yn-no { border-color: var(--border); }
-  .yn-icon { font-size: 28px; margin-bottom: 6px; }
-  .yn-label { font-size: 13px; font-weight: 700; }
-  .yn-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .ec-tenor-btn.selected {
+    border-color: var(--accent);
+    background: rgba(220,38,38,0.08);
+    color: var(--accent);
+  }
 
   /* BUNGA GRID */
   .bunga-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
   }
   .bunga-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     background: var(--surface2);
     border: 1.5px solid var(--border);
-    border-radius: 14px;
-    padding: 12px 8px;
+    border-radius: 8px;
+    padding: 6px 10px;
     cursor: pointer;
-    text-align: center;
-    transition: all 0.2s ease;
+    transition: all 0.18s ease;
     -webkit-user-select: none; user-select: none;
   }
-  .bunga-btn:active { transform: scale(0.94); }
+  .bunga-btn:active { transform: scale(0.96); }
   .bunga-btn.selected {
     border-color: var(--accent);
-    background: rgba(220,38,38,0.1);
+    background: rgba(220,38,38,0.08);
+  }
+  .bunga-check {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px;
+    color: transparent;
+    transition: all 0.18s;
+  }
+  .bunga-btn.selected .bunga-check {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
   }
   .bunga-rate {
     font-family: var(--mono);
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
     color: var(--text);
   }
-  .bunga-label { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 600; }
+  .bunga-label { display: none; }
 
   /* TENOR PRESET */
   .tenor-preset {
@@ -1763,52 +1553,48 @@
       <div class="step-dot" id="dot2"><span>2</span></div>
       <div class="step-line" id="line2"></div>
       <div class="step-dot" id="dot3"><span>3</span></div>
-      <div class="step-line" id="line3"></div>
-      <div class="step-dot" id="dot4"><span>4</span></div>
     </div>
     <div class="step-labels">
       <div class="step-label active" id="lbl1">Input</div>
       <div class="step-label" style="width:auto;flex:1;text-align:center;"></div>
-      <div class="step-label" id="lbl2">Proteksi</div>
+      <div class="step-label" id="lbl2">Proteksi & Bunga</div>
       <div class="step-label" style="width:auto;flex:1;text-align:center;"></div>
-      <div class="step-label" id="lbl3">Bunga</div>
-      <div class="step-label" style="width:auto;flex:1;text-align:center;"></div>
-      <div class="step-label" id="lbl4">Hasil</div>
+      <div class="step-label" id="lbl3">Hasil</div>
     </div>
   </div>
 
   <!-- CONTENT -->
   <div class="content">
 
-    <!-- STEP 1: NOMINAL -->
+    <!-- STEP 1: HARGA + UANG MUKA (satu halaman) -->
     <div class="screen active" id="screen-nominal">
       <div class="card">
-        <div class="card-title" id="nominalTitle">💰 Harga Barang</div>
-        <div class="nominal-display empty" id="nominalDisplay">Masukkan harga...</div>
-        
-        
-        <!-- INPUT PENDAPATAN KONSUMEN -->
-        <div class="income-input-container" style="margin: 20px 0; padding: 16px; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border);">
-          <div style="font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">
-            💵 Pendapatan Bulanan (Opsional)
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="color: var(--muted); font-size: 14px;">Rp</span>
-            <input 
-              type="text" 
-              id="incomeInput" 
-              placeholder="Contoh: 5.000.000" 
-              style="flex: 1; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 14px; font-weight: 600;"
-              oninput="updateIncomeInput(this.value)"
-            >
-          </div>
-          <div style="font-size: 11px; color: var(--muted); margin-top: 6px;">
-            ℹ️ Untuk mendapatkan saran tenor yang sesuai
-          </div>
-        </div>
-        
-        <!-- SLIDER FOR CASH INPUT -->
-        <div class="slider-container" id="sliderContainer" style="display: none; margin: 20px 0;">
+        <div class="card-title">💰 Harga Barang</div>
+        <input
+          type="text"
+          inputmode="numeric"
+          id="hargaInput"
+          class="nominal-display"
+          placeholder="Masukkan harga..."
+          oninput="handleHargaInput(this.value)"
+          autocomplete="off"
+        >
+
+        <div class="sep" style="margin: 18px 0;"></div>
+
+        <div class="card-title">💵 Uang Muka (Cash)</div>
+        <input
+          type="text"
+          inputmode="numeric"
+          id="cashInput"
+          class="nominal-display"
+          placeholder="0 (tanpa DP)"
+          oninput="handleCashInput(this.value)"
+          autocomplete="off"
+        >
+
+        <!-- SLIDER UANG MUKA -->
+        <div class="slider-container" id="sliderContainer" style="margin: 14px 0 0;">
           <div class="slider-label">Geser untuk mengubah uang muka:</div>
           <input 
             type="range" 
@@ -1825,20 +1611,11 @@
             <div class="slider-max" id="sliderMaxLabel">Rp 0</div>
           </div>
         </div>
-        
-        <div class="numpad">
-          <button class="numpad-btn" onclick="numpadInput('1')">1</button>
-          <button class="numpad-btn" onclick="numpadInput('2')">2</button>
-          <button class="numpad-btn" onclick="numpadInput('3')">3</button>
-          <button class="numpad-btn" onclick="numpadInput('4')">4</button>
-          <button class="numpad-btn" onclick="numpadInput('5')">5</button>
-          <button class="numpad-btn" onclick="numpadInput('6')">6</button>
-          <button class="numpad-btn" onclick="numpadInput('7')">7</button>
-          <button class="numpad-btn" onclick="numpadInput('8')">8</button>
-          <button class="numpad-btn" onclick="numpadInput('9')">9</button>
-          <button class="numpad-btn zero" onclick="numpadInput('0')">0</button>
-          <button class="numpad-btn del" onclick="numpadDel()">⌫</button>
-          <button class="numpad-btn next-btn" onclick="goToProteksi()">Lanjut →</button>
+
+        <!-- RINGKASAN NOMINAL -->
+        <div id="nominalSummary" style="display:none; margin-top:14px; padding:12px 14px; background:rgba(220,38,38,0.07); border-radius:12px; border:1px solid rgba(220,38,38,0.2);">
+          <div style="font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Nominal yang dicicil</div>
+          <div id="nominalResult" style="font-family:var(--mono); font-size:22px; font-weight:600; color:var(--accent);"></div>
         </div>
       </div>
 
@@ -1851,74 +1628,71 @@
       </div>
     </div>
 
-    <!-- STEP 2: PROTEKSI YN + PILIH -->
+    <!-- STEP 2: PROTEKSI + BUNGA -->
     <div class="screen" id="screen-proteksi">
       <div class="card">
-        <div class="card-title">🛡️ Pakai Proteksi?</div>
-        <div class="yn-grid" id="ynGrid">
-          <div class="yn-btn" id="ynYes" onclick="setProteksiYN(true)">
-            <div class="yn-icon">✅</div>
-            <div class="yn-label">Pakai</div>
-            <div class="yn-sub">Dengan proteksi</div>
+        <div class="card-title">🛡️ Proteksi <span style="font-size:11px;font-weight:400;color:var(--muted);">(opsional)</span></div>
+        <div class="prot-list">
+          <div class="prot-item" id="t-AKUJAGA" onclick="toggleAsuransi('AKUJAGA')">
+            <div class="prot-check"></div>
+            <div class="prot-label">
+              AMAN+
+              <span class="prot-info-btn" onclick="event.stopPropagation(); showManfaatModal()">i</span>
+              <span class="prot-sub"> · Perlindungan jiwa</span>
+            </div>
+            <div class="prot-price" id="price-AKUJAGA">–</div>
           </div>
-          <div class="yn-btn" id="ynNo" onclick="setProteksiYN(false)">
-            <div class="yn-icon">❌</div>
-            <div class="yn-label">Tanpa</div>
-            <div class="yn-sub">Skip proteksi</div>
+          <div class="prot-item" id="t-GADGET" onclick="toggleAsuransi('GADGET')">
+            <div class="prot-check"></div>
+            <div class="prot-label">
+              Santai
+              <span class="prot-info-btn" onclick="event.stopPropagation(); showSantaiModal()">i</span>
+              <span class="prot-sub"> · Proteksi elektronik</span>
+            </div>
+            <div class="prot-price" id="price-GADGET">–</div>
+          </div>
+          <div class="prot-item" id="t-EASYCOVER" onclick="toggleAsuransi('EASYCOVER')">
+            <div class="prot-check"></div>
+            <div class="prot-label">
+              Easy Cover
+              <span class="prot-sub"> · Proteksi barang</span>
+            </div>
+            <div class="prot-price" id="price-EASYCOVER">–</div>
+          </div>
+          <!-- Sub-option tenor Easy Cover -->
+          <div id="easyCoverTenorRow" style="display:none; padding:6px 10px 4px 28px;">
+            <div style="font-size:11px;color:var(--muted);font-weight:600;margin-bottom:5px;">Durasi Easy Cover:</div>
+            <div style="display:flex;gap:7px;">
+              <div class="ec-tenor-btn selected" id="ec-12" onclick="setEasyCoverTenor(12)">
+                <div class="prot-check" style="width:14px;height:14px;font-size:8px;">✓</div>
+                <span>12 Bulan</span>
+              </div>
+              <div class="ec-tenor-btn" id="ec-24" onclick="setEasyCoverTenor(24)">
+                <div class="prot-check" style="width:14px;height:14px;font-size:8px;"></div>
+                <span>24 Bulan</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div id="proteksiList" style="display:none">
-        <div class="card">
-          <div class="card-title">☑️ Pilih Proteksi</div>
-          <div class="info-chip">ℹ️ Boleh pilih lebih dari satu</div>
-          <div class="toggle-grid" id="asuransiToggles">
-            <div class="toggle-btn" id="t-AKUJAGA" onclick="toggleAsuransi('AKUJAGA')">
-              <div class="toggle-check"></div>
-              <div class="toggle-info">
-                <div class="toggle-name">
-                  AMAN+
-                  <span class="info-btn" onclick="event.stopPropagation(); showManfaatModal()">i</span>
-                </div>
-                <div class="toggle-desc">Perlindungan jiwa peminjam</div>
-              </div>
-              <div class="toggle-price" id="price-AKUJAGA">–</div>
-            </div>
-            <div class="toggle-btn" id="t-GADGET" onclick="toggleAsuransi('GADGET')">
-              <div class="toggle-check"></div>
-              <div class="toggle-info">
-                <div class="toggle-name">
-                  Santai
-                  <span class="info-btn" onclick="event.stopPropagation(); showSantaiModal()">i</span>
-                </div>
-                <div class="toggle-desc">Proteksi perangkat elektronik</div>
-              </div>
-              <div class="toggle-price" id="price-GADGET">–</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 3: BUNGA -->
-    <div class="screen" id="screen-bunga">
-      <div class="card">
+      <!-- BUNGA (langsung di bawah proteksi) -->
+      <div class="card" style="margin-top:14px;">
         <div class="card-title">📈 Bunga per Bulan</div>
         <div class="bunga-grid">
-          <div class="bunga-btn" onclick="selectBunga(0)"><div class="bunga-rate">0%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0199)"><div class="bunga-rate">1.99%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0225)"><div class="bunga-rate">2.25%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0239)"><div class="bunga-rate">2.39%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0259)"><div class="bunga-rate">2.59%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0290)"><div class="bunga-rate">2.90%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0299)"><div class="bunga-rate">2.99%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0339)"><div class="bunga-rate">3.39%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0359)"><div class="bunga-rate">3.59%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0390)"><div class="bunga-rate">3.90%</div><div class="bunga-label">/ bulan</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0)"><div class="bunga-check">✓</div><div class="bunga-rate">0%</div><div class="bunga-label">/ bulan</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0199)"><div class="bunga-check">✓</div><div class="bunga-rate">1.99%</div><div class="bunga-label">/ bulan</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0225)"><div class="bunga-check">✓</div><div class="bunga-rate">2.25%</div><div class="bunga-label">/ bulan</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0239)"><div class="bunga-check">✓</div><div class="bunga-rate">2.39%</div><div class="bunga-label">/ bulan</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0259)"><div class="bunga-check">✓</div><div class="bunga-rate">2.59%</div><div class="bunga-label">/ bulan</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0290)"><div class="bunga-check">✓</div><div class="bunga-rate">2.90%</div><div class="bunga-label">/ bulan</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0299)"><div class="bunga-check">✓</div><div class="bunga-rate">2.99%</div><div class="bunga-label">/ bulan</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0339)"><div class="bunga-check">✓</div><div class="bunga-rate">3.39%</div><div class="bunga-label">/ bulan</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0359)"><div class="bunga-check">✓</div><div class="bunga-rate">3.59%</div><div class="bunga-label">/ bulan</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0390)"><div class="bunga-check">✓</div><div class="bunga-rate">3.90%</div><div class="bunga-label">/ bulan</div></div>
         </div>
       </div>
-      
+
       <!-- MANUAL BUNGA INPUT -->
       <div class="card" style="margin-top:14px;">
         <div class="card-title">💡 Atau Input Manual</div>
@@ -1932,7 +1706,7 @@
       </div>
     </div>
 
-    <!-- STEP 4: RESULT -->
+    <!-- STEP 3: RESULT -->
     <div class="screen" id="screen-result">
       <!-- TENOR MANUAL INPUT -->
       <div class="card" style="margin-bottom:14px;background:linear-gradient(135deg, rgba(220,38,38,0.05) 0%, rgba(220,38,38,0.02) 100%);">
@@ -2003,31 +1777,25 @@
 let state = {
   hargaBarang: '',
   cash: '',
-  nominal: 0, // ini akan jadi pokok (hargaBarang - cash)
+  nominal: 0,
   asuransi: [],
   pakaProteksi: null,
   bunga: null,
-  tenorList: [3, 6, 9, 12, 15, 18, 24], // default tenor list
-  income: '', // pendapatan bulanan konsumen (opsional)
-  biayaAdmin: 299000 // biaya admin tunggal (akan berubah sesuai pilihan)
+  tenorList: [3, 6, 9, 12, 15, 18, 24],
+  income: '',
+  biayaAdmin: 299000,
+  easyCoverTenor: 12 // 12 atau 24
 };
 
 /* ========== STEP MANAGEMENT ========== */
 let currentStep = 1;
-let inputMode = 'harga'; // 'harga' atau 'cash'
+const SCREENS = ['', 'screen-nominal', 'screen-proteksi', 'screen-result'];
 
 function showScreen(n) {
   currentStep = n;
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  if (n === 1) {
-    inputMode = 'harga';
-    document.getElementById('screen-nominal').classList.add('active');
-  } else if (n === 2) {
-    inputMode = 'cash';
-    document.getElementById('screen-nominal').classList.add('active');
-  } else {
-    document.getElementById(['','','','screen-proteksi','screen-bunga','screen-result'][n]).classList.add('active');
-  }
+  const screenId = SCREENS[n];
+  if (screenId) document.getElementById(screenId).classList.add('active');
   updateProgress(n);
   updateActionBar(n);
   updateHomeButton(n);
@@ -2035,30 +1803,24 @@ function showScreen(n) {
 }
 
 function updateProgress(step) {
-  // Map step ke progress dots (1=harga, 2=cash, 3=proteksi, 4=bunga, 5=hasil)
-  // Tapi kita tetap tampilkan 4 dots: Harga+Cash, Proteksi, Bunga, Hasil
-  let progressStep = step;
-  if (step === 2) progressStep = 1; // cash tetap di step 1 visual
-  if (step >= 3) progressStep = step - 1; // geser mundur 1 karena cash digabung
-  
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= 3; i++) {
     const dot = document.getElementById('dot' + i);
     const lbl = document.getElementById('lbl' + i);
     dot.className = 'step-dot';
     if (lbl) lbl.className = 'step-label';
-    if (i < progressStep) { 
-      dot.classList.add('done'); 
-      dot.innerHTML = ''; 
+    if (i < step) {
+      dot.classList.add('done');
+      dot.innerHTML = '';
+    } else if (i === step) {
+      dot.classList.add('active');
+      dot.innerHTML = '<span>' + i + '</span>';
+      if (lbl) lbl.classList.add('active');
+    } else {
+      dot.innerHTML = '<span>' + i + '</span>';
     }
-    else if (i === progressStep) { 
-      dot.classList.add('active'); 
-      dot.innerHTML = '<span>' + i + '</span>'; 
-      if(lbl) lbl.classList.add('active'); 
-    }
-    else dot.innerHTML = '<span>' + i + '</span>';
-    if (i < 4) {
+    if (i < 3) {
       const line = document.getElementById('line' + i);
-      if (line) line.className = 'step-line' + (i < progressStep ? ' done' : '');
+      if (line) line.className = 'step-line' + (i < step ? ' done' : '');
     }
   }
 }
@@ -2066,36 +1828,20 @@ function updateProgress(step) {
 function updateActionBar(step) {
   const bar = document.getElementById('actionBar');
   if (step === 1) {
-    bar.innerHTML = '';
+    bar.innerHTML = `<button class="btn btn-primary" onclick="goToProteksi()">Lanjut ke Proteksi & Bunga →</button>`;
     return;
   }
   if (step === 2) {
     bar.innerHTML = `
       <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
       <button class="btn btn-secondary" onclick="showScreen(1)">←</button>
-      <button class="btn btn-primary" onclick="goToProteksi()">Lanjut ke Proteksi →</button>`;
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;">Pilih bunga di atas</div>`;
     return;
   }
   if (step === 3) {
     bar.innerHTML = `
       <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
-      <button class="btn btn-secondary" onclick="showScreen(2)">←</button>
-      <button class="btn btn-primary" onclick="goToBunga()">Lanjut ke Bunga →</button>`;
-    updateActionBarStep3();
-    return;
-  }
-  if (step === 4) {
-    bar.innerHTML = `
-      <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
-      <button class="btn btn-secondary" onclick="showScreen(3)">←</button>
-      <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;">Pilih bunga di atas</div>`;
-    return;
-  }
-  if (step === 5) {
-    bar.innerHTML = `
-      <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
-      <button class="btn btn-ghost" onclick="showScreen(4)" style="flex:0 0 auto;padding:0 14px;">Bunga</button>
-      <button class="btn btn-ghost" onclick="showScreen(3)" style="flex:0 0 auto;padding:0 14px;">Proteksi</button>
+      <button class="btn btn-ghost" onclick="showScreen(2)" style="flex:0 0 auto;padding:0 14px;">← Ubah</button>
       <button class="btn btn-primary" onclick="resetAll()">🔄 Hitung Ulang</button>`;
     return;
   }
@@ -2113,108 +1859,73 @@ function updateHomeButton(step) {
   }
 }
 
-/* ========== NUMPAD ========== */
-function numpadInput(d) {
-  if (inputMode === 'harga') {
-    if (state.hargaBarang.length >= 12) return;
-    state.hargaBarang += d;
-  } else if (inputMode === 'cash') {
-    if (state.cash.length >= 12) return;
-    state.cash += d;
-  }
-  renderNominal();
-}
-function numpadDel() {
-  if (inputMode === 'harga') {
-    state.hargaBarang = state.hargaBarang.slice(0, -1);
-  } else if (inputMode === 'cash') {
-    state.cash = state.cash.slice(0, -1);
-  }
-  renderNominal();
-}
-function renderNominal() {
-  const el = document.getElementById('nominalDisplay');
-  const titleEl = document.getElementById('nominalTitle');
-  const sliderContainer = document.getElementById('sliderContainer');
-  const cashSlider = document.getElementById('cashSlider');
-  
-  if (inputMode === 'harga') {
-    titleEl.textContent = '💰 Harga Barang';
-    sliderContainer.style.display = 'none';
-    if (!state.hargaBarang) {
-      el.textContent = 'Masukkan harga...';
-      el.className = 'nominal-display empty';
-    } else {
-      el.textContent = 'Rp ' + parseInt(state.hargaBarang).toLocaleString('id-ID');
-      el.className = 'nominal-display';
-    }
-  } else if (inputMode === 'cash') {
-    titleEl.textContent = '💵 Uang Muka (Cash)';
-    sliderContainer.style.display = 'block';
-    
-    // Update slider max value berdasarkan harga barang
-    const maxCash = parseInt(state.hargaBarang) || 0;
-    cashSlider.max = maxCash;
-    
-    // Update slider current value
-    cashSlider.value = parseInt(state.cash) || 0;
-    
-    // Update max label di slider
-    document.getElementById('sliderMaxLabel').textContent = 'Rp ' + maxCash.toLocaleString('id-ID');
-    
-    if (!state.cash) {
-      el.textContent = 'Masukkan cash...';
-      el.className = 'nominal-display empty';
-    } else {
-      el.textContent = 'Rp ' + parseInt(state.cash).toLocaleString('id-ID');
-      el.className = 'nominal-display';
-    }
-  }
+
+/* ========== INPUT HANDLERS ========== */
+function handleHargaInput(value) {
+  const clean = value.replace(/\D/g, '').slice(0, 12);
+  state.hargaBarang = clean;
+  const formatted = clean ? parseInt(clean).toLocaleString('id-ID') : '';
+  const el = document.getElementById('hargaInput');
+  if (el.value !== formatted) el.value = formatted;
+  updateSliderAndSummary();
 }
 
-/* UPDATE INCOME INPUT */
-function updateIncomeInput(value) {
-  // Remove non-numeric characters
-  const cleanValue = value.replace(/\D/g, '');
-  state.income = cleanValue;
-  
-  // Update input display dengan formatting
-  const incomeInput = document.getElementById('incomeInput');
-  if (cleanValue) {
-    incomeInput.value = parseInt(cleanValue).toLocaleString('id-ID');
+function handleCashInput(value) {
+  const clean = value.replace(/\D/g, '').slice(0, 12);
+  state.cash = clean;
+  const formatted = clean ? parseInt(clean).toLocaleString('id-ID') : '';
+  const el = document.getElementById('cashInput');
+  if (el.value !== formatted) el.value = formatted;
+  // Sync slider
+  const cashSlider = document.getElementById('cashSlider');
+  cashSlider.value = parseInt(clean) || 0;
+  updateSliderAndSummary();
+}
+
+function updateSliderAndSummary() {
+  const harga = parseInt(state.hargaBarang) || 0;
+  const cash = parseInt(state.cash) || 0;
+  const cashSlider = document.getElementById('cashSlider');
+  cashSlider.max = harga;
+  cashSlider.value = cash;
+  document.getElementById('sliderMaxLabel').textContent = 'Rp ' + harga.toLocaleString('id-ID');
+
+  const nominal = harga - cash;
+  const summaryEl = document.getElementById('nominalSummary');
+  const resultEl = document.getElementById('nominalResult');
+  if (harga > 0) {
+    summaryEl.style.display = 'block';
+    resultEl.textContent = 'Rp ' + Math.max(nominal, 0).toLocaleString('id-ID');
   } else {
-    incomeInput.value = '';
+    summaryEl.style.display = 'none';
   }
 }
 
 /* SLIDER CASH INPUT */
 function sliderCashInput(value) {
   state.cash = value;
-  renderNominal();
+  const formatted = parseInt(value) ? parseInt(value).toLocaleString('id-ID') : '';
+  const el = document.getElementById('cashInput');
+  if (el.value !== formatted) el.value = formatted;
+  updateSliderAndSummary();
 }
 
 function goToProteksi() {
-  if (inputMode === 'harga') {
-    if (!state.hargaBarang || parseInt(state.hargaBarang) < 100000) {
-      shake(document.getElementById('nominalDisplay'));
-      return;
-    }
-    // Lanjut ke input cash
-    showScreen(2);
-    renderNominal();
-  } else if (inputMode === 'cash') {
-    const harga = parseInt(state.hargaBarang) || 0;
-    const cash = parseInt(state.cash) || 0;
-    if (cash >= harga) {
-      alert('Cash tidak boleh lebih besar atau sama dengan harga barang!');
-      return;
-    }
-    // Hitung pokok
-    state.nominal = harga - cash;
-    updateAkujagaPrice();
-    updateGadgetPrice();
-    showScreen(3);
+  if (!state.hargaBarang || parseInt(state.hargaBarang) < 100000) {
+    shake(document.getElementById('hargaInput'));
+    return;
   }
+  const harga = parseInt(state.hargaBarang) || 0;
+  const cash = parseInt(state.cash) || 0;
+  if (cash >= harga) {
+    alert('Uang muka tidak boleh lebih besar atau sama dengan harga barang!');
+    return;
+  }
+  state.nominal = harga - cash;
+  updateAkujagaPrice();
+  updateGadgetPrice();
+  updateEasyCoverPrice();
+  showScreen(2);
 }
 function shake(el) {
   el.style.animation = 'none';
@@ -2224,36 +1935,26 @@ function shake(el) {
 }
 
 /* ========== PROTEKSI ========== */
-function setProteksiYN(yn) {
-  state.pakaProteksi = yn;
-  if (yn) {
-    document.getElementById('ynYes').className = 'yn-btn yn-yes';
-    document.getElementById('ynNo').className = 'yn-btn';
-    document.getElementById('proteksiList').style.display = 'block';
-    updateActionBarStep3();
-  } else {
-    document.getElementById('ynNo').className = 'yn-btn yn-no';
-    document.getElementById('ynYes').className = 'yn-btn';
-    document.getElementById('proteksiList').style.display = 'none';
-    state.asuransi = [];
-    // Langsung lanjut ke bunga jika pilih tanpa proteksi
-    setTimeout(() => showScreen(4), 250);
-  }
-}
 
 function toggleAsuransi(key) {
   const idx = state.asuransi.indexOf(key);
   if (idx >= 0) state.asuransi.splice(idx, 1);
   else state.asuransi.push(key);
+  state.pakaProteksi = state.asuransi.length > 0;
   renderToggles();
 }
 
 function renderToggles() {
-  ['AKUJAGA', 'GADGET'].forEach(k => {
+  ['AKUJAGA', 'GADGET', 'EASYCOVER'].forEach(k => {
     const el = document.getElementById('t-' + k);
     if (!el) return;
-    el.classList.toggle('selected', state.asuransi.includes(k));
+    const selected = state.asuransi.includes(k);
+    el.classList.toggle('selected', selected);
+    el.querySelector('.prot-check').textContent = selected ? '✓' : '';
   });
+  const ecRow = document.getElementById('easyCoverTenorRow');
+  if (ecRow) ecRow.style.display = state.asuransi.includes('EASYCOVER') ? 'block' : 'none';
+  updateEasyCoverPrice();
 }
 
 function updateAkujagaPrice() {
@@ -2269,22 +1970,39 @@ function updateGadgetPrice() {
   if (el) el.textContent = rupiah(premi);
 }
 
-function updateActionBarStep3() {
-  if (currentStep !== 3) return;
-  const bar = document.getElementById('actionBar');
-  const lanjutBtn = bar.querySelector('.btn-primary');
-  if (!lanjutBtn) return;
-  // Tampilkan tombol lanjut hanya jika pilih pakai proteksi
-  if (state.pakaProteksi === true) {
-    lanjutBtn.style.display = 'flex';
-  } else {
-    lanjutBtn.style.display = 'none';
+function getEasyCoverPrice(harga, tenor) {
+  // Table: [minGP, maxGP, price12, price24]
+  const tbl = [
+    [1000000,    2000000,    299000,  409000],
+    [2000001,    4000000,    399000,  549000],
+    [4000001,    5000000,    499000,  689000],
+    [5000001,   10000000,    699000,  969000],
+    [10000001,  16000000,  1249000, 1739000],
+    [16000001,  20000000,  1749000, 2419000],
+    [20000001,  30000000,  2499000, 3449000],
+  ];
+  for (const [mn, mx, p12, p24] of tbl) {
+    if (harga >= mn && harga <= mx) return tenor === 24 ? p24 : p12;
   }
+  return null; // di luar range
 }
 
-function goToBunga() {
-  showScreen(4);
+function updateEasyCoverPrice() {
+  const harga = parseInt(state.hargaBarang) || 0;
+  const price = getEasyCoverPrice(harga, state.easyCoverTenor);
+  const el = document.getElementById('price-EASYCOVER');
+  if (el) el.textContent = price ? rupiah(price) : '–';
 }
+
+function setEasyCoverTenor(t) {
+  state.easyCoverTenor = t;
+  document.getElementById('ec-12').classList.toggle('selected', t === 12);
+  document.getElementById('ec-24').classList.toggle('selected', t === 24);
+  document.getElementById('ec-12').querySelector('.prot-check').textContent = t === 12 ? '✓' : '';
+  document.getElementById('ec-24').querySelector('.prot-check').textContent = t === 24 ? '✓' : '';
+  updateEasyCoverPrice();
+}
+
 
 /* ========== BUNGA ========== */
 function selectBunga(rate) {
@@ -2320,7 +2038,7 @@ function selectBunga(rate) {
   document.getElementById('bungaManualInput').value = '';
   setTimeout(() => {
     buildAndShowResult();
-    showScreen(5);
+    showScreen(3);
   }, 200);
 }
 
@@ -2364,7 +2082,7 @@ function selectBungaManual() {
   
   setTimeout(() => {
     buildAndShowResult();
-    showScreen(5);
+    showScreen(3);
   }, 200);
 }
 
@@ -2420,6 +2138,13 @@ function buildResultHTML() {
     totalAsuransi += premi;
     proteksiRows.push({ name: 'Santai', val: rupiah(premi) });
   }
+  if (as.includes('EASYCOVER')) {
+    const ecPrice = getEasyCoverPrice(hargaBarang, state.easyCoverTenor);
+    if (ecPrice) {
+      totalAsuransi += ecPrice;
+      proteksiRows.push({ name: `Easy Cover ${state.easyCoverTenor}bln`, val: rupiah(ecPrice) });
+    }
+  }
 
   // Summary header
   let html = `<div class="result-header fade">
@@ -2464,73 +2189,11 @@ function buildResultHTML() {
   }
   html += `</div></div></div>`;
 
-  // TENOR RECOMMENDATION BASED ON INCOME
-  if (state.income) {
-    html += buildTenorRecommendation(state.tenorList, pokok, bunga, akujagaPerBulan, totalAsuransi);
-  }
-
   // Gunakan tenor list dari state (bisa custom atau default)
   state.tenorList.forEach(tenor => {
     html += buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi);
   });
 
-  return html;
-}
-
-function buildTenorRecommendation(tenors, pokok, bunga, akujagaPerBulan, totalAsuransi) {
-  const income = parseInt(state.income) || 0;
-  if (!income) return '';
-  
-  const biayaAdmin = state.biayaAdmin;
-  const adminBulanan = 10000;
-  
-  let html = `<div class="tenor-recommendation show" style="margin-bottom: 20px;">
-    <div class="tenor-rec-title">💡 Saran Tenor untuk Anda</div>
-    <div class="tenor-rec-grid">`;
-  
-  let bestRecommendation = null;
-  
-  tenors.forEach(tenor => {
-    const ta = totalAsuransi + akujagaPerBulan * tenor;
-    const base = pokok + ta;
-    const bungaTotal = base * bunga * tenor;
-    const total = base + bungaTotal + biayaAdmin + (adminBulanan * tenor);
-    const cicilan = total / tenor;
-    
-    const persentase = (cicilan / income) * 100;
-    let status = '', statusText = '', color = '';
-    
-    // Determine affordability status
-    if (persentase < 20) {
-      color = 'green';
-      statusText = 'Sangat Aman ✓';
-      if (!bestRecommendation) bestRecommendation = tenor;
-    } else if (persentase < 30) {
-      color = 'yellow';
-      statusText = 'Terjangkau';
-      if (!bestRecommendation && color !== 'green') bestRecommendation = tenor;
-    } else {
-      color = 'red';
-      statusText = 'Berat';
-    }
-    
-    const isRecommended = bestRecommendation === tenor;
-    const recommendedClass = isRecommended ? 'recommended' : '';
-    
-    html += `<div class="tenor-rec-item ${color} ${recommendedClass}">
-      <div class="tenor-rec-tenor">${tenor} BLN</div>
-      <div class="tenor-rec-cicilan">${rupiah(cicilan)}/bln</div>
-      <div class="tenor-rec-status">${statusText}</div>
-      ${isRecommended ? '<div style="font-size: 10px; margin-top: 4px; color: var(--accent);">⭐ TERBAIK</div>' : ''}
-    </div>`;
-  });
-  
-  html += `</div>
-    <div class="tenor-rec-reason">
-      ℹ️ Cicilan ideal: 10-20% dari pendapatan bulanan. Cicilan &gt; 30% bisa memberatkan.
-    </div>
-  </div>`;
-  
   return html;
 }
 
@@ -2601,15 +2264,12 @@ function goHome() {
 
 /* ========== RESET ========== */
 function resetAll() {
-  state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24], income: '', biayaAdmin: 299000 };
-  inputMode = 'harga';
-  document.getElementById('nominalDisplay').textContent = 'Masukkan harga...';
-  document.getElementById('nominalDisplay').className = 'nominal-display empty';
-  document.getElementById('nominalTitle').textContent = '💰 Harga Barang';
-  document.getElementById('incomeInput').value = '';
-  document.getElementById('proteksiList').style.display = 'none';
-  document.getElementById('ynYes').className = 'yn-btn';
-  document.getElementById('ynNo').className = 'yn-btn';
+  state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24], income: '', biayaAdmin: 299000, easyCoverTenor: 12 };
+  document.getElementById('hargaInput').value = '';
+  document.getElementById('cashInput').value = '';
+  document.getElementById('cashSlider').value = 0;
+  document.getElementById('nominalSummary').style.display = 'none';
+  document.getElementById('proteksiList') && (document.getElementById('proteksiList').style.display = 'none');
   document.getElementById('bungaManualInput').value = '';
   document.getElementById('tenorManualInput').value = '';
   document.querySelectorAll('.tenor-preset').forEach(b => b.classList.remove('selected'));
@@ -2827,7 +2487,7 @@ function loadActivityLog(activityId) {
   
   // Go to result screen
   buildAndShowResult();
-  showScreen(5);
+  showScreen(3);
   
   // Show feedback
   const msg = document.createElement('div');
