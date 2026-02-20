@@ -776,8 +776,8 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--card-radius);
-    padding: 20px;
-    margin-bottom: 14px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
     animation: slideUp 0.35s ease;
     box-shadow: 0 2px 8px rgba(220,38,38,0.04);
     transition: box-shadow 0.3s ease;
@@ -836,15 +836,15 @@
   .prot-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-top: 10px;
+    gap: 4px;
+    margin-top: 6px;
   }
   .prot-item {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 9px 12px;
-    border-radius: 10px;
+    padding: 7px 10px;
+    border-radius: 8px;
     border: 1.5px solid var(--border);
     background: var(--surface2);
     cursor: pointer;
@@ -858,8 +858,8 @@
   }
   .prot-item.prot-yn { font-weight: 600; font-size: 13px; }
   .prot-check {
-    width: 18px; height: 18px;
-    border-radius: 5px;
+    width: 16px; height: 16px;
+    border-radius: 4px;
     border: 2px solid var(--border);
     background: var(--surface);
     flex-shrink: 0;
@@ -873,11 +873,11 @@
     border-color: var(--accent2);
     color: white;
   }
-  .prot-label { flex: 1; font-size: 13px; font-weight: 600; color: var(--text); }
-  .prot-sub { font-size: 11px; color: var(--muted); font-weight: 400; }
+  .prot-label { flex: 1; font-size: 12px; font-weight: 600; color: var(--text); }
+  .prot-sub { font-size: 10px; color: var(--muted); font-weight: 400; }
   .prot-price {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 11px;
     color: var(--accent3);
     font-weight: 500;
     flex-shrink: 0;
@@ -1018,7 +1018,7 @@
     border: 1px solid var(--border);
     border-radius: var(--card-radius);
     overflow: hidden;
-    margin-bottom: 14px;
+    margin-bottom: 8px;
     animation: slideUp 0.35s ease forwards;
     box-shadow: 0 2px 8px rgba(220,38,38,0.04);
     transition: all 0.3s ease;
@@ -1029,7 +1029,7 @@
   }
   .tenor-header {
     background: var(--surface2);
-    padding: 12px 18px;
+    padding: 9px 14px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1050,12 +1050,12 @@
     color: var(--accent);
     font-size: 12px;
     font-weight: 800;
-    padding: 3px 10px;
-    border-radius: 8px;
+    padding: 2px 8px;
+    border-radius: 6px;
     font-family: var(--mono);
     letter-spacing: 0.03em;
   }
-  .tenor-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .tenor-title { font-size: 13px; font-weight: 700; color: var(--text); }
   .option-row {
     border: 1px solid var(--border);
     border-radius: 14px;
@@ -1550,14 +1550,10 @@
     <div class="progress-steps">
       <div class="step-dot active" id="dot1"><span>1</span></div>
       <div class="step-line" id="line1"></div>
-      <div class="step-dot" id="dot2"><span>2</span></div>
-      <div class="step-line" id="line2"></div>
-      <div class="step-dot" id="dot3"><span>3</span></div>
+      <div class="step-dot" id="dot3"><span>2</span></div>
     </div>
     <div class="step-labels">
-      <div class="step-label active" id="lbl1">Input</div>
-      <div class="step-label" style="width:auto;flex:1;text-align:center;"></div>
-      <div class="step-label" id="lbl2">Proteksi & Bunga</div>
+      <div class="step-label active" id="lbl1">Input & Bunga</div>
       <div class="step-label" style="width:auto;flex:1;text-align:center;"></div>
       <div class="step-label" id="lbl3">Hasil</div>
     </div>
@@ -1619,6 +1615,36 @@
         </div>
       </div>
 
+      <!-- BUNGA CARD di halaman utama -->
+      <div class="card" style="margin-top:10px;">
+        <div class="card-title">📈 Bunga per Bulan</div>
+        <div class="bunga-grid">
+          <div class="bunga-btn" onclick="selectBunga(0)"><div class="bunga-check">✓</div><div class="bunga-rate">0%</div><div class="bunga-label">/ bln</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0199)"><div class="bunga-check">✓</div><div class="bunga-rate">1.99%</div><div class="bunga-label">/ bln</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0225)"><div class="bunga-check">✓</div><div class="bunga-rate">2.25%</div><div class="bunga-label">/ bln</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0239)"><div class="bunga-check">✓</div><div class="bunga-rate">2.39%</div><div class="bunga-label">/ bln</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0259)"><div class="bunga-check">✓</div><div class="bunga-rate">2.59%</div><div class="bunga-label">/ bln</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0290)"><div class="bunga-check">✓</div><div class="bunga-rate">2.90%</div><div class="bunga-label">/ bln</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0299)"><div class="bunga-check">✓</div><div class="bunga-rate">2.99%</div><div class="bunga-label">/ bln</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0339)"><div class="bunga-check">✓</div><div class="bunga-rate">3.39%</div><div class="bunga-label">/ bln</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0359)"><div class="bunga-check">✓</div><div class="bunga-rate">3.59%</div><div class="bunga-label">/ bln</div></div>
+          <div class="bunga-btn" onclick="selectBunga(0.0390)"><div class="bunga-check">✓</div><div class="bunga-rate">3.90%</div><div class="bunga-label">/ bln</div></div>
+        </div>
+        <!-- Manual bunga toggle -->
+        <div style="margin-top:8px;">
+          <button onclick="toggleBungaInput()" id="bungaToggleBtn" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:rgba(220,38,38,0.05);border:1px dashed rgba(220,38,38,0.2);border-radius:8px;cursor:pointer;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;text-align:left;">
+            <span>💡 Input Manual Bunga</span>
+            <span id="bungaToggleIcon" style="font-size:14px;font-weight:400;">＋</span>
+          </button>
+          <div id="bungaInputPanel" style="display:none;margin-top:5px;">
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="number" id="bungaManualInput" placeholder="cth: 2.50" step="0.01" min="0" max="10" style="flex:1;padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--mono);box-sizing:border-box;">
+              <button onclick="selectBungaManual()" style="padding:7px 14px;background:var(--accent);color:white;border:none;border-radius:8px;font-weight:700;cursor:pointer;white-space:nowrap;font-size:12px;" onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">Pakai</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ACTIVITY LOG / RIWAYAT CICILAN -->
       <div class="activity-log-container" id="activityLogContainer">
         <div class="activity-log-title">📊 Riwayat Cek Cicilan Terakhir</div>
@@ -1628,9 +1654,13 @@
       </div>
     </div>
 
-    <!-- STEP 2: PROTEKSI + BUNGA -->
-    <div class="screen" id="screen-proteksi">
-      <div class="card">
+    <!-- STEP 2: hidden (bunga moved to result) -->
+    <div class="screen" id="screen-proteksi" style="display:none!important;"></div>
+
+    <!-- STEP 3: RESULT -->
+    <div class="screen" id="screen-result">
+      <!-- PROTEKSI (pindah ke sini, realtime) -->
+      <div class="card" style="margin-bottom:8px;">
         <div class="card-title">🛡️ Proteksi <span style="font-size:11px;font-weight:400;color:var(--muted);">(opsional)</span></div>
         <div class="prot-list">
           <div class="prot-item" id="t-AKUJAGA" onclick="toggleAsuransi('AKUJAGA')">
@@ -1676,56 +1706,17 @@
         </div>
       </div>
 
-      <!-- BUNGA (langsung di bawah proteksi) -->
-      <div class="card" style="margin-top:14px;">
-        <div class="card-title">📈 Bunga per Bulan</div>
-        <div class="bunga-grid">
-          <div class="bunga-btn" onclick="selectBunga(0)"><div class="bunga-check">✓</div><div class="bunga-rate">0%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0199)"><div class="bunga-check">✓</div><div class="bunga-rate">1.99%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0225)"><div class="bunga-check">✓</div><div class="bunga-rate">2.25%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0239)"><div class="bunga-check">✓</div><div class="bunga-rate">2.39%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0259)"><div class="bunga-check">✓</div><div class="bunga-rate">2.59%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0290)"><div class="bunga-check">✓</div><div class="bunga-rate">2.90%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0299)"><div class="bunga-check">✓</div><div class="bunga-rate">2.99%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0339)"><div class="bunga-check">✓</div><div class="bunga-rate">3.39%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0359)"><div class="bunga-check">✓</div><div class="bunga-rate">3.59%</div><div class="bunga-label">/ bulan</div></div>
-          <div class="bunga-btn" onclick="selectBunga(0.0390)"><div class="bunga-check">✓</div><div class="bunga-rate">3.90%</div><div class="bunga-label">/ bulan</div></div>
-        </div>
-      </div>
-
-      <!-- MANUAL BUNGA INPUT -->
-      <div class="card" style="margin-top:14px;">
-        <div class="card-title">💡 Atau Input Manual</div>
-        <div style="display:flex;gap:10px;align-items:flex-end;">
-          <div style="flex:1;">
-            <label style="display:block;font-size:11px;color:var(--muted);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.04em;">Bunga (%) per Bulan</label>
-            <input type="number" id="bungaManualInput" placeholder="2.50" step="0.01" min="0" max="10" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:12px;font-size:16px;font-family:var(--mono);box-sizing:border-box;">
+      <!-- TENOR MANUAL INPUT (toggle) -->
+      <div style="margin-bottom:8px;">
+        <button onclick="toggleTenorInput()" id="tenorToggleBtn" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:9px 14px;background:linear-gradient(135deg,rgba(220,38,38,0.07),rgba(220,38,38,0.02));border:1px solid rgba(220,38,38,0.18);border-radius:10px;cursor:pointer;font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.06em;text-align:left;">
+          <span>⏰ Input Manual Tenor</span>
+          <span id="tenorToggleIcon" style="font-size:16px;font-weight:400;">＋</span>
+        </button>
+        <div id="tenorInputPanel" style="display:none;margin-top:5px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="number" id="tenorManualInput" placeholder="cth: 12" step="1" min="1" max="60" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:15px;font-family:var(--mono);box-sizing:border-box;">
+            <button onclick="selectTenorManual()" style="padding:8px 16px;background:var(--accent);color:white;border:none;border-radius:8px;font-weight:700;cursor:pointer;white-space:nowrap;font-size:13px;" onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">Hitung</button>
           </div>
-          <button onclick="selectBungaManual()" style="padding:12px 20px;background:var(--accent);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;transition:0.2s;flex-shrink:0;" onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">Pakai</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 3: RESULT -->
-    <div class="screen" id="screen-result">
-      <!-- TENOR MANUAL INPUT -->
-      <div class="card" style="margin-bottom:14px;background:linear-gradient(135deg, rgba(220,38,38,0.05) 0%, rgba(220,38,38,0.02) 100%);">
-        <div class="card-title">⏰ Pilih Tenor (Bulan)</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;" id="tenorPresets">
-          <button class="tenor-preset" onclick="selectTenorPreset(3)">3</button>
-          <button class="tenor-preset" onclick="selectTenorPreset(6)">6</button>
-          <button class="tenor-preset" onclick="selectTenorPreset(9)">9</button>
-          <button class="tenor-preset" onclick="selectTenorPreset(12)">12</button>
-          <button class="tenor-preset" onclick="selectTenorPreset(15)">15</button>
-          <button class="tenor-preset" onclick="selectTenorPreset(18)">18</button>
-          <button class="tenor-preset" onclick="selectTenorPreset(24)">24</button>
-        </div>
-        <div style="display:flex;gap:10px;align-items:flex-end;">
-          <div style="flex:1;">
-            <label style="display:block;font-size:11px;color:var(--muted);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.04em;">Atau Input Custom</label>
-            <input type="number" id="tenorManualInput" placeholder="12" step="1" min="1" max="60" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:12px;font-size:16px;font-family:var(--mono);box-sizing:border-box;">
-          </div>
-          <button onclick="selectTenorManual()" style="padding:12px 20px;background:var(--accent);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;transition:0.2s;flex-shrink:0;white-space:nowrap;" onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">Hitung</button>
         </div>
       </div>
       <div id="resultContent"></div>
@@ -1790,8 +1781,10 @@ let state = {
 /* ========== STEP MANAGEMENT ========== */
 let currentStep = 1;
 const SCREENS = ['', 'screen-nominal', 'screen-proteksi', 'screen-result'];
+// step2 is hidden; we use 1 and 3 only
 
 function showScreen(n) {
+  if (n === 2) n = 3; // step 2 merged into step 1
   currentStep = n;
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const screenId = SCREENS[n];
@@ -1803,45 +1796,40 @@ function showScreen(n) {
 }
 
 function updateProgress(step) {
-  for (let i = 1; i <= 3; i++) {
-    const dot = document.getElementById('dot' + i);
-    const lbl = document.getElementById('lbl' + i);
-    dot.className = 'step-dot';
-    if (lbl) lbl.className = 'step-label';
-    if (i < step) {
-      dot.classList.add('done');
-      dot.innerHTML = '';
-    } else if (i === step) {
-      dot.classList.add('active');
-      dot.innerHTML = '<span>' + i + '</span>';
-      if (lbl) lbl.classList.add('active');
-    } else {
-      dot.innerHTML = '<span>' + i + '</span>';
-    }
-    if (i < 3) {
-      const line = document.getElementById('line' + i);
-      if (line) line.className = 'step-line' + (i < step ? ' done' : '');
-    }
+  // 2-step UI: dot1=step1, dot3=step2(hasil)
+  const displayStep = step >= 3 ? 2 : 1;
+  const d1 = document.getElementById('dot1');
+  const d3 = document.getElementById('dot3');
+  const l1 = document.getElementById('lbl1');
+  const l3 = document.getElementById('lbl3');
+  const line1 = document.getElementById('line1');
+  d1.className = 'step-dot';
+  d3.className = 'step-dot';
+  if (l1) l1.className = 'step-label';
+  if (l3) l3.className = 'step-label';
+  if (displayStep === 1) {
+    d1.classList.add('active'); d1.innerHTML = '<span>1</span>';
+    d3.innerHTML = '<span>2</span>';
+    if (l1) l1.classList.add('active');
+    if (line1) line1.className = 'step-line';
+  } else {
+    d1.classList.add('done'); d1.innerHTML = '';
+    d3.classList.add('active'); d3.innerHTML = '<span>2</span>';
+    if (l3) l3.classList.add('active');
+    if (line1) line1.className = 'step-line done';
   }
 }
 
 function updateActionBar(step) {
   const bar = document.getElementById('actionBar');
   if (step === 1) {
-    bar.innerHTML = `<button class="btn btn-primary" onclick="goToProteksi()">Lanjut ke Proteksi & Bunga →</button>`;
-    return;
-  }
-  if (step === 2) {
-    bar.innerHTML = `
-      <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
-      <button class="btn btn-secondary" onclick="showScreen(1)">←</button>
-      <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;">Pilih bunga di atas</div>`;
+    bar.innerHTML = `<button class="btn btn-primary" onclick="goToProteksi()">Hitung Cicilan →</button>`;
     return;
   }
   if (step === 3) {
     bar.innerHTML = `
       <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
-      <button class="btn btn-ghost" onclick="showScreen(2)" style="flex:0 0 auto;padding:0 14px;">← Ubah</button>
+      <button class="btn btn-ghost" onclick="showScreen(1)" style="flex:0 0 auto;padding:0 14px;">← Ubah</button>
       <button class="btn btn-primary" onclick="resetAll()">🔄 Hitung Ulang</button>`;
     return;
   }
@@ -1925,7 +1913,9 @@ function goToProteksi() {
   updateAkujagaPrice();
   updateGadgetPrice();
   updateEasyCoverPrice();
-  showScreen(2);
+  renderToggles();
+  buildAndShowResult();
+  showScreen(3);
 }
 function shake(el) {
   el.style.animation = 'none';
@@ -1941,7 +1931,14 @@ function toggleAsuransi(key) {
   if (idx >= 0) state.asuransi.splice(idx, 1);
   else state.asuransi.push(key);
   state.pakaProteksi = state.asuransi.length > 0;
+  updateAkujagaPrice();
+  updateGadgetPrice();
+  updateEasyCoverPrice();
   renderToggles();
+  // Realtime recalculation jika hasil sudah ditampilkan
+  if (currentStep === 3 && state.tenorList && state.tenorList.length > 0) {
+    buildAndShowResult();
+  }
 }
 
 function renderToggles() {
@@ -2001,6 +1998,10 @@ function setEasyCoverTenor(t) {
   document.getElementById('ec-12').querySelector('.prot-check').textContent = t === 12 ? '✓' : '';
   document.getElementById('ec-24').querySelector('.prot-check').textContent = t === 24 ? '✓' : '';
   updateEasyCoverPrice();
+  // Realtime recalculation
+  if (currentStep === 3 && state.tenorList && state.tenorList.length > 0) {
+    buildAndShowResult();
+  }
 }
 
 
@@ -2035,14 +2036,25 @@ function selectBunga(rate) {
   
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
   event.currentTarget.classList.add('selected');
-  document.getElementById('bungaManualInput').value = '';
-  setTimeout(() => {
+  const _inp = document.getElementById('bungaManualInput');
+  if (_inp) _inp.value = '';
+  // Jika sudah di halaman hasil → hitung ulang langsung
+  if (currentStep === 3) {
     buildAndShowResult();
-    showScreen(3);
-  }, 200);
+  }
 }
 
 /* Input Manual Bunga */
+function toggleBungaInput() {
+  const panel = document.getElementById('bungaInputPanel');
+  const icon = document.getElementById('bungaToggleIcon');
+  if (!panel) return;
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  icon.textContent = isOpen ? '＋' : '－';
+  if (!isOpen) document.getElementById('bungaManualInput').focus();
+}
+
 function selectBungaManual() {
   const input = document.getElementById('bungaManualInput');
   const value = parseFloat(input.value);
@@ -2080,10 +2092,12 @@ function selectBungaManual() {
   
   console.log('Final state.biayaAdmin:', state.biayaAdmin);
   
-  setTimeout(() => {
+  if (currentStep === 3) {
+    buildAndShowResult();
+  } else {
     buildAndShowResult();
     showScreen(3);
-  }, 200);
+  }
 }
 
 /* BIAYA ADMIN SELECTION */
@@ -2094,6 +2108,15 @@ function selectTenorPreset(tenor) {
   state.tenorList = [tenor];
   document.getElementById('tenorManualInput').value = '';
   buildAndShowResult();
+}
+
+function toggleTenorInput() {
+  const panel = document.getElementById('tenorInputPanel');
+  const icon = document.getElementById('tenorToggleIcon');
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  icon.textContent = isOpen ? '＋' : '－';
+  if (!isOpen) document.getElementById('tenorManualInput').focus();
 }
 
 function selectTenorManual() {
@@ -2114,7 +2137,11 @@ function selectTenorManual() {
 function buildAndShowResult() {
   const el = document.getElementById('resultContent');
   el.innerHTML = buildResultHTML();
-  
+  // Sync proteksi toggles & prices (karena section ada di halaman ini)
+  updateAkujagaPrice();
+  updateGadgetPrice();
+  updateEasyCoverPrice();
+  renderToggles();
   // Save to activity log
   saveActivityLog();
 }
@@ -2146,48 +2173,7 @@ function buildResultHTML() {
     }
   }
 
-  // Summary header
-  let html = `<div class="result-header fade">
-    <div class="result-header-row">
-      <div class="result-label">Harga Barang</div>
-      <div class="result-value">${rupiah(parseInt(state.hargaBarang))}</div>
-    </div>
-    <div class="result-header-row">
-      <div class="result-label">Uang Muka (Cash)</div>
-      <div class="result-value">${rupiah(parseInt(state.cash) || 0)}</div>
-    </div>
-    <div class="sep" style="margin:10px 0"></div>
-    <div class="result-header-row">
-      <div class="result-label">Nominal Pokok</div>
-      <div class="result-value big">${rupiah(pokok)}</div>
-    </div>
-    <div class="sep" style="margin:10px 0"></div>
-    <div class="result-header-row">
-      <div class="result-label">Biaya Admin</div>
-      <div class="result-value">${rupiah(state.biayaAdmin)}</div>
-    </div>
-    <div class="result-header-row">
-      <div class="result-label">Admin Bulanan</div>
-      <div class="result-value">Rp 10.000/bln</div>
-    </div>
-    <div class="result-header-row">
-      <div class="result-label">Bunga / Bulan</div>
-      <div class="result-value">${(bunga * 100).toFixed(2)}%</div>
-    </div>
-    <div class="result-header-row">
-      <div class="result-label">Proteksi</div>
-      <div>`;
-
-  if (proteksiRows.length === 0) {
-    html += `<span style="font-size:12px;color:var(--muted)">Tidak ada</span>`;
-  } else {
-    html += `<div class="proteksi-tags">` + proteksiRows.map(r =>
-      `<div class="ptag-wrap">
-        <span class="ptag">${r.name}</span>
-        <span class="ptag-price">${r.val}</span>
-      </div>`).join('') + `</div>`;
-  }
-  html += `</div></div></div>`;
+  let html = ``;
 
   // Gunakan tenor list dari state (bisa custom atau default)
   state.tenorList.forEach(tenor => {
@@ -2223,10 +2209,12 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi) {
   let html = `<div class="tenor-card fade">
     <div class="tenor-header" onclick="toggleTenor(${tenor})">
       <div class="tenor-badge">${tenor} BLN</div>
-      <div class="tenor-title" style="flex:1;margin-left:12px;"><strong>${rupiah(cicilan)}</strong><span style="font-size:12px;color:var(--muted);">/bln</span></div>
-      <div class="tenor-toggle-icon open" id="${iconId}">▲</div>
+      <div class="tenor-title" style="flex:1;margin-left:12px;">
+        <strong>${rupiah(cicilan)}</strong><span style="font-size:12px;color:var(--muted);">/bln</span>
+      </div>
+      <div class="tenor-toggle-icon" id="${iconId}">▼</div>
     </div>
-    <div class="tenor-body open" id="${cardId}" style="display:none;">
+    <div class="tenor-body" id="${cardId}" style="display:none;">
       ${detailHTML}
     </div>
   </div>`;
@@ -2239,12 +2227,14 @@ function toggleTenor(tenor) {
   const body = document.getElementById('tenor-body-' + tenor);
   const icon = document.getElementById('tenor-icon-' + tenor);
   if (!body) return;
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  icon.classList.toggle('open', !isOpen);
-  
-  // Update icon text
-  icon.textContent = isOpen ? '▼' : '▲';
+  const isOpen = body.style.display !== 'none';
+  if (isOpen) {
+    body.style.display = 'none';
+    icon.textContent = '▼';
+  } else {
+    body.style.display = 'block';
+    icon.textContent = '▲';
+  }
 }
 
 /* ========== GO HOME / KEMBALI KE HALAMAN AWAL ========== */
