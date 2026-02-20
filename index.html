@@ -1621,6 +1621,265 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
+
+  /* ===================== MODE SALES ===================== */
+  #salesOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #0f0f0f;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    font-family: var(--font);
+  }
+  #salesOverlay.active { display: flex; }
+
+  .sales-topbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .sales-topbar-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .sales-close-btn {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .sales-close-btn:hover { background: rgba(255,255,255,0.15); }
+
+  .sales-summary-bar {
+    width: 100%;
+    padding: 10px 20px 8px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .sales-summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+  .sales-summary-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .sales-summary-value {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    font-family: var(--mono);
+  }
+
+  .sales-main {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .sales-tenor-badge {
+    font-size: 13px;
+    font-weight: 800;
+    color: #dc2626;
+    background: rgba(220,38,38,0.15);
+    border: 1px solid rgba(220,38,38,0.3);
+    border-radius: 10px;
+    padding: 5px 16px;
+    letter-spacing: 0.08em;
+    margin-bottom: 18px;
+    font-family: var(--mono);
+  }
+
+  .sales-cicilan-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+
+  .sales-cicilan-amount {
+    font-size: 52px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: -1px;
+  }
+
+  .sales-cicilan-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  .sales-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 340px;
+    margin-bottom: 20px;
+  }
+  .sales-detail-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .sales-detail-box-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .sales-detail-box-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    font-family: var(--mono);
+  }
+
+  .sales-proteksi-list {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+  .sales-proteksi-chip {
+    background: rgba(220,38,38,0.15);
+    border: 1px solid rgba(220,38,38,0.3);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #ef4444;
+  }
+
+  .sales-nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px 20px 28px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .sales-nav-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.07);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sales-nav-btn:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.3); }
+  .sales-nav-btn:disabled { opacity: 0.2; cursor: default; }
+
+  .sales-dots {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+  }
+  .sales-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .sales-dot.active {
+    background: #dc2626;
+    width: 20px;
+    border-radius: 4px;
+  }
+
+  .sales-wa-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    margin-top: 8px;
+  }
+  .sales-wa-btn:hover { opacity: 0.85; }
+
+  /* Trigger button di action bar */
+  .sales-mode-trigger {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    color: white;
+    border-radius: 12px;
+    padding: 0 16px;
+    height: 44px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: all 0.2s;
+    font-family: var(--font);
+    flex-shrink: 0;
+  }
+  .sales-mode-trigger:hover {
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    border-color: rgba(255,255,255,0.25);
+  }
+  /* ===================== END MODE SALES ===================== */
 </style>
 </head>
 <body>
@@ -1897,6 +2156,29 @@
 
 <!-- SANTAI MODAL -->
 <!-- CONFIRM HOME MODAL -->
+
+<!-- ==================== SALES MODE OVERLAY ==================== -->
+<div id="salesOverlay">
+  <!-- Top bar -->
+  <div class="sales-topbar">
+    <div class="sales-topbar-title">🎯 Mode Presentasi</div>
+    <button class="sales-close-btn" onclick="closeSalesMode()">✕</button>
+  </div>
+
+  <!-- Ringkasan harga & DP -->
+  <div class="sales-summary-bar" id="salesSummaryBar"></div>
+
+  <!-- Main card -->
+  <div class="sales-main" id="salesMain"></div>
+
+  <!-- Navigasi -->
+  <div class="sales-nav">
+    <button class="sales-nav-btn" id="salesPrevBtn" onclick="salesNav(-1)">‹</button>
+    <div class="sales-dots" id="salesDots"></div>
+    <button class="sales-nav-btn" id="salesNextBtn" onclick="salesNav(1)">›</button>
+  </div>
+</div>
+<!-- ==================== END SALES MODE ==================== -->
 <div class="modal-overlay" id="confirmHomeModal" onclick="closeConfirmHome()">
   <div class="modal-content" onclick="event.stopPropagation()" style="max-width:320px;text-align:center;">
     <div class="modal-header" style="justify-content:center;border-bottom:none;padding-bottom:0;">
@@ -1975,9 +2257,9 @@ function updateActionBar(step) {
   }
   if (step === 3) {
     bar.innerHTML = `
-      <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠 Home</button>
+      <button class="btn btn-ghost" onclick="goHome()" title="Kembali ke halaman awal">🏠</button>
       <button class="btn btn-ghost" onclick="showScreen(1)" style="flex:0 0 auto;padding:0 14px;">← Ubah</button>
-      <button class="btn btn-primary" onclick="resetAll()">🔄 Hitung Ulang</button>`;
+      <button class="sales-mode-trigger" onclick="openSalesMode()">🎯 Mode Sales</button>`;
     return;
   }
 }
@@ -2845,6 +3127,172 @@ updateHomeButton(1);
 displayActivityLog();
 
 /* Running text: pure CSS marquee, no JS needed */
+
+/* ===================== MODE SALES ===================== */
+let salesIndex = 0;
+let salesData = [];
+
+function buildSalesData() {
+  const pokok = state.nominal;
+  const bunga = state.bunga;
+  const hargaBarang = parseInt(state.hargaBarang) || 0;
+  const harga = hargaBarang + getAddonTotal();
+  const dp = parseInt(state.cash) || 0;
+  const as = state.asuransi;
+
+  let totalAsuransi = 0;
+  let akujagaPerBulan = 0;
+  let proteksiNama = [];
+
+  if (as.includes('AKUJAGA')) {
+    akujagaPerBulan = pokok * 0.0099;
+    proteksiNama.push('AMAN+');
+  }
+  if (as.includes('GADGET')) {
+    const premi = hargaBarang > 10000000 ? 899000 : 599000;
+    totalAsuransi += premi;
+    proteksiNama.push('Santai');
+  }
+  if (as.includes('EASYCOVER')) {
+    const ecPrice = getEasyCoverPrice(hargaBarang, state.easyCoverTenor);
+    if (ecPrice) { totalAsuransi += ecPrice; proteksiNama.push(`Easy Cover ${state.easyCoverTenor}bln`); }
+  }
+
+  return state.tenorList.map(tenor => {
+    const adminBulanan = 10000;
+    const akujagaTotal = akujagaPerBulan * tenor;
+    const ta = totalAsuransi + akujagaTotal;
+    const base = pokok + ta;
+    const bungaTotal = base * bunga * tenor;
+    const total = base + bungaTotal + state.biayaAdmin + (adminBulanan * tenor);
+    const cicilan = total / tenor;
+
+    const waMsg = encodeURIComponent(
+      `📱 *Simulasi Cicilan Home Credit*\n` +
+      `────────────────\n` +
+      `💰 Harga Barang : ${rupiah(harga)}\n` +
+      `💵 DP / Uang Muka : ${rupiah(dp)}\n` +
+      `────────────────\n` +
+      `⏰ Tenor : *${tenor} Bulan*\n` +
+      `💳 Cicilan : *${rupiah(cicilan)}/bln*\n` +
+      `────────────────\n` +
+      `_Simulasi masih perkiraan, bukan angka pasti._`
+    );
+
+    return { tenor, cicilan, total, harga, dp, proteksiNama, bunga, waMsg };
+  });
+}
+
+function openSalesMode() {
+  if (!state.bunga || !state.nominal) return;
+  salesData = buildSalesData();
+  salesIndex = 0;
+
+  // Summary bar
+  const d = salesData[0];
+  document.getElementById('salesSummaryBar').innerHTML = `
+    <div class="sales-summary-item">
+      <div class="sales-summary-label">Harga</div>
+      <div class="sales-summary-value">${rupiah(d.harga)}</div>
+    </div>
+    <div style="width:1px;background:rgba(255,255,255,0.08);height:30px;"></div>
+    <div class="sales-summary-item">
+      <div class="sales-summary-label">DP</div>
+      <div class="sales-summary-value">${rupiah(d.dp)}</div>
+    </div>
+    <div style="width:1px;background:rgba(255,255,255,0.08);height:30px;"></div>
+    <div class="sales-summary-item">
+      <div class="sales-summary-label">Bunga</div>
+      <div class="sales-summary-value">${(d.bunga*100).toFixed(2)}%/bln</div>
+    </div>
+    ${d.proteksiNama.length ? `
+    <div style="width:1px;background:rgba(255,255,255,0.08);height:30px;"></div>
+    <div class="sales-summary-item">
+      <div class="sales-summary-label">Proteksi</div>
+      <div class="sales-summary-value" style="font-size:10px;">${d.proteksiNama.join(', ')}</div>
+    </div>` : ''}
+  `;
+
+  // Dots
+  document.getElementById('salesDots').innerHTML = salesData.map((_, i) =>
+    `<div class="sales-dot ${i===0?'active':''}" onclick="salesGoto(${i})"></div>`
+  ).join('');
+
+  renderSalesCard(0);
+  document.getElementById('salesOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSalesMode() {
+  document.getElementById('salesOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function renderSalesCard(idx) {
+  const d = salesData[idx];
+  const cicilanFmt = rupiah(d.cicilan).replace('Rp ', '');
+
+  document.getElementById('salesMain').innerHTML = `
+    <div class="sales-tenor-badge">TENOR ${d.tenor} BULAN</div>
+    <div class="sales-cicilan-label">Cicilan per Bulan</div>
+    <div class="sales-cicilan-amount">Rp ${cicilanFmt}</div>
+    <div class="sales-cicilan-sub">/ bulan × ${d.tenor} bulan</div>
+
+    <div class="sales-detail-grid">
+      <div class="sales-detail-box">
+        <div class="sales-detail-box-label">Nilai Pembiayaan</div>
+        <div class="sales-detail-box-value" style="font-size:11px;">${rupiah(d.total)}</div>
+      </div>
+      <div class="sales-detail-box">
+        <div class="sales-detail-box-label">Uang Muka</div>
+        <div class="sales-detail-box-value" style="font-size:11px;">${rupiah(d.dp)}</div>
+      </div>
+    </div>
+
+    ${d.proteksiNama.length ? `
+    <div class="sales-proteksi-list">
+      ${d.proteksiNama.map(n=>`<div class="sales-proteksi-chip">🛡️ ${n}</div>`).join('')}
+    </div>` : ''}
+
+    <a href="https://wa.me/?text=${d.waMsg}" target="_blank" rel="noopener noreferrer" class="sales-wa-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Kirim via WhatsApp
+    </a>
+  `;
+
+  // Update dots
+  document.querySelectorAll('.sales-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
+  // Update nav buttons
+  document.getElementById('salesPrevBtn').disabled = idx === 0;
+  document.getElementById('salesNextBtn').disabled = idx === salesData.length - 1;
+}
+
+function salesNav(dir) {
+  const next = salesIndex + dir;
+  if (next < 0 || next >= salesData.length) return;
+  salesIndex = next;
+  renderSalesCard(salesIndex);
+}
+
+function salesGoto(idx) {
+  salesIndex = idx;
+  renderSalesCard(idx);
+}
+
+// Swipe support untuk Mode Sales
+(function() {
+  let startX = 0;
+  document.addEventListener('touchstart', e => {
+    if (!document.getElementById('salesOverlay').classList.contains('active')) return;
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (!document.getElementById('salesOverlay').classList.contains('active')) return;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) salesNav(diff > 0 ? 1 : -1);
+  }, { passive: true });
+})();
+/* ===================== END MODE SALES ===================== */
 </script>
 </body>
 </html>
