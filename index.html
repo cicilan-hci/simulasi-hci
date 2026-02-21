@@ -3452,7 +3452,7 @@ function buildSalesData() {
 }
 
 function openSalesMode() {
-  if (!state.bunga || !state.nominal) return;
+  if (state.bunga === null || state.bunga === undefined || !state.nominal) return;
   salesData = buildSalesData();
   salesIndex = 0;
 
