@@ -3429,8 +3429,8 @@ async function kirimSaran() {
     try {
       await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', // Apps Script tidak support CORS biasa
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload)
       });
     } catch(err) {
