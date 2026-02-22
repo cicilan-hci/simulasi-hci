@@ -3384,7 +3384,7 @@ function setSaranKategori(el, kategori) {
 }
 
 // 🔧 URL Apps Script kamu
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwpWgT0GUyG00JTkkArq_R1rbHLofZs92zvvQ8ZSsv-_nxzcn1C-1wPKthTw1E2KvqkYQ/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxCf5B6usJ_LsOzTRgu3u-fkggxPaD827jVor_6ur1tmfa4qqejpWf614AeFXazgDUu8w/exec';
 
 async function kirimSaran() {
   const nama    = document.getElementById('saranNama').value.trim() || 'Anonim';
@@ -3414,12 +3414,11 @@ async function kirimSaran() {
     localStorage.setItem('saran_log', JSON.stringify(logs.slice(0, 50)));
   } catch(e) {}
 
-  // PERBAIKAN: Kirim ke Google Sheets menggunakan POST dengan FormData dan no-cors mode
   btnText.textContent = 'Mengirim...';
   kirimBtn.disabled = true;
 
   try {
-    // Buat FormData untuk kompatibilitas lintas browser
+    // Coba Method 1: POST dengan FormData (untuk Chrome)
     const formData = new FormData();
     formData.append('nama', nama);
     formData.append('kategori', kategori);
@@ -3430,18 +3429,33 @@ async function kirimSaran() {
     formData.append('bunga', bunga);
     formData.append('ua', ua);
     
-    // Gunakan fetch dengan mode no-cors untuk kompatibilitas Chrome
     await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors', // Bypass CORS restrictions di Chrome
+      mode: 'no-cors',
       body: formData
     });
     
-    // Dengan no-cors, response akan opaque, jadi kita assume success
-    console.log('Feedback berhasil dikirim');
-  } catch(err) {
-    console.warn('Error saat kirim:', err);
-    // Tetap lanjut ke sukses modal karena dengan no-cors data kemungkinan tetap terkirim
+    console.log('✓ Feedback terkirim via POST');
+  } catch(err1) {
+    console.warn('POST gagal, coba GET:', err1);
+    
+    try {
+      // Fallback Method 2: GET dengan URL params (untuk backward compatibility)
+      const params = new URLSearchParams({ nama, kategori, pesan, waktu, harga, tenor, bunga, ua });
+      const url = APPS_SCRIPT_URL + '?' + params.toString();
+      
+      await new Promise((resolve) => {
+        const img = new Image();
+        img.onload = img.onerror = resolve;
+        img.src = url;
+        setTimeout(resolve, 3000);
+      });
+      
+      console.log('✓ Feedback terkirim via GET');
+    } catch(err2) {
+      console.warn('GET juga gagal:', err2);
+      // Tetap lanjut, data sudah tersimpan di localStorage
+    }
   }
 
   kirimBtn.disabled = false;
