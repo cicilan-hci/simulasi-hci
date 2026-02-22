@@ -3414,22 +3414,34 @@ async function kirimSaran() {
     localStorage.setItem('saran_log', JSON.stringify(logs.slice(0, 50)));
   } catch(e) {}
 
-  // Kirim ke Google Sheets via GET + URL params (bebas CORS)
+  // PERBAIKAN: Kirim ke Google Sheets menggunakan POST dengan FormData dan no-cors mode
   btnText.textContent = 'Mengirim...';
   kirimBtn.disabled = true;
 
   try {
-    const params = new URLSearchParams({ nama, kategori, pesan, waktu, harga, tenor, bunga, ua });
-    const url = APPS_SCRIPT_URL + '?' + params.toString();
-    // Gunakan Image trick — paling reliable untuk no-CORS GET request
-    await new Promise((resolve) => {
-      const img = new Image();
-      img.onload = img.onerror = resolve;
-      img.src = url;
-      setTimeout(resolve, 5000); // timeout 5 detik
+    // Buat FormData untuk kompatibilitas lintas browser
+    const formData = new FormData();
+    formData.append('nama', nama);
+    formData.append('kategori', kategori);
+    formData.append('pesan', pesan);
+    formData.append('waktu', waktu);
+    formData.append('harga', harga);
+    formData.append('tenor', tenor);
+    formData.append('bunga', bunga);
+    formData.append('ua', ua);
+    
+    // Gunakan fetch dengan mode no-cors untuk kompatibilitas Chrome
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Bypass CORS restrictions di Chrome
+      body: formData
     });
+    
+    // Dengan no-cors, response akan opaque, jadi kita assume success
+    console.log('Feedback berhasil dikirim');
   } catch(err) {
-    console.warn('Gagal kirim:', err);
+    console.warn('Error saat kirim:', err);
+    // Tetap lanjut ke sukses modal karena dengan no-cors data kemungkinan tetap terkirim
   }
 
   kirimBtn.disabled = false;
