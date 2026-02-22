@@ -940,6 +940,69 @@
     border-color: rgba(220,38,38,0.3);
   }
 
+  /* === INPUT VALIDATION FEEDBACK === */
+  .input-feedback {
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 6px;
+    min-height: 18px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.25s ease;
+    letter-spacing: 0.01em;
+  }
+  .input-feedback.valid {
+    color: #16a34a;
+  }
+  .input-feedback.error {
+    color: var(--accent);
+  }
+  .input-feedback.warn {
+    color: #d97706;
+  }
+  .nominal-display.input-valid {
+    border-bottom-color: #16a34a;
+    box-shadow: 0 2px 8px rgba(22,163,74,0.12);
+  }
+  .nominal-display.input-error {
+    border-bottom-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(220,38,38,0.15);
+  }
+
+  /* === KRITIK & SARAN === */
+  .saran-cat-btn {
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .saran-cat-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(220,38,38,0.05);
+  }
+  .saran-cat-btn.selected {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  :root.dark-mode .saran-cat-btn {
+    background: var(--surface2);
+    border-color: var(--border);
+    color: var(--muted);
+  }
+  :root.dark-mode .saran-cat-btn.selected {
+    background: var(--accent);
+    color: white;
+  }
+
   /* INPUT NOMINAL */
   .nominal-display {
     font-family: var(--mono);
@@ -1396,6 +1459,46 @@
   /* SCREEN MGMT */
   .screen { display: none; }
   .screen.active { display: block; }
+
+  /* === SCREEN TRANSITIONS === */
+  .screen.slide-in-right {
+    animation: screenSlideInRight 0.32s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  .screen.slide-in-left {
+    animation: screenSlideInLeft 0.32s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  .screen.slide-out-left {
+    display: block !important;
+    animation: screenSlideOutLeft 0.28s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    top: 0; left: 0;
+  }
+  .screen.slide-out-right {
+    display: block !important;
+    animation: screenSlideOutRight 0.28s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    top: 0; left: 0;
+  }
+  @keyframes screenSlideInRight {
+    from { opacity: 0; transform: translateX(48px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes screenSlideInLeft {
+    from { opacity: 0; transform: translateX(-48px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes screenSlideOutLeft {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(-48px); }
+  }
+  @keyframes screenSlideOutRight {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(48px); }
+  }
 
   /* ASURANSI INFO */
   .info-chip {
@@ -2187,10 +2290,13 @@
     <div class="header-badge">💳 Kredit</div>
     <h1>Simulasi Cicilan</h1>
     <p>Simulasi masih perkiraan, bukan angka pasti.</p>
-    <div class="header-link">
+    <div class="header-link" style="display:flex;gap:8px;flex-wrap:wrap;">
       <a href="https://www.homecredit.co.id/" target="_blank" rel="noopener noreferrer">
         🔗 Home Credit Indonesia →
       </a>
+      <button onclick="openSaranModal()" style="display:inline-flex;align-items:center;gap:6px;background:rgba(220,38,38,0.1);color:var(--accent);padding:8px 14px;border-radius:12px;font-size:12px;font-weight:600;border:1px solid rgba(220,38,38,0.2);cursor:pointer;font-family:var(--font);transition:all 0.25s ease;" onmouseover="this.style.background='rgba(220,38,38,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(220,38,38,0.1)';this.style.transform='translateY(0)'">
+        💬 Kritik & Saran
+      </button>
     </div>
   </div>
 
@@ -2213,6 +2319,7 @@
           oninput="handleHargaInput(this.value)"
           autocomplete="off"
         >
+        <div id="hargaFeedback" class="input-feedback"></div>
 
         <!-- ADDON BUTTON -->
         <button class="addon-toggle-btn" id="addonToggleBtn" onclick="toggleAddonPanel()">
@@ -2462,6 +2569,79 @@
   </div>
 </div>
 
+<!-- MODAL KRITIK & SARAN -->
+<div class="modal-overlay" id="saranModal" onclick="closeSaranModal()">
+  <div class="modal-content" onclick="event.stopPropagation()" style="max-width:360px;">
+    <div class="modal-header">
+      <div class="modal-title"><span>💬</span> Kritik & Saran</div>
+      <button class="modal-close" onclick="closeSaranModal()">×</button>
+    </div>
+    <div class="modal-body" style="padding:16px 20px 20px;">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Masukan kamu sangat berarti untuk meningkatkan aplikasi ini. 🙏</p>
+
+      <div style="margin-bottom:12px;">
+        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);display:block;margin-bottom:6px;">Nama <span style="font-weight:400;color:var(--muted);text-transform:none;">(opsional)</span></label>
+        <input type="text" id="saranNama" placeholder="Nama kamu..." autocomplete="off"
+          style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:13px;background:var(--surface);color:var(--text);outline:none;transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);display:block;margin-bottom:6px;">Kategori</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;" id="saranKategoriGroup">
+          <button onclick="setSaranKategori(this,'Bug / Error')"       class="saran-cat-btn">🐛 Bug / Error</button>
+          <button onclick="setSaranKategori(this,'Fitur Baru')"        class="saran-cat-btn">✨ Fitur Baru</button>
+          <button onclick="setSaranKategori(this,'Tampilan')"          class="saran-cat-btn">🎨 Tampilan</button>
+          <button onclick="setSaranKategori(this,'Kalkulasi')"         class="saran-cat-btn">🔢 Kalkulasi</button>
+          <button onclick="setSaranKategori(this,'Lainnya')"           class="saran-cat-btn">💬 Lainnya</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);display:block;margin-bottom:6px;">Pesan <span style="color:var(--accent);">*</span></label>
+        <textarea id="saranPesan" rows="4" placeholder="Tulis kritik atau saranmu di sini..."
+          style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:13px;background:var(--surface);color:var(--text);outline:none;resize:vertical;transition:border-color 0.2s;min-height:90px;"
+          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+        <div id="saranPesanError" style="font-size:11px;color:var(--accent);margin-top:4px;display:none;">⚠️ Pesan tidak boleh kosong</div>
+      </div>
+
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-ghost" onclick="closeSaranModal()" style="flex:1;">Batal</button>
+        <button class="btn btn-primary" onclick="kirimSaran()" style="flex:2;" id="saranKirimBtn">
+          <span id="saranBtnText">Kirim Saran 📨</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="saranSuksesModal" onclick="closeSaranSuksesModal()">
+  <div class="modal-content" onclick="event.stopPropagation()" style="max-width:300px;text-align:center;">
+    <div class="modal-body" style="padding:30px 24px;">
+      <div style="font-size:48px;margin-bottom:12px;">🎉</div>
+      <div style="font-size:18px;font-weight:800;margin-bottom:8px;color:var(--text);">Terima Kasih!</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Saran kamu sudah terkirim. Kami akan terus berusaha meningkatkan aplikasi ini.</p>
+      <button class="btn btn-primary" onclick="closeSaranSuksesModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="confirmUbahModal" onclick="closeConfirmUbah()">
+  <div class="modal-content" onclick="event.stopPropagation()" style="max-width:320px;text-align:center;">
+    <div class="modal-header" style="justify-content:center;border-bottom:none;padding-bottom:0;">
+      <div class="modal-title" style="font-size:18px;">✏️ Ubah Data?</div>
+    </div>
+    <div class="modal-body" style="padding:12px 20px 20px;">
+      <p style="color:var(--muted);font-size:14px;margin:0 0 6px;">Kembali ke halaman input untuk mengubah data.</p>
+      <p style="color:var(--accent);font-size:12px;font-weight:600;margin:0 0 20px;">Hasil simulasi saat ini akan diperbarui.</p>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <button class="btn btn-ghost" onclick="closeConfirmUbah()" style="flex:1;">Batal</button>
+        <button class="btn btn-primary" onclick="confirmUbah()" style="flex:1;">✏️ Ubah</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="santaiModal" onclick="closeSantaiModal()">
   <div class="modal-content" onclick="event.stopPropagation()">
     <div class="modal-header">
@@ -2502,14 +2682,41 @@ const SCREENS = ['', 'screen-nominal', 'screen-proteksi', 'screen-result'];
 
 function showScreen(n) {
   if (n === 2) n = 3; // step 2 merged into step 1
+  const prevStep = currentStep;
+  const direction = n > prevStep ? 'forward' : 'backward';
+  const outClass = direction === 'forward' ? 'slide-out-left' : 'slide-out-right';
+  const inClass  = direction === 'forward' ? 'slide-in-right' : 'slide-in-left';
+
+  // Find current active screen and animate it out
+  const currentScreenId = SCREENS[prevStep];
+  if (currentScreenId && prevStep !== n) {
+    const outEl = document.getElementById(currentScreenId);
+    if (outEl) {
+      outEl.classList.add(outClass);
+      setTimeout(() => {
+        outEl.classList.remove('active', outClass);
+      }, 280);
+    }
+  }
+
   currentStep = n;
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const screenId = SCREENS[n];
-  if (screenId) document.getElementById(screenId).classList.add('active');
   updateProgress(n);
   updateActionBar(n);
   updateHomeButton(n);
-  window.scrollTo(0, 0);
+
+  // Animate new screen in (slight delay so out-anim starts first)
+  const screenId = SCREENS[n];
+  if (screenId) {
+    const inEl = document.getElementById(screenId);
+    setTimeout(() => {
+      inEl.classList.remove('slide-in-right','slide-in-left');
+      inEl.classList.add('active', inClass);
+      // Clean up animation class after it plays
+      setTimeout(() => inEl.classList.remove(inClass), 350);
+    }, prevStep !== n ? 60 : 0);
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function updateProgress(step) {
@@ -2644,6 +2851,40 @@ function handleHargaInput(value) {
   updateDpQuickButtons();
   updateSliderAndSummary();
   syncEasyCoverWithTecProtec();
+  validateHargaRealtime(parseInt(clean) || 0, el);
+}
+
+function validateHargaRealtime(harga, inputEl) {
+  const feedbackEl = document.getElementById('hargaFeedback');
+  if (!feedbackEl) return;
+
+  // Remove previous state classes
+  inputEl.classList.remove('input-valid', 'input-error');
+
+  if (!harga || harga === 0) {
+    feedbackEl.className = 'input-feedback';
+    feedbackEl.innerHTML = '';
+    return;
+  }
+  if (harga < 600000) {
+    inputEl.classList.add('input-error');
+    feedbackEl.className = 'input-feedback error';
+    feedbackEl.innerHTML = '⚠️ Harga terlalu kecil (min. Rp 600.000)';
+    return;
+  }
+  if (harga > 100000000) {
+    inputEl.classList.add('input-error');
+    feedbackEl.className = 'input-feedback warn';
+    feedbackEl.innerHTML = '⚠️ Harga melebihi Rp 100 juta, cek kembali';
+    return;
+  }
+  // Valid
+  inputEl.classList.add('input-valid');
+  feedbackEl.className = 'input-feedback valid';
+  const fmt = harga >= 1000000
+    ? '✓ ' + (harga / 1000000).toFixed(harga % 1000000 === 0 ? 0 : 1) + ' Juta'
+    : '✓ Rp ' + harga.toLocaleString('id-ID');
+  feedbackEl.innerHTML = fmt + ' — siap dihitung';
 }
 
 function handleCashInput(value) {
@@ -2751,7 +2992,7 @@ function sliderCashInput(value) {
 }
 
 function goToProteksi() {
-  if (!state.hargaBarang || parseInt(state.hargaBarang) < 100000) {
+  if (!state.hargaBarang || parseInt(state.hargaBarang) < 600000) {
     shake(document.getElementById('hargaInput'));
     return;
   }
@@ -3112,6 +3353,117 @@ function toggleTenor(tenor) {
   }
 }
 
+/* ========== KRITIK & SARAN ========== */
+let saranKategoriSelected = '';
+
+function openSaranModal() {
+  document.getElementById('saranModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  saranKategoriSelected = '';
+  document.getElementById('saranNama').value = '';
+  document.getElementById('saranPesan').value = '';
+  document.getElementById('saranPesanError').style.display = 'none';
+  document.getElementById('saranBtnText').textContent = 'Kirim Saran 📨';
+  document.querySelectorAll('.saran-cat-btn').forEach(b => b.classList.remove('selected'));
+}
+
+function closeSaranModal() {
+  document.getElementById('saranModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function closeSaranSuksesModal() {
+  document.getElementById('saranSuksesModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function setSaranKategori(el, kategori) {
+  document.querySelectorAll('.saran-cat-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  saranKategoriSelected = kategori;
+}
+
+// 🔧 Ganti URL ini dengan Web App URL setelah deploy Apps Script
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_IPnQT8Eiucrk4WDso5KI6LF3kdGcQdYeysighXdMtmeJK48hXM5Om6_ASRgIgxY_/exec';
+
+async function kirimSaran() {
+  const nama    = document.getElementById('saranNama').value.trim() || 'Anonim';
+  const pesan   = document.getElementById('saranPesan').value.trim();
+  const errEl   = document.getElementById('saranPesanError');
+  const btnText = document.getElementById('saranBtnText');
+  const kirimBtn = document.getElementById('saranKirimBtn');
+
+  if (!pesan) {
+    errEl.style.display = 'block';
+    document.getElementById('saranPesan').focus();
+    return;
+  }
+  errEl.style.display = 'none';
+
+  const kategori = saranKategoriSelected || 'Umum';
+  const waktu    = new Date().toLocaleString('id-ID');
+
+  // Data tambahan dari state kalkulator
+  const harga  = state.hargaBarang ? 'Rp ' + parseInt(state.hargaBarang).toLocaleString('id-ID') : '-';
+  const tenor  = state.tenorList   ? state.tenorList.join(', ') + ' bln' : '-';
+  const bunga  = state.bunga != null ? (state.bunga * 100).toFixed(2) + '%' : '-';
+
+  const payload = {
+    nama, kategori, pesan, waktu, harga, tenor, bunga,
+    userAgent: navigator.userAgent
+  };
+
+  // Simpan ke localStorage sebagai backup lokal
+  try {
+    let logs = JSON.parse(localStorage.getItem('saran_log') || '[]');
+    logs.unshift(payload);
+    logs = logs.slice(0, 50);
+    localStorage.setItem('saran_log', JSON.stringify(logs));
+  } catch(e) {}
+
+  // Kirim ke Google Sheets via Apps Script
+  if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'GANTI_DENGAN_URL_APPS_SCRIPT_KAMU') {
+    btnText.textContent = 'Mengirim...';
+    kirimBtn.disabled = true;
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Apps Script tidak support CORS biasa
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch(err) {
+      console.warn('Gagal kirim ke Sheets:', err);
+    }
+
+    kirimBtn.disabled = false;
+    btnText.textContent = 'Kirim Saran 📨';
+  }
+
+  closeSaranModal();
+  setTimeout(() => {
+    document.getElementById('saranSuksesModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }, 200);
+}
+
+/* ========== UBAH DATA (dari screen hasil) ========== */
+function askUbahData() {
+  document.getElementById('confirmUbahModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function confirmUbah() {
+  closeConfirmUbah();
+  showScreen(1);
+}
+
+function closeConfirmUbah() {
+  document.getElementById('confirmUbahModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
 /* ========== GO HOME / KEMBALI KE HALAMAN AWAL ========== */
 function goHome() {
   if (currentStep === 1) return;
@@ -3143,6 +3495,9 @@ function closeConfirmHome() {
 function resetAll() {
   state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24], income: '', biayaAdmin: 299000, easyCoverTenor: 12, addons: { tecprotec: 0, aksesoris: 0, kartuprovider: 0 } };
   document.getElementById('hargaInput').value = '';
+  document.getElementById('hargaInput').classList.remove('input-valid', 'input-error');
+  const feedbackEl = document.getElementById('hargaFeedback');
+  if (feedbackEl) { feedbackEl.className = 'input-feedback'; feedbackEl.innerHTML = ''; }
   document.getElementById('cashInput').value = '';
   document.getElementById('cashSlider').value = 0;
   updateDpQuickButtons();
@@ -3205,6 +3560,10 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeManfaatModal();
     closeSantaiModal();
+    closeConfirmHome();
+    closeConfirmUbah();
+    closeSaranModal();
+    closeSaranSuksesModal();
   }
 });
 
