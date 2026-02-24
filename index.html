@@ -970,38 +970,6 @@
     box-shadow: 0 2px 8px rgba(220,38,38,0.15);
   }
 
-  /* === KRITIK & SARAN === */
-  .saran-cat-btn {
-    padding: 5px 10px;
-    border-radius: 20px;
-    border: 1.5px solid var(--border);
-    background: var(--surface);
-    color: var(--muted);
-    font-family: var(--font);
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.18s ease;
-  }
-  .saran-cat-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(220,38,38,0.05);
-  }
-  .saran-cat-btn.selected {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-  }
-  :root.dark-mode .saran-cat-btn {
-    background: var(--surface2);
-    border-color: var(--border);
-    color: var(--muted);
-  }
-  :root.dark-mode .saran-cat-btn.selected {
-    background: var(--accent);
-    color: white;
-  }
 
   /* INPUT NOMINAL */
   .nominal-display {
@@ -2290,13 +2258,10 @@
     <div class="header-badge">💳 Kredit</div>
     <h1>Simulasi Cicilan</h1>
     <p>Simulasi masih perkiraan, bukan angka pasti.</p>
-    <div class="header-link" style="display:flex;gap:8px;flex-wrap:wrap;">
+    <div class="header-link">
       <a href="https://www.homecredit.co.id/" target="_blank" rel="noopener noreferrer">
         🔗 Home Credit Indonesia →
       </a>
-      <button onclick="openSaranModal()" style="display:inline-flex;align-items:center;gap:6px;background:rgba(220,38,38,0.1);color:var(--accent);padding:8px 14px;border-radius:12px;font-size:12px;font-weight:600;border:1px solid rgba(220,38,38,0.2);cursor:pointer;font-family:var(--font);transition:all 0.25s ease;" onmouseover="this.style.background='rgba(220,38,38,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(220,38,38,0.1)';this.style.transform='translateY(0)'">
-        💬 Kritik & Saran
-      </button>
     </div>
   </div>
 
@@ -2569,62 +2534,6 @@
   </div>
 </div>
 
-<!-- MODAL KRITIK & SARAN -->
-<div class="modal-overlay" id="saranModal" onclick="closeSaranModal()">
-  <div class="modal-content" onclick="event.stopPropagation()" style="max-width:360px;">
-    <div class="modal-header">
-      <div class="modal-title"><span>💬</span> Kritik & Saran</div>
-      <button class="modal-close" onclick="closeSaranModal()">×</button>
-    </div>
-    <div class="modal-body" style="padding:16px 20px 20px;">
-      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Masukan kamu sangat berarti untuk meningkatkan aplikasi ini. 🙏</p>
-
-      <div style="margin-bottom:12px;">
-        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);display:block;margin-bottom:6px;">Nama <span style="font-weight:400;color:var(--muted);text-transform:none;">(opsional)</span></label>
-        <input type="text" id="saranNama" placeholder="Nama kamu..." autocomplete="off"
-          style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:13px;background:var(--surface);color:var(--text);outline:none;transition:border-color 0.2s;"
-          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
-      </div>
-
-      <div style="margin-bottom:12px;">
-        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);display:block;margin-bottom:6px;">Kategori</label>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;" id="saranKategoriGroup">
-          <button onclick="setSaranKategori(this,'Bug / Error')"       class="saran-cat-btn">🐛 Bug / Error</button>
-          <button onclick="setSaranKategori(this,'Fitur Baru')"        class="saran-cat-btn">✨ Fitur Baru</button>
-          <button onclick="setSaranKategori(this,'Tampilan')"          class="saran-cat-btn">🎨 Tampilan</button>
-          <button onclick="setSaranKategori(this,'Kalkulasi')"         class="saran-cat-btn">🔢 Kalkulasi</button>
-          <button onclick="setSaranKategori(this,'Lainnya')"           class="saran-cat-btn">💬 Lainnya</button>
-        </div>
-      </div>
-
-      <div style="margin-bottom:16px;">
-        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);display:block;margin-bottom:6px;">Pesan <span style="color:var(--accent);">*</span></label>
-        <textarea id="saranPesan" rows="4" placeholder="Tulis kritik atau saranmu di sini..."
-          style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:10px;font-family:var(--font);font-size:13px;background:var(--surface);color:var(--text);outline:none;resize:vertical;transition:border-color 0.2s;min-height:90px;"
-          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-        <div id="saranPesanError" style="font-size:11px;color:var(--accent);margin-top:4px;display:none;">⚠️ Pesan tidak boleh kosong</div>
-      </div>
-
-      <div style="display:flex;gap:8px;">
-        <button class="btn btn-ghost" onclick="closeSaranModal()" style="flex:1;">Batal</button>
-        <button class="btn btn-primary" onclick="kirimSaran()" style="flex:2;" id="saranKirimBtn">
-          <span id="saranBtnText">Kirim Saran 📨</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="saranSuksesModal" onclick="closeSaranSuksesModal()">
-  <div class="modal-content" onclick="event.stopPropagation()" style="max-width:300px;text-align:center;">
-    <div class="modal-body" style="padding:30px 24px;">
-      <div style="font-size:48px;margin-bottom:12px;">🎉</div>
-      <div style="font-size:18px;font-weight:800;margin-bottom:8px;color:var(--text);">Terima Kasih!</div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Saran kamu sudah terkirim. Kami akan terus berusaha meningkatkan aplikasi ini.</p>
-      <button class="btn btn-primary" onclick="closeSaranSuksesModal()">Tutup</button>
-    </div>
-  </div>
-</div>
 
 <div class="modal-overlay" id="confirmUbahModal" onclick="closeConfirmUbah()">
   <div class="modal-content" onclick="event.stopPropagation()" style="max-width:320px;text-align:center;">
@@ -2641,6 +2550,7 @@
     </div>
   </div>
 </div>
+
 
 <div class="modal-overlay" id="santaiModal" onclick="closeSantaiModal()">
   <div class="modal-content" onclick="event.stopPropagation()">
@@ -3353,120 +3263,6 @@ function toggleTenor(tenor) {
   }
 }
 
-/* ========== KRITIK & SARAN ========== */
-let saranKategoriSelected = '';
-
-function openSaranModal() {
-  document.getElementById('saranModal').classList.add('show');
-  document.body.style.overflow = 'hidden';
-  saranKategoriSelected = '';
-  document.getElementById('saranNama').value = '';
-  document.getElementById('saranPesan').value = '';
-  document.getElementById('saranPesanError').style.display = 'none';
-  document.getElementById('saranBtnText').textContent = 'Kirim Saran 📨';
-  document.querySelectorAll('.saran-cat-btn').forEach(b => b.classList.remove('selected'));
-}
-
-function closeSaranModal() {
-  document.getElementById('saranModal').classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-function closeSaranSuksesModal() {
-  document.getElementById('saranSuksesModal').classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-function setSaranKategori(el, kategori) {
-  document.querySelectorAll('.saran-cat-btn').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
-  saranKategoriSelected = kategori;
-}
-
-// 🔧 URL Apps Script kamu
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxCf5B6usJ_LsOzTRgu3u-fkggxPaD827jVor_6ur1tmfa4qqejpWf614AeFXazgDUu8w/exec';
-
-async function kirimSaran() {
-  const nama    = document.getElementById('saranNama').value.trim() || 'Anonim';
-  const pesan   = document.getElementById('saranPesan').value.trim();
-  const errEl   = document.getElementById('saranPesanError');
-  const btnText = document.getElementById('saranBtnText');
-  const kirimBtn = document.getElementById('saranKirimBtn');
-
-  if (!pesan) {
-    errEl.style.display = 'block';
-    document.getElementById('saranPesan').focus();
-    return;
-  }
-  errEl.style.display = 'none';
-
-  const kategori = saranKategoriSelected || 'Umum';
-  const waktu    = new Date().toLocaleString('id-ID');
-  const harga    = state.hargaBarang ? 'Rp ' + parseInt(state.hargaBarang).toLocaleString('id-ID') : '-';
-  const tenor    = state.tenorList   ? state.tenorList.join(', ') + ' bln' : '-';
-  const bunga    = state.bunga != null ? (state.bunga * 100).toFixed(2) + '%' : '-';
-  const ua       = navigator.userAgent.substring(0, 100);
-
-  // Simpan ke localStorage sebagai backup
-  try {
-    let logs = JSON.parse(localStorage.getItem('saran_log') || '[]');
-    logs.unshift({ nama, kategori, pesan, waktu, harga, tenor, bunga });
-    localStorage.setItem('saran_log', JSON.stringify(logs.slice(0, 50)));
-  } catch(e) {}
-
-  btnText.textContent = 'Mengirim...';
-  kirimBtn.disabled = true;
-
-  try {
-    // Coba Method 1: POST dengan FormData (untuk Chrome)
-    const formData = new FormData();
-    formData.append('nama', nama);
-    formData.append('kategori', kategori);
-    formData.append('pesan', pesan);
-    formData.append('waktu', waktu);
-    formData.append('harga', harga);
-    formData.append('tenor', tenor);
-    formData.append('bunga', bunga);
-    formData.append('ua', ua);
-    
-    await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: formData
-    });
-    
-    console.log('✓ Feedback terkirim via POST');
-  } catch(err1) {
-    console.warn('POST gagal, coba GET:', err1);
-    
-    try {
-      // Fallback Method 2: GET dengan URL params (untuk backward compatibility)
-      const params = new URLSearchParams({ nama, kategori, pesan, waktu, harga, tenor, bunga, ua });
-      const url = APPS_SCRIPT_URL + '?' + params.toString();
-      
-      await new Promise((resolve) => {
-        const img = new Image();
-        img.onload = img.onerror = resolve;
-        img.src = url;
-        setTimeout(resolve, 3000);
-      });
-      
-      console.log('✓ Feedback terkirim via GET');
-    } catch(err2) {
-      console.warn('GET juga gagal:', err2);
-      // Tetap lanjut, data sudah tersimpan di localStorage
-    }
-  }
-
-  kirimBtn.disabled = false;
-  btnText.textContent = 'Kirim Saran 📨';
-
-  closeSaranModal();
-  setTimeout(() => {
-    document.getElementById('saranSuksesModal').classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }, 200);
-}
 
 /* ========== UBAH DATA (dari screen hasil) ========== */
 function askUbahData() {
