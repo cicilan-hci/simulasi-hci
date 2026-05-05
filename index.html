@@ -666,6 +666,16 @@
     color: var(--text);
   }
 
+  /* Dark mode Bunga Rendah buttons */
+  :root.dark-mode #btnBR15,
+  :root.dark-mode #btnBR18,
+  :root.dark-mode #btnBR21,
+  :root.dark-mode #btnBR24 {
+    background: var(--surface2) !important;
+    border-color: var(--border) !important;
+    color: var(--text) !important;
+  }
+
   :root.dark-mode .tenor-preset {
     background: var(--surface2);
     border-color: var(--border);
@@ -2416,6 +2426,41 @@
             <div id="bungaRinganInfo" style="display:none;margin-top:8px;padding:6px 8px;background:rgba(34,197,94,0.1);border-radius:6px;font-size:10px;color:#059669;font-weight:600;"></div>
           </div>
         </div>
+
+        <!-- BUNGA RENDAH toggle -->
+        <div style="margin-top:8px;">
+          <button onclick="toggleBungaRendah()" id="bungaRendahToggleBtn" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(99,102,241,0.08) 100%);border:1px solid rgba(59,130,246,0.3);border-radius:8px;cursor:pointer;font-size:11px;font-weight:700;color:#2563eb;text-transform:uppercase;letter-spacing:0.06em;text-align:left;">
+            <span>💻 Bunga Rendah 0,99% (Electronic & Laptop)</span>
+            <span id="bungaRendahToggleIcon" style="font-size:14px;font-weight:400;">＋</span>
+          </button>
+          <div id="bungaRendahPanel" style="display:none;margin-top:5px;padding:10px;background:rgba(59,130,246,0.03);border:1px solid rgba(59,130,246,0.15);border-radius:8px;">
+            <div style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.5;">
+              📋 <b>Syarat:</b> Harga barang <b>Rp 6 juta – Rp 30 juta</b><br>
+              🛒 <b>Komoditi:</b> Electronic &amp; Laptop<br>
+              💸 <b>Bunga:</b> 0,99% / bulan<br>
+              📅 <b>Tenor:</b> 15, 18, 21, 24 bulan
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <button onclick="selectBungaRendah(15)" id="btnBR15" style="padding:10px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;">
+                <div style="font-size:13px;font-weight:700;color:#2563eb;margin-bottom:2px;">15 Bulan</div>
+                <div style="font-size:9px;color:var(--muted);">0,99% / bln</div>
+              </button>
+              <button onclick="selectBungaRendah(18)" id="btnBR18" style="padding:10px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;">
+                <div style="font-size:13px;font-weight:700;color:#2563eb;margin-bottom:2px;">18 Bulan</div>
+                <div style="font-size:9px;color:var(--muted);">0,99% / bln</div>
+              </button>
+              <button onclick="selectBungaRendah(21)" id="btnBR21" style="padding:10px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;">
+                <div style="font-size:13px;font-weight:700;color:#2563eb;margin-bottom:2px;">21 Bulan</div>
+                <div style="font-size:9px;color:var(--muted);">0,99% / bln</div>
+              </button>
+              <button onclick="selectBungaRendah(24)" id="btnBR24" style="padding:10px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;">
+                <div style="font-size:13px;font-weight:700;color:#2563eb;margin-bottom:2px;">24 Bulan</div>
+                <div style="font-size:9px;color:var(--muted);">0,99% / bln</div>
+              </button>
+            </div>
+            <div id="bungaRendahInfo" style="display:none;margin-top:8px;padding:6px 8px;background:rgba(59,130,246,0.1);border-radius:6px;font-size:10px;color:#2563eb;font-weight:600;"></div>
+          </div>
+        </div>
       </div>
 
       <!-- ACTIVITY LOG / RIWAYAT CICILAN -->
@@ -3039,8 +3084,18 @@ function selectBunga(rate, el) {
   state.bunga = rate;
   state.isBungaRingan = false;
   state.bungaRinganMode = null;
+  state.isBungaRendah = false;
+  state.bungaRendahTenor = null;
   state.tenorList = [3, 6, 9, 12, 15, 18, 24]; // Reset ke default
   
+  // Reset bunga rendah buttons
+  [15, 18, 21, 24].forEach(t => {
+    const btn = document.getElementById('btnBR' + t);
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const infoRendah = document.getElementById('bungaRendahInfo');
+  if (infoRendah) infoRendah.style.display = 'none';
+
   // Auto-set biaya admin berdasarkan bunga dan harga barang
   const harga = parseInt(state.hargaBarang) || 0;
   if (rate === 0 || rate < 0.001) {
@@ -3108,9 +3163,18 @@ function selectBungaManual() {
   state.bunga = rate;
   state.isBungaRingan = false;
   state.bungaRinganMode = null;
+  state.isBungaRendah = false;
+  state.bungaRendahTenor = null;
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('btnMPGG')?.classList.remove('selected');
   document.getElementById('btnFEL')?.classList.remove('selected');
+  // Reset bunga rendah buttons
+  [15, 18, 21, 24].forEach(t => {
+    const btn = document.getElementById('btnBR' + t);
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const infoRendah2 = document.getElementById('bungaRendahInfo');
+  if (infoRendah2) infoRendah2.style.display = 'none';
   
   // Auto-set biaya admin berdasarkan bunga dan harga barang
   const harga = parseInt(state.hargaBarang) || 0;
@@ -3163,6 +3227,16 @@ function selectBungaRingan(mode) {
   // Set state
   state.isBungaRingan = true;
   state.bungaRinganMode = mode;
+  state.isBungaRendah = false;
+  state.bungaRendahTenor = null;
+  
+  // Reset bunga rendah buttons
+  [15, 18, 21, 24].forEach(t => {
+    const btn = document.getElementById('btnBR' + t);
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const infoRendah = document.getElementById('bungaRendahInfo');
+  if (infoRendah) infoRendah.style.display = 'none';
   
   // Set bunga dan tenor sesuai program
   if (mode === 'MPGG') {
@@ -3211,6 +3285,77 @@ function selectBungaRingan(mode) {
   if (currentStep !== 3) showScreen(3);
 }
 
+
+/* BUNGA RENDAH FUNCTIONS */
+function toggleBungaRendah() {
+  const panel = document.getElementById('bungaRendahPanel');
+  const icon = document.getElementById('bungaRendahToggleIcon');
+  if (!panel) return;
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  icon.textContent = isOpen ? '＋' : '－';
+}
+
+function selectBungaRendah(tenor) {
+  const harga = parseInt(state.hargaBarang) || 0;
+  const totalHarga = harga + getAddonTotal();
+  const cash = parseInt(state.cash) || 0;
+  const nominal = totalHarga - cash;
+
+  // Validasi harga barang (bukan nominal pembiayaan)
+  if (harga < 6000000 || harga > 30000000) {
+    alert('⚠️ Bunga Rendah 0,99% hanya untuk harga barang Rp 6.000.000 – Rp 30.000.000\n\nHarga barang saat ini: ' + rupiah(harga));
+    return;
+  }
+
+  // Set state
+  state.bunga = 0.0099;
+  state.isBungaRingan = false;
+  state.bungaRinganMode = null;
+  state.isBungaRendah = true;
+  state.bungaRendahTenor = tenor;
+  state.tenorList = [tenor];
+  // Admin fee: harga barang < 10jt → 299.000, >= 10jt → 399.000
+  state.biayaAdmin = harga < 10000000 ? 299000 : 399000;
+  state.nominal = nominal;
+
+  // Reset bunga normal & bunga ringan buttons
+  document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
+  const bungaManualInput = document.getElementById('bungaManualInput');
+  if (bungaManualInput) bungaManualInput.value = '';
+  const btnMPGG = document.getElementById('btnMPGG');
+  const btnFEL = document.getElementById('btnFEL');
+  if (btnMPGG) { btnMPGG.style.background = 'white'; btnMPGG.style.borderColor = 'var(--border)'; btnMPGG.style.transform = 'scale(1)'; }
+  if (btnFEL) { btnFEL.style.background = 'white'; btnFEL.style.borderColor = 'var(--border)'; btnFEL.style.transform = 'scale(1)'; }
+  const infoRingan = document.getElementById('bungaRinganInfo');
+  if (infoRingan) infoRingan.style.display = 'none';
+
+  // Update Bunga Rendah button styles
+  [15, 18, 21, 24].forEach(t => {
+    const btn = document.getElementById('btnBR' + t);
+    if (!btn) return;
+    if (t === tenor) {
+      btn.style.background = 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)';
+      btn.style.borderColor = '#2563eb';
+      btn.style.transform = 'scale(1.02)';
+    } else {
+      btn.style.background = 'white';
+      btn.style.borderColor = 'var(--border)';
+      btn.style.transform = 'scale(1)';
+    }
+  });
+
+  // Show info
+  const info = document.getElementById('bungaRendahInfo');
+  if (info) {
+    info.style.display = 'block';
+    const adminFmt = rupiah(state.biayaAdmin);
+    info.innerHTML = `✓ Tenor ${tenor} bln dipilih — Bunga 0,99%/bln, Admin ${adminFmt} (masuk cicilan) + Rp 10.000/bln`;
+  }
+
+  buildAndShowResult();
+  if (currentStep !== 3) showScreen(3);
+}
 
 /* BIAYA ADMIN SELECTION */
 /* TENOR HANDLING */
@@ -3341,12 +3486,16 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
   if (state.isBungaRingan) {
     const badgeColor = state.bungaRinganMode === 'MPGG' ? '#059669' : '#10b981';
     bungaRinganBadge = `<div style="display:inline-block;margin-left:8px;padding:3px 8px;background:${badgeColor};color:white;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:0.05em;">✨ ${state.bungaRinganMode}</div>`;
+  } else if (state.isBungaRendah) {
+    bungaRinganBadge = `<div style="display:inline-block;margin-left:8px;padding:3px 8px;background:#2563eb;color:white;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:0.05em;">💻 Bunga Rendah</div>`;
   }
 
   // WA message
   const harga = (parseInt(state.hargaBarang) || 0) + getAddonTotal();
   const dp = parseInt(state.cash) || 0;
-  const programInfo = state.isBungaRingan ? `\n🎁 Program: ${state.bungaRinganMode}` : '';
+  let programInfo = '';
+  if (state.isBungaRingan) programInfo = `\n🎁 Program: ${state.bungaRinganMode}`;
+  else if (state.isBungaRendah) programInfo = `\n💻 Program: Bunga Rendah 0,99% (Electronic & Laptop)`;
   const waMsg = encodeURIComponent(
     `📱 *Simulasi Cicilan Home Credit*\n` +
     `────────────────\n` +
@@ -3365,6 +3514,8 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
     adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (3% dari harga, masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code>`;
   } else if (state.isBungaRingan && state.bungaRinganMode === 'MPGG') {
     adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (3% dari harga, masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code>`;
+  } else if (state.isBungaRendah) {
+    adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code><br>💻 Program Bunga Rendah 0,99% — Electronic &amp; Laptop`;
   } else {
     adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code>`;
   }
@@ -3768,7 +3919,7 @@ function buildSalesData() {
     const total = base + bungaTotal + biayaAdminDiLuar + (adminBulanan * tenor);
     const cicilan = total / tenor;
 
-    const programInfo = state.isBungaRingan ? `\n🎁 Program: ${state.bungaRinganMode}` : '';
+    const programInfo = state.isBungaRingan ? `\n🎁 Program: ${state.bungaRinganMode}` : (state.isBungaRendah ? `\n💻 Program: Bunga Rendah 0,99%` : '');
     const waMsg = encodeURIComponent(
       `📱 *Simulasi Cicilan Home Credit*\n` +
       `────────────────\n` +
