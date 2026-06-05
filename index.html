@@ -666,16 +666,6 @@
     color: var(--text);
   }
 
-  /* Dark mode Bunga Rendah buttons */
-  :root.dark-mode #btnBR15,
-  :root.dark-mode #btnBR18,
-  :root.dark-mode #btnBR21,
-  :root.dark-mode #btnBR24 {
-    background: var(--surface2) !important;
-    border-color: var(--border) !important;
-    color: var(--text) !important;
-  }
-
   :root.dark-mode .tenor-preset {
     background: var(--surface2);
     border-color: var(--border);
@@ -2415,55 +2405,97 @@
               <button onclick="selectBungaRingan('MPGG')" id="btnMPGG" style="flex:1;padding:10px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;">
                 <div style="font-size:13px;font-weight:700;color:#059669;margin-bottom:2px;">MPGG</div>
                 <div style="font-size:9px;color:var(--muted);">500rb - 6jt</div>
-                <div style="font-size:9px;color:var(--muted);">6,9,12 bln</div>
+                <div style="font-size:9px;color:var(--muted);">3,6,9,12 bln</div>
               </button>
               <button onclick="selectBungaRingan('FEL')" id="btnFEL" style="flex:1;padding:10px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;">
                 <div style="font-size:13px;font-weight:700;color:#059669;margin-bottom:2px;">FEL</div>
                 <div style="font-size:9px;color:var(--muted);">500rb - 30jt</div>
-                <div style="font-size:9px;color:var(--muted);">6,9,12,15 bln</div>
+                <div style="font-size:9px;color:var(--muted);">12 & 15 bln</div>
               </button>
             </div>
             <div id="bungaRinganInfo" style="display:none;margin-top:8px;padding:6px 8px;background:rgba(34,197,94,0.1);border-radius:6px;font-size:10px;color:#059669;font-weight:600;"></div>
           </div>
         </div>
 
-        <!-- BUNGA RENDAH toggle -->
+        <!-- PROMO BUNGA 0% - 1GP toggle -->
         <div style="margin-top:8px;">
-          <button onclick="toggleBungaRendah()" id="bungaRendahToggleBtn" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(99,102,241,0.08) 100%);border:1px solid rgba(59,130,246,0.3);border-radius:8px;cursor:pointer;font-size:11px;font-weight:700;color:#2563eb;text-transform:uppercase;letter-spacing:0.06em;text-align:left;">
-            <span>💻 Bunga Rendah 0,99% (Electronic & Laptop)</span>
-            <span id="bungaRendahToggleIcon" style="font-size:14px;font-weight:400;">＋</span>
+          <button onclick="togglePromo1GP()" id="promo1GPToggleBtn" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:linear-gradient(135deg, rgba(234,179,8,0.12) 0%, rgba(245,158,11,0.08) 100%);border:1px solid rgba(234,179,8,0.4);border-radius:8px;cursor:pointer;font-size:11px;font-weight:700;color:#b45309;text-transform:uppercase;letter-spacing:0.06em;text-align:left;">
+            <span>🎁 Promo Bunga 0% · 1GP (One Gift Payment)</span>
+            <span id="promo1GPToggleIcon" style="font-size:14px;font-weight:400;">＋</span>
           </button>
-          <div id="bungaRendahPanel" style="display:none;margin-top:5px;padding:10px;background:rgba(59,130,246,0.03);border:1px solid rgba(59,130,246,0.15);border-radius:8px;">
+          <div id="promo1GPPanel" style="display:none;margin-top:5px;padding:10px;background:rgba(234,179,8,0.03);border:1px solid rgba(234,179,8,0.2);border-radius:8px;">
             <div style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.5;">
-              📋 <b>Syarat:</b> Harga barang <b>Rp 6 juta – Rp 30 juta</b><br>
-              🛒 <b>Komoditi:</b> Electronic &amp; Laptop<br>
-              💸 <b>Bunga:</b> 0,99% / bulan<br>
-              📅 <b>Tenor:</b> 15, 18, 21, 24 bulan
+              Cicilan <b>bunga 0%</b> bayar di awal (Gift Payment). Pilih tenor bayar+bonus:
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-              <button onclick="selectBungaRendah(15)" id="btnBR15" style="padding:10px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;">
-                <div style="font-size:13px;font-weight:700;color:#2563eb;margin-bottom:2px;">15 Bulan</div>
-                <div style="font-size:9px;color:var(--muted);">0,99% / bln</div>
+            <div style="display:flex;gap:6px;">
+              <button onclick="selectPromo1GP('5+1')" id="btn1GP_5_1" style="flex:1;padding:8px 4px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;text-align:center;">
+                <div style="font-size:13px;font-weight:700;color:#b45309;margin-bottom:2px;">5+1</div>
+                <div style="font-size:9px;color:var(--muted);">Bayar 5 bln</div>
+                <div style="font-size:9px;color:var(--muted);">Gratis 1 bln</div>
               </button>
-              <button onclick="selectBungaRendah(18)" id="btnBR18" style="padding:10px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;">
-                <div style="font-size:13px;font-weight:700;color:#2563eb;margin-bottom:2px;">18 Bulan</div>
-                <div style="font-size:9px;color:var(--muted);">0,99% / bln</div>
+              <button onclick="selectPromo1GP('8+1')" id="btn1GP_8_1" style="flex:1;padding:8px 4px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;text-align:center;">
+                <div style="font-size:13px;font-weight:700;color:#b45309;margin-bottom:2px;">8+1</div>
+                <div style="font-size:9px;color:var(--muted);">Bayar 8 bln</div>
+                <div style="font-size:9px;color:var(--muted);">Gratis 1 bln</div>
               </button>
-              <button onclick="selectBungaRendah(21)" id="btnBR21" style="padding:10px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;">
-                <div style="font-size:13px;font-weight:700;color:#2563eb;margin-bottom:2px;">21 Bulan</div>
-                <div style="font-size:9px;color:var(--muted);">0,99% / bln</div>
-              </button>
-              <button onclick="selectBungaRendah(24)" id="btnBR24" style="padding:10px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;">
-                <div style="font-size:13px;font-weight:700;color:#2563eb;margin-bottom:2px;">24 Bulan</div>
-                <div style="font-size:9px;color:var(--muted);">0,99% / bln</div>
+              <button onclick="selectPromo1GP('10+2')" id="btn1GP_10_2" style="flex:1;padding:8px 4px;background:white;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text);transition:all 0.2s;text-align:center;">
+                <div style="font-size:13px;font-weight:700;color:#b45309;margin-bottom:2px;">10+2</div>
+                <div style="font-size:9px;color:var(--muted);">Bayar 10 bln</div>
+                <div style="font-size:9px;color:var(--muted);">Gratis 2 bln</div>
               </button>
             </div>
-            <div id="bungaRendahInfo" style="display:none;margin-top:8px;padding:6px 8px;background:rgba(59,130,246,0.1);border-radius:6px;font-size:10px;color:#2563eb;font-weight:600;"></div>
+            <div id="promo1GPInfo" style="display:none;margin-top:8px;padding:6px 8px;background:rgba(234,179,8,0.12);border-radius:6px;font-size:10px;color:#b45309;font-weight:600;line-height:1.5;"></div>
+            <!-- Syarat gratis cicilan -->
+            <div style="margin-top:8px;padding:8px 10px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:8px;display:flex;align-items:flex-start;gap:7px;">
+              <span style="font-size:14px;flex-shrink:0;">⚠️</span>
+              <div style="font-size:10px;color:#991b1b;font-weight:600;line-height:1.55;">
+                <b>Syarat Gratis Cicilan:</b> Bulan gratis hanya berlaku jika konsumen <b>selalu membayar tepat waktu</b> selama masa cicilan. Keterlambatan pembayaran dapat membatalkan benefit gratis.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROMO TRIPLE ZERO toggle -->
+        <div style="margin-top:8px;">
+          <button onclick="toggleTripleZero()" id="tripleZeroToggleBtn" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:linear-gradient(135deg, rgba(6,182,212,0.12) 0%, rgba(14,165,233,0.08) 100%);border:1px solid rgba(6,182,212,0.4);border-radius:8px;cursor:pointer;font-size:11px;font-weight:700;color:#0369a1;text-transform:uppercase;letter-spacing:0.06em;text-align:left;">
+            <span>🔵 Triple Zero · Bunga 0% · Admin 0 · Biaya Bulanan 0</span>
+            <span id="tripleZeroToggleIcon" style="font-size:14px;font-weight:400;">＋</span>
+          </button>
+          <div id="tripleZeroPanel" style="display:none;margin-top:5px;padding:12px;background:rgba(6,182,212,0.03);border:1px solid rgba(6,182,212,0.2);border-radius:8px;">
+            <!-- 3 badge keunggulan -->
+            <div style="display:flex;gap:6px;margin-bottom:10px;">
+              <div style="flex:1;text-align:center;padding:6px 4px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.3);border-radius:8px;">
+                <div style="font-size:16px;">💸</div>
+                <div style="font-size:10px;font-weight:700;color:#0369a1;">Bunga 0%</div>
+              </div>
+              <div style="flex:1;text-align:center;padding:6px 4px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.3);border-radius:8px;">
+                <div style="font-size:16px;">🆓</div>
+                <div style="font-size:10px;font-weight:700;color:#0369a1;">Admin 0</div>
+              </div>
+              <div style="flex:1;text-align:center;padding:6px 4px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.3);border-radius:8px;">
+                <div style="font-size:16px;">📅</div>
+                <div style="font-size:10px;font-weight:700;color:#0369a1;">Bulanan 0</div>
+              </div>
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.5;">
+              Bayar <b>12 bulan</b>, gratis <b>2 bulan</b> (total 14 bulan). Semua biaya tambahan <b>0</b>.
+            </div>
+            <button onclick="selectTripleZero()" id="btnTripleZero" style="width:100%;padding:10px;background:white;border:2px solid rgba(6,182,212,0.5);border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;color:#0369a1;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;">
+              <span style="font-size:16px;">🔵</span>
+              <span>Aktifkan Triple Zero · Tenor 12+2</span>
+            </button>
+            <div id="tripleZeroInfo" style="display:none;margin-top:8px;padding:6px 8px;background:rgba(6,182,212,0.12);border-radius:6px;font-size:10px;color:#0369a1;font-weight:600;line-height:1.5;"></div>
+            <!-- Syarat gratis cicilan -->
+            <div style="margin-top:8px;padding:8px 10px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:8px;display:flex;align-items:flex-start;gap:7px;">
+              <span style="font-size:14px;flex-shrink:0;">⚠️</span>
+              <div style="font-size:10px;color:#991b1b;font-weight:600;line-height:1.55;">
+                <b>Syarat Gratis Cicilan:</b> 2 bulan gratis hanya berlaku jika konsumen <b>selalu membayar tepat waktu</b> selama 12 bulan masa cicilan. Keterlambatan pembayaran dapat membatalkan benefit gratis.
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- ACTIVITY LOG / RIWAYAT CICILAN -->
       <div class="activity-log-container" id="activityLogContainer">
         <div class="activity-log-title">📊 Riwayat Cek Cicilan Terakhir</div>
         <div class="activity-log-list" id="activityLogList">
@@ -2653,7 +2685,10 @@ let state = {
   easyCoverTenor: 12, // 12 atau 24
   addons: { tecprotec: 0, aksesoris: 0, kartuprovider: 0 },
   bungaRinganMode: null, // 'MPGG' or 'FEL' or null
-  isBungaRingan: false
+  isBungaRingan: false,
+  is1GP: false,      // NEW: flag promo 1GP
+  mode1GP: null,     // NEW: '5+1' | '8+1' | '10+2'
+  isTripleZero: false // NEW: flag Triple Zero
 };
 
 /* ========== STEP MANAGEMENT ========== */
@@ -3084,18 +3119,11 @@ function selectBunga(rate, el) {
   state.bunga = rate;
   state.isBungaRingan = false;
   state.bungaRinganMode = null;
-  state.isBungaRendah = false;
-  state.bungaRendahTenor = null;
+  state.is1GP = false;
+  state.mode1GP = null;
+  state.isTripleZero = false;
   state.tenorList = [3, 6, 9, 12, 15, 18, 24]; // Reset ke default
   
-  // Reset bunga rendah buttons
-  [15, 18, 21, 24].forEach(t => {
-    const btn = document.getElementById('btnBR' + t);
-    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
-  });
-  const infoRendah = document.getElementById('bungaRendahInfo');
-  if (infoRendah) infoRendah.style.display = 'none';
-
   // Auto-set biaya admin berdasarkan bunga dan harga barang
   const harga = parseInt(state.hargaBarang) || 0;
   if (rate === 0 || rate < 0.001) {
@@ -3125,6 +3153,17 @@ function selectBunga(rate, el) {
   }
   const info = document.getElementById('bungaRinganInfo');
   if (info) info.style.display = 'none';
+
+  // Reset 1GP buttons
+  ['5+1', '8+1', '10+2'].forEach(m => {
+    const btn = document.getElementById('btn1GP_' + m.replace('+', '_'));
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const info1gp = document.getElementById('promo1GPInfo');
+  if (info1gp) info1gp.style.display = 'none';
+
+  // Reset Triple Zero
+  resetTripleZeroBtn();
 
   // ⚠️ FIX: Selalu hitung ulang state.nominal
   const totalHarga = harga + getAddonTotal();
@@ -3163,18 +3202,12 @@ function selectBungaManual() {
   state.bunga = rate;
   state.isBungaRingan = false;
   state.bungaRinganMode = null;
-  state.isBungaRendah = false;
-  state.bungaRendahTenor = null;
+  state.is1GP = false;
+  state.mode1GP = null;
+  state.isTripleZero = false;
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('btnMPGG')?.classList.remove('selected');
   document.getElementById('btnFEL')?.classList.remove('selected');
-  // Reset bunga rendah buttons
-  [15, 18, 21, 24].forEach(t => {
-    const btn = document.getElementById('btnBR' + t);
-    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
-  });
-  const infoRendah2 = document.getElementById('bungaRendahInfo');
-  if (infoRendah2) infoRendah2.style.display = 'none';
   
   // Auto-set biaya admin berdasarkan bunga dan harga barang
   const harga = parseInt(state.hargaBarang) || 0;
@@ -3227,25 +3260,18 @@ function selectBungaRingan(mode) {
   // Set state
   state.isBungaRingan = true;
   state.bungaRinganMode = mode;
-  state.isBungaRendah = false;
-  state.bungaRendahTenor = null;
-  
-  // Reset bunga rendah buttons
-  [15, 18, 21, 24].forEach(t => {
-    const btn = document.getElementById('btnBR' + t);
-    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
-  });
-  const infoRendah = document.getElementById('bungaRendahInfo');
-  if (infoRendah) infoRendah.style.display = 'none';
+  state.is1GP = false;
+  state.mode1GP = null;
+  state.isTripleZero = false;
   
   // Set bunga dan tenor sesuai program
   if (mode === 'MPGG') {
     state.bunga = 0.0225; // MPGG 2.25% bunga
-    state.tenorList = [6, 9, 12];
+    state.tenorList = [3, 6, 9, 12];
     state.biayaAdmin = Math.round(totalHarga * 0.03); // Admin 3% dari harga barang
   } else if (mode === 'FEL') {
     state.bunga = 0.0225; // 2.25%
-    state.tenorList = [6, 9, 12, 15];
+    state.tenorList = [12, 15];
     state.biayaAdmin = Math.round(totalHarga * 0.03); // Admin 3% dari harga barang
   }
   
@@ -3255,6 +3281,17 @@ function selectBungaRingan(mode) {
   // Reset pilihan bunga normal
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('bungaManualInput').value = '';
+  
+  // Reset 1GP buttons
+  ['5+1', '8+1', '10+2'].forEach(m => {
+    const btn = document.getElementById('btn1GP_' + m.replace('+', '_'));
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const info1gpBR = document.getElementById('promo1GPInfo');
+  if (info1gpBR) info1gpBR.style.display = 'none';
+
+  // Reset Triple Zero
+  resetTripleZeroBtn();
   
   // Update button styles
   const btnMPGG = document.getElementById('btnMPGG');
@@ -3274,9 +3311,9 @@ function selectBungaRingan(mode) {
   if (info) {
     info.style.display = 'block';
     if (mode === 'MPGG') {
-      info.innerHTML = '✓ MPGG dipilih - Bunga 2.25%, Admin 3% (masuk cicilan) + Rp 10rb/bln, Tenor 6,9,12 bulan';
+      info.innerHTML = '✓ MPGG dipilih - Bunga 2.25%, Admin 3% (masuk cicilan) + Rp 10rb/bln, Tenor 3-12 bulan';
     } else {
-      info.innerHTML = '✓ FEL dipilih - Bunga 2.25%, Admin 3% dari harga (masuk cicilan) + Rp 10rb/bln, Tenor 6,9,12,15 bulan';
+      info.innerHTML = '✓ FEL dipilih - Bunga 2.25%, Admin 3% dari harga (masuk cicilan) + Rp 10rb/bln, Tenor 12-15 bulan';
     }
   }
   
@@ -3286,71 +3323,165 @@ function selectBungaRingan(mode) {
 }
 
 
-/* BUNGA RENDAH FUNCTIONS */
-function toggleBungaRendah() {
-  const panel = document.getElementById('bungaRendahPanel');
-  const icon = document.getElementById('bungaRendahToggleIcon');
+/* ========== PROMO BUNGA 0% - 1GP ========== */
+function togglePromo1GP() {
+  const panel = document.getElementById('promo1GPPanel');
+  const icon = document.getElementById('promo1GPToggleIcon');
   if (!panel) return;
   const isOpen = panel.style.display !== 'none';
   panel.style.display = isOpen ? 'none' : 'block';
   icon.textContent = isOpen ? '＋' : '－';
 }
 
-function selectBungaRendah(tenor) {
+function selectPromo1GP(mode) {
   const harga = parseInt(state.hargaBarang) || 0;
   const totalHarga = harga + getAddonTotal();
   const cash = parseInt(state.cash) || 0;
   const nominal = totalHarga - cash;
 
-  // Validasi harga barang (bukan nominal pembiayaan)
-  if (harga < 6000000 || harga > 30000000) {
-    alert('⚠️ Bunga Rendah 0,99% hanya untuk harga barang Rp 6.000.000 – Rp 30.000.000\n\nHarga barang saat ini: ' + rupiah(harga));
+  if (!harga || nominal <= 0) {
+    alert('⚠️ Masukkan harga barang terlebih dahulu!');
     return;
   }
 
-  // Set state
-  state.bunga = 0.0099;
+  // 1GP: bunga 0%, tenor = bulan bayar (tidak termasuk bulan gratis)
+  // 5+1 → bayar 5 bln, 8+1 → bayar 8 bln, 10+2 → bayar 10 bln
+  const tenorMap = { '5+1': 5, '8+1': 8, '10+2': 10 };
+  const labelMap = { '5+1': '5 bayar + 1 gratis (6 bln total)', '8+1': '8 bayar + 1 gratis (9 bln total)', '10+2': '10 bayar + 2 gratis (12 bln total)' };
+
+  state.is1GP = true;
+  state.mode1GP = mode;
   state.isBungaRingan = false;
   state.bungaRinganMode = null;
-  state.isBungaRendah = true;
-  state.bungaRendahTenor = tenor;
-  state.tenorList = [tenor];
-  // Admin fee: harga barang < 10jt → 299.000, >= 10jt → 399.000
-  state.biayaAdmin = harga < 10000000 ? 299000 : 399000;
+  state.isTripleZero = false;
+  state.bunga = 0; // Bunga 0%
+
+  // Biaya admin berdasarkan harga barang
+  state.biayaAdmin = harga < 15000000 ? 299000 : 399000;
+
+  // Tenor = bulan yang dibayar (bulan gratis tidak ikut cicilan)
+  state.tenorList = [tenorMap[mode]];
   state.nominal = nominal;
 
-  // Reset bunga normal & bunga ringan buttons
+  // Reset pilihan bunga normal & bunga ringan
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
   const bungaManualInput = document.getElementById('bungaManualInput');
   if (bungaManualInput) bungaManualInput.value = '';
-  const btnMPGG = document.getElementById('btnMPGG');
-  const btnFEL = document.getElementById('btnFEL');
-  if (btnMPGG) { btnMPGG.style.background = 'white'; btnMPGG.style.borderColor = 'var(--border)'; btnMPGG.style.transform = 'scale(1)'; }
-  if (btnFEL) { btnFEL.style.background = 'white'; btnFEL.style.borderColor = 'var(--border)'; btnFEL.style.transform = 'scale(1)'; }
-  const infoRingan = document.getElementById('bungaRinganInfo');
-  if (infoRingan) infoRingan.style.display = 'none';
 
-  // Update Bunga Rendah button styles
-  [15, 18, 21, 24].forEach(t => {
-    const btn = document.getElementById('btnBR' + t);
-    if (!btn) return;
-    if (t === tenor) {
-      btn.style.background = 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)';
-      btn.style.borderColor = '#2563eb';
-      btn.style.transform = 'scale(1.02)';
-    } else {
+  // Reset bunga ringan buttons
+  ['btnMPGG', 'btnFEL'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) {
       btn.style.background = 'white';
       btn.style.borderColor = 'var(--border)';
       btn.style.transform = 'scale(1)';
     }
   });
+  const brInfo = document.getElementById('bungaRinganInfo');
+  if (brInfo) brInfo.style.display = 'none';
+
+  // Reset Triple Zero
+  resetTripleZeroBtn();
+
+  // Highlight selected 1GP button
+  ['5+1', '8+1', '10+2'].forEach(m => {
+    const id = 'btn1GP_' + m.replace('+', '_');
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    const active = (m === mode);
+    btn.style.background = active ? 'linear-gradient(135deg, #fef9c3 0%, #fde68a 100%)' : 'white';
+    btn.style.borderColor = active ? '#b45309' : 'var(--border)';
+    btn.style.transform = active ? 'scale(1.03)' : 'scale(1)';
+  });
 
   // Show info
-  const info = document.getElementById('bungaRendahInfo');
+  const info = document.getElementById('promo1GPInfo');
   if (info) {
     info.style.display = 'block';
-    const adminFmt = rupiah(state.biayaAdmin);
-    info.innerHTML = `✓ Tenor ${tenor} bln dipilih — Bunga 0,99%/bln, Admin ${adminFmt} (masuk cicilan) + Rp 10.000/bln`;
+    const adminFmt = (state.biayaAdmin).toLocaleString('id-ID');
+    info.innerHTML = `✓ <b>1GP ${mode}</b> dipilih · Bunga 0% · Admin Rp ${adminFmt} (masuk cicilan) + Rp 10rb/bln · ${labelMap[mode]}`;
+  }
+
+  buildAndShowResult();
+  if (currentStep !== 3) showScreen(3);
+}
+
+/* ========== PROMO TRIPLE ZERO ========== */
+function toggleTripleZero() {
+  const panel = document.getElementById('tripleZeroPanel');
+  const icon  = document.getElementById('tripleZeroToggleIcon');
+  if (!panel) return;
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  icon.textContent = isOpen ? '＋' : '－';
+}
+
+function resetTripleZeroBtn() {
+  const btn = document.getElementById('btnTripleZero');
+  if (btn) {
+    btn.style.background = 'white';
+    btn.style.borderColor = 'rgba(6,182,212,0.5)';
+    btn.style.transform = 'scale(1)';
+  }
+  const info = document.getElementById('tripleZeroInfo');
+  if (info) info.style.display = 'none';
+}
+
+function selectTripleZero() {
+  const harga = parseInt(state.hargaBarang) || 0;
+  const totalHarga = harga + getAddonTotal();
+  const cash  = parseInt(state.cash) || 0;
+  const nominal = totalHarga - cash;
+
+  if (!harga || nominal <= 0) {
+    alert('⚠️ Masukkan harga barang terlebih dahulu!');
+    return;
+  }
+
+  // Triple Zero: bunga 0%, admin 0, biaya bulanan 0, tenor bayar 12 (+2 gratis = 14 total)
+  state.isTripleZero  = true;
+  state.is1GP         = false;
+  state.mode1GP       = null;
+  state.isBungaRingan = false;
+  state.bungaRinganMode = null;
+  state.bunga         = 0;
+  state.biayaAdmin    = 0;   // Admin GRATIS
+  state.tenorList     = [12]; // Bayar 12 bulan
+  state.nominal       = nominal;
+
+  // Reset semua bunga normal & ringan
+  document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
+  const bungaManualInput = document.getElementById('bungaManualInput');
+  if (bungaManualInput) bungaManualInput.value = '';
+
+  ['btnMPGG', 'btnFEL'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const brInfo = document.getElementById('bungaRinganInfo');
+  if (brInfo) brInfo.style.display = 'none';
+
+  // Reset 1GP buttons
+  ['5+1','8+1','10+2'].forEach(m => {
+    const btn = document.getElementById('btn1GP_' + m.replace('+','_'));
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const info1gp = document.getElementById('promo1GPInfo');
+  if (info1gp) info1gp.style.display = 'none';
+
+  // Highlight Triple Zero button
+  const btn = document.getElementById('btnTripleZero');
+  if (btn) {
+    btn.style.background = 'linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%)';
+    btn.style.borderColor = '#0891b2';
+    btn.style.transform   = 'scale(1.02)';
+  }
+
+  // Show info
+  const info = document.getElementById('tripleZeroInfo');
+  if (info) {
+    info.style.display = 'block';
+    info.innerHTML = '✓ <b>Triple Zero</b> aktif · Bunga 0% · Admin Rp 0 · Biaya Bulanan Rp 0 · Bayar 12 bulan, gratis 2 bulan (total 14 bulan)';
   }
 
   buildAndShowResult();
@@ -3447,11 +3578,11 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
 
   // ===== Kalkulasi =====
   let biayaAdmin = state.biayaAdmin;
-  let adminBulanan = 10000;
+  let adminBulanan = state.isTripleZero ? 0 : 10000; // Triple Zero: biaya bulanan = 0
   
   // SEMUA admin fee masuk ke cicilan (dikenakan bunga)
   // Baik untuk cicilan normal maupun Bunga Ringan (MPGG/FEL)
-  const biayaAdminMasukBase = biayaAdmin; // Admin masuk cicilan
+  const biayaAdminMasukBase = biayaAdmin; // Admin masuk cicilan (0 jika Triple Zero)
   const biayaAdminDiLuar = 0; // Tidak ada admin di luar
   
   const akujagaTotal = akujagaPerBulan * tenor;
@@ -3486,16 +3617,17 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
   if (state.isBungaRingan) {
     const badgeColor = state.bungaRinganMode === 'MPGG' ? '#059669' : '#10b981';
     bungaRinganBadge = `<div style="display:inline-block;margin-left:8px;padding:3px 8px;background:${badgeColor};color:white;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:0.05em;">✨ ${state.bungaRinganMode}</div>`;
-  } else if (state.isBungaRendah) {
-    bungaRinganBadge = `<div style="display:inline-block;margin-left:8px;padding:3px 8px;background:#2563eb;color:white;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:0.05em;">💻 Bunga Rendah</div>`;
+  } else if (state.is1GP) {
+    const labelMap1gp = { '5+1': '5+1 Bln', '8+1': '8+1 Bln', '10+2': '10+2 Bln' };
+    bungaRinganBadge = `<div style="display:inline-block;margin-left:8px;padding:3px 8px;background:linear-gradient(135deg,#b45309,#d97706);color:white;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:0.05em;">🎁 1GP ${labelMap1gp[state.mode1GP] || ''}</div>`;
+  } else if (state.isTripleZero) {
+    bungaRinganBadge = `<div style="display:inline-block;margin-left:6px;padding:3px 7px;background:linear-gradient(135deg,#0891b2,#06b6d4);color:white;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:0.04em;">🔵 TRIPLE ZERO</div><div style="display:inline-block;margin-left:4px;padding:3px 7px;background:#059669;color:white;border-radius:6px;font-size:9px;font-weight:700;">FREE ADMIN</div>`;
   }
 
   // WA message
   const harga = (parseInt(state.hargaBarang) || 0) + getAddonTotal();
   const dp = parseInt(state.cash) || 0;
-  let programInfo = '';
-  if (state.isBungaRingan) programInfo = `\n🎁 Program: ${state.bungaRinganMode}`;
-  else if (state.isBungaRendah) programInfo = `\n💻 Program: Bunga Rendah 0,99% (Electronic & Laptop)`;
+  const programInfo = state.isBungaRingan ? `\n🎁 Program: ${state.bungaRinganMode}` : (state.is1GP ? `\n🎁 Program: Bunga 0% - 1GP ${state.mode1GP}` : (state.isTripleZero ? `\n🔵 Program: Triple Zero (12+2 Bulan)` : ''));
   const waMsg = encodeURIComponent(
     `📱 *Simulasi Cicilan Home Credit*\n` +
     `────────────────\n` +
@@ -3510,12 +3642,16 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
 
   // Calc description with conditional admin fee display
   let adminFeeText = '';
-  if (state.isBungaRingan && state.bungaRinganMode === 'FEL') {
+  if (state.isTripleZero) {
+    adminFeeText = `<span style="color:#0891b2;font-weight:700;">🔵 TRIPLE ZERO</span> · Biaya Admin: <code>Rp 0</code> · Biaya Bulanan: <code>Rp 0/bln</code><br>💡 Bayar <b>12 bulan</b>, gratis <b>2 bulan</b> (total 14 bulan)`;
+  } else if (state.is1GP) {
+    const totalBulan1gp = { '5+1': 6, '8+1': 9, '10+2': 12 };
+    const totalBulan = totalBulan1gp[state.mode1GP] || tenor;
+    adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (masuk cicilan, bunga 0%)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code><br>💡 Bayar <b>${tenor} bulan</b>, gratis <b>${totalBulan - tenor} bulan</b> (total ${totalBulan} bulan)`;
+  } else if (state.isBungaRingan && state.bungaRinganMode === 'FEL') {
     adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (3% dari harga, masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code>`;
   } else if (state.isBungaRingan && state.bungaRinganMode === 'MPGG') {
     adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (3% dari harga, masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code>`;
-  } else if (state.isBungaRendah) {
-    adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code><br>💻 Program Bunga Rendah 0,99% — Electronic &amp; Laptop`;
   } else {
     adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code>`;
   }
@@ -3537,9 +3673,10 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
 
   let html = `<div class="tenor-card fade">
     <div class="tenor-header" onclick="toggleTenor(${tenor})">
-      <div class="tenor-badge">${tenor} BLN${bungaRinganBadge}</div>
+      <div class="tenor-badge">${state.isTripleZero ? '12+2' : (state.is1GP ? `${state.mode1GP}` : tenor + ' BLN')}${bungaRinganBadge}</div>
       <div class="tenor-title" style="flex:1;margin-left:12px;">
-        <strong>${rupiah(cicilan)}</strong><span style="font-size:12px;color:var(--muted);">/bln</span>
+        ${state.isTripleZero ? `<span style="font-size:10px;color:#0891b2;font-weight:700;display:block;margin-bottom:1px;">Cicilan Ringan - 2GP · Triple Zero</span>` : (state.is1GP ? `<span style="font-size:10px;color:#b45309;font-weight:700;display:block;margin-bottom:1px;">Cicilan Ringan - 1GP</span>` : '')}
+        <strong style="${state.isTripleZero ? 'color:#0891b2;' : ''}">${rupiah(cicilan)}</strong><span style="font-size:12px;color:var(--muted);">/bln</span>
       </div>
       <div class="tenor-toggle-icon" id="${iconId}">▼</div>
     </div>
@@ -3906,7 +4043,7 @@ function buildSalesData() {
 
   return state.tenorList.map(tenor => {
     let biayaAdmin = state.biayaAdmin;
-    let adminBulanan = 10000;
+    let adminBulanan = state.isTripleZero ? 0 : 10000; // Triple Zero: biaya bulanan = 0
     
     // SEMUA admin fee masuk ke cicilan (dikenakan bunga)
     const biayaAdminMasukBase = biayaAdmin;
@@ -3919,7 +4056,7 @@ function buildSalesData() {
     const total = base + bungaTotal + biayaAdminDiLuar + (adminBulanan * tenor);
     const cicilan = total / tenor;
 
-    const programInfo = state.isBungaRingan ? `\n🎁 Program: ${state.bungaRinganMode}` : (state.isBungaRendah ? `\n💻 Program: Bunga Rendah 0,99%` : '');
+    const programInfo = state.isBungaRingan ? `\n🎁 Program: ${state.bungaRinganMode}` : (state.is1GP ? `\n🎁 Program: Bunga 0% - 1GP ${state.mode1GP}` : (state.isTripleZero ? `\n🔵 Program: Triple Zero (12+2 Bulan)` : ''));
     const waMsg = encodeURIComponent(
       `📱 *Simulasi Cicilan Home Credit*\n` +
       `────────────────\n` +
