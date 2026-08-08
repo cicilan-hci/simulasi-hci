@@ -2494,6 +2494,77 @@
             </div>
           </div>
         </div>
+
+        <!-- PROMO FEL (10+2) toggle -->
+        <div style="margin-top:8px;">
+          <button onclick="toggleFEL102()" id="fel102ToggleBtn" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:linear-gradient(135deg, rgba(219,39,119,0.12) 0%, rgba(236,72,153,0.08) 100%);border:1px solid rgba(219,39,119,0.4);border-radius:8px;cursor:pointer;font-size:11px;font-weight:700;color:#be185d;text-transform:uppercase;letter-spacing:0.06em;text-align:left;">
+            <span>🎉 Promo FEL (10+2)</span>
+            <span id="fel102ToggleIcon" style="font-size:14px;font-weight:400;">＋</span>
+          </button>
+          <div id="fel102Panel" style="display:none;margin-top:5px;padding:12px;background:rgba(219,39,119,0.03);border:1px solid rgba(219,39,119,0.2);border-radius:8px;">
+            <div style="display:flex;gap:6px;margin-bottom:10px;">
+              <div style="flex:1;text-align:center;padding:6px 4px;background:rgba(219,39,119,0.1);border:1px solid rgba(219,39,119,0.3);border-radius:8px;">
+                <div style="font-size:16px;">📄</div>
+                <div style="font-size:10px;font-weight:700;color:#be185d;">Admin 10%</div>
+              </div>
+              <div style="flex:1;text-align:center;padding:6px 4px;background:rgba(219,39,119,0.1);border:1px solid rgba(219,39,119,0.3);border-radius:8px;">
+                <div style="font-size:16px;">📅</div>
+                <div style="font-size:10px;font-weight:700;color:#be185d;">Bulanan 12rb</div>
+              </div>
+              <div style="flex:1;text-align:center;padding:6px 4px;background:rgba(219,39,119,0.1);border:1px solid rgba(219,39,119,0.3);border-radius:8px;">
+                <div style="font-size:16px;">🎁</div>
+                <div style="font-size:10px;font-weight:700;color:#be185d;">10+2 Bln</div>
+              </div>
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.5;">
+              Admin <b>10% dari harga barang</b> (masuk cicilan) + biaya bulanan <b>Rp 12.000/bln</b>. Bayar <b>10 bulan</b>, <b>2 cicilan terakhir gratis</b> (total 12 bulan).
+            </div>
+            <button onclick="selectFEL102()" id="btnFEL102" style="width:100%;padding:10px;background:white;border:2px solid rgba(219,39,119,0.5);border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;color:#be185d;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;">
+              <span style="font-size:16px;">🎉</span>
+              <span>Aktifkan FEL 10+2</span>
+            </button>
+            <div id="fel102Info" style="display:none;margin-top:8px;padding:6px 8px;background:rgba(219,39,119,0.12);border-radius:6px;font-size:10px;color:#be185d;font-weight:600;line-height:1.5;"></div>
+            <!-- Syarat gratis cicilan -->
+            <div style="margin-top:8px;padding:8px 10px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:8px;display:flex;align-items:flex-start;gap:7px;">
+              <span style="font-size:14px;flex-shrink:0;">⚠️</span>
+              <div style="font-size:10px;color:#991b1b;font-weight:600;line-height:1.55;">
+                <b>Syarat Gratis Cicilan:</b> 2 cicilan terakhir gratis hanya berlaku jika konsumen <b>tidak pernah terlambat membayar</b> selama 10 bulan masa cicilan. Keterlambatan pembayaran dapat membatalkan benefit gratis.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROMO BUNGA RENDAH 0.99% toggle -->
+        <div style="margin-top:8px;">
+          <button onclick="toggleBungaRendah099()" id="bungaRendah099ToggleBtn" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:linear-gradient(135deg, rgba(79,70,229,0.12) 0%, rgba(99,102,241,0.08) 100%);border:1px solid rgba(79,70,229,0.4);border-radius:8px;cursor:pointer;font-size:11px;font-weight:700;color:#4338ca;text-transform:uppercase;letter-spacing:0.06em;text-align:left;">
+            <span>✨ Bunga Rendah 0,99% · Furniture & Laptop</span>
+            <span id="bungaRendah099ToggleIcon" style="font-size:14px;font-weight:400;">＋</span>
+          </button>
+          <div id="bungaRendah099Panel" style="display:none;margin-top:5px;padding:12px;background:rgba(79,70,229,0.03);border:1px solid rgba(79,70,229,0.2);border-radius:8px;">
+            <div style="display:flex;gap:6px;margin-bottom:10px;">
+              <div style="flex:1;text-align:center;padding:6px 4px;background:rgba(79,70,229,0.1);border:1px solid rgba(79,70,229,0.3);border-radius:8px;">
+                <div style="font-size:16px;">💸</div>
+                <div style="font-size:10px;font-weight:700;color:#4338ca;">Bunga 0,99%</div>
+              </div>
+              <div style="flex:1;text-align:center;padding:6px 4px;background:rgba(79,70,229,0.1);border:1px solid rgba(79,70,229,0.3);border-radius:8px;">
+                <div style="font-size:16px;">📅</div>
+                <div style="font-size:10px;font-weight:700;color:#4338ca;">Tenor 24 Bln</div>
+              </div>
+              <div style="flex:1;text-align:center;padding:6px 4px;background:rgba(79,70,229,0.1);border:1px solid rgba(79,70,229,0.3);border-radius:8px;">
+                <div style="font-size:16px;">🛋️</div>
+                <div style="font-size:10px;font-weight:700;color:#4338ca;">Furniture/Laptop</div>
+              </div>
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.5;">
+              Khusus kategori <b>Furniture & Laptop</b> · Nilai pembiayaan <b>Rp 6.000.000 - Rp 30.000.000</b> · Admin Rp 299.000/399.000 (masuk cicilan) + biaya bulanan <b>Rp 12.000/bln</b> · Tenor tetap <b>24 bulan</b>.
+            </div>
+            <button onclick="selectBungaRendah099()" id="btnBungaRendah099" style="width:100%;padding:10px;background:white;border:2px solid rgba(79,70,229,0.5);border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;color:#4338ca;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;">
+              <span style="font-size:16px;">✨</span>
+              <span>Aktifkan Bunga Rendah 0,99%</span>
+            </button>
+            <div id="bungaRendah099Info" style="display:none;margin-top:8px;padding:6px 8px;background:rgba(79,70,229,0.12);border-radius:6px;font-size:10px;color:#4338ca;font-weight:600;line-height:1.5;"></div>
+          </div>
+        </div>
       </div>
 
       <div class="activity-log-container" id="activityLogContainer">
@@ -2688,7 +2759,9 @@ let state = {
   isBungaRingan: false,
   is1GP: false,      // NEW: flag promo 1GP
   mode1GP: null,     // NEW: '5+1' | '8+1' | '10+2'
-  isTripleZero: false // NEW: flag Triple Zero
+  isTripleZero: false, // NEW: flag Triple Zero
+  isFEL102: false,   // NEW: flag Promo FEL (10+2)
+  isBungaRendah099: false // NEW: flag Promo Bunga Rendah 0.99% (24 bln, Furniture/Laptop)
 };
 
 /* ========== STEP MANAGEMENT ========== */
@@ -3122,6 +3195,8 @@ function selectBunga(rate, el) {
   state.is1GP = false;
   state.mode1GP = null;
   state.isTripleZero = false;
+  state.isFEL102 = false;
+  state.isBungaRendah099 = false;
   state.tenorList = [3, 6, 9, 12, 15, 18, 24]; // Reset ke default
   
   // Auto-set biaya admin berdasarkan bunga dan harga barang
@@ -3165,6 +3240,10 @@ function selectBunga(rate, el) {
   // Reset Triple Zero
   resetTripleZeroBtn();
 
+  // Reset FEL 10+2
+  resetFEL102Btn();
+  resetBungaRendah099Btn();
+
   // ⚠️ FIX: Selalu hitung ulang state.nominal
   const totalHarga = harga + getAddonTotal();
   const cash = parseInt(state.cash) || 0;
@@ -3205,9 +3284,36 @@ function selectBungaManual() {
   state.is1GP = false;
   state.mode1GP = null;
   state.isTripleZero = false;
+  state.isFEL102 = false;
+  state.isBungaRendah099 = false;
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
-  document.getElementById('btnMPGG')?.classList.remove('selected');
-  document.getElementById('btnFEL')?.classList.remove('selected');
+
+  // Reset Bunga Ringan (MPGG/FEL) buttons + info
+  const btnMPGG = document.getElementById('btnMPGG');
+  const btnFEL = document.getElementById('btnFEL');
+  if (btnMPGG && btnFEL) {
+    btnMPGG.style.background = 'white';
+    btnMPGG.style.borderColor = 'var(--border)';
+    btnMPGG.style.transform = 'scale(1)';
+    btnFEL.style.background = 'white';
+    btnFEL.style.borderColor = 'var(--border)';
+    btnFEL.style.transform = 'scale(1)';
+  }
+  const bungaRinganInfo = document.getElementById('bungaRinganInfo');
+  if (bungaRinganInfo) bungaRinganInfo.style.display = 'none';
+
+  // Reset 1GP buttons + info
+  ['5+1', '8+1', '10+2'].forEach(m => {
+    const btn = document.getElementById('btn1GP_' + m.replace('+', '_'));
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const info1gp = document.getElementById('promo1GPInfo');
+  if (info1gp) info1gp.style.display = 'none';
+
+  // Reset Triple Zero & FEL 10+2
+  resetTripleZeroBtn();
+  resetFEL102Btn();
+  resetBungaRendah099Btn();
   
   // Auto-set biaya admin berdasarkan bunga dan harga barang
   const harga = parseInt(state.hargaBarang) || 0;
@@ -3263,6 +3369,8 @@ function selectBungaRingan(mode) {
   state.is1GP = false;
   state.mode1GP = null;
   state.isTripleZero = false;
+  state.isFEL102 = false;
+  state.isBungaRendah099 = false;
   
   // Set bunga dan tenor sesuai program
   if (mode === 'MPGG') {
@@ -3292,6 +3400,10 @@ function selectBungaRingan(mode) {
 
   // Reset Triple Zero
   resetTripleZeroBtn();
+
+  // Reset FEL 10+2
+  resetFEL102Btn();
+  resetBungaRendah099Btn();
   
   // Update button styles
   const btnMPGG = document.getElementById('btnMPGG');
@@ -3311,9 +3423,9 @@ function selectBungaRingan(mode) {
   if (info) {
     info.style.display = 'block';
     if (mode === 'MPGG') {
-      info.innerHTML = '✓ MPGG dipilih - Bunga 2.25%, Admin 3% (masuk cicilan) + Rp 10rb/bln, Tenor 3-12 bulan';
+      info.innerHTML = '✓ MPGG dipilih - Bunga 2.25%, Admin 3% (masuk cicilan) + Rp 12rb/bln, Tenor 3-12 bulan';
     } else {
-      info.innerHTML = '✓ FEL dipilih - Bunga 2.25%, Admin 3% dari harga (masuk cicilan) + Rp 10rb/bln, Tenor 12-15 bulan';
+      info.innerHTML = '✓ FEL dipilih - Bunga 2.25%, Admin 3% dari harga (masuk cicilan) + Rp 12rb/bln, Tenor 12-15 bulan';
     }
   }
   
@@ -3354,6 +3466,8 @@ function selectPromo1GP(mode) {
   state.isBungaRingan = false;
   state.bungaRinganMode = null;
   state.isTripleZero = false;
+  state.isFEL102 = false;
+  state.isBungaRendah099 = false;
   state.bunga = 0; // Bunga 0%
 
   // Biaya admin berdasarkan harga barang
@@ -3383,6 +3497,10 @@ function selectPromo1GP(mode) {
   // Reset Triple Zero
   resetTripleZeroBtn();
 
+  // Reset FEL 10+2
+  resetFEL102Btn();
+  resetBungaRendah099Btn();
+
   // Highlight selected 1GP button
   ['5+1', '8+1', '10+2'].forEach(m => {
     const id = 'btn1GP_' + m.replace('+', '_');
@@ -3399,7 +3517,195 @@ function selectPromo1GP(mode) {
   if (info) {
     info.style.display = 'block';
     const adminFmt = (state.biayaAdmin).toLocaleString('id-ID');
-    info.innerHTML = `✓ <b>1GP ${mode}</b> dipilih · Bunga 0% · Admin Rp ${adminFmt} (masuk cicilan) + Rp 10rb/bln · ${labelMap[mode]}`;
+    info.innerHTML = `✓ <b>1GP ${mode}</b> dipilih · Bunga 0% · Admin Rp ${adminFmt} (masuk cicilan) + Rp 12rb/bln · ${labelMap[mode]}`;
+  }
+
+  buildAndShowResult();
+  if (currentStep !== 3) showScreen(3);
+}
+
+/* ========== PROMO FEL (10+2) ========== */
+function toggleFEL102() {
+  const panel = document.getElementById('fel102Panel');
+  const icon  = document.getElementById('fel102ToggleIcon');
+  if (!panel) return;
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  icon.textContent = isOpen ? '＋' : '－';
+}
+
+function resetFEL102Btn() {
+  const btn = document.getElementById('btnFEL102');
+  if (btn) {
+    btn.style.background = 'white';
+    btn.style.borderColor = 'rgba(219,39,119,0.5)';
+    btn.style.transform = 'scale(1)';
+  }
+  const info = document.getElementById('fel102Info');
+  if (info) info.style.display = 'none';
+}
+
+function selectFEL102() {
+  const harga = parseInt(state.hargaBarang) || 0;
+  const totalHarga = harga + getAddonTotal();
+  const cash = parseInt(state.cash) || 0;
+  const nominal = totalHarga - cash;
+
+  if (!harga || nominal <= 0) {
+    alert('⚠️ Masukkan harga barang terlebih dahulu!');
+    return;
+  }
+
+  // FEL 10+2: bunga 0%, admin 10% dari harga (masuk cicilan), biaya bulanan Rp 12rb,
+  // bayar 10 bulan, 2 cicilan terakhir gratis jika tidak pernah telat (total 12 bulan)
+  state.isFEL102      = true;
+  state.isTripleZero  = false;
+  state.is1GP         = false;
+  state.mode1GP       = null;
+  state.isBungaRingan = false;
+  state.bungaRinganMode = null;
+  state.isBungaRendah099 = false;
+  state.bunga         = 0;
+  state.biayaAdmin    = Math.round(totalHarga * 0.10); // Admin 10% dari harga barang
+  state.tenorList     = [10]; // Bayar 10 bulan
+  state.nominal        = nominal;
+
+  // Reset bunga normal & manual
+  document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
+  const bungaManualInput = document.getElementById('bungaManualInput');
+  if (bungaManualInput) bungaManualInput.value = '';
+
+  // Reset Bunga Ringan
+  ['btnMPGG', 'btnFEL'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const brInfo = document.getElementById('bungaRinganInfo');
+  if (brInfo) brInfo.style.display = 'none';
+
+  // Reset 1GP
+  ['5+1','8+1','10+2'].forEach(m => {
+    const btn = document.getElementById('btn1GP_' + m.replace('+','_'));
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const info1gp = document.getElementById('promo1GPInfo');
+  if (info1gp) info1gp.style.display = 'none';
+
+  // Reset Triple Zero
+  resetTripleZeroBtn();
+  resetBungaRendah099Btn();
+
+  // Highlight FEL 10+2 button
+  const btn = document.getElementById('btnFEL102');
+  if (btn) {
+    btn.style.background = 'linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%)';
+    btn.style.borderColor = '#be185d';
+    btn.style.transform   = 'scale(1.02)';
+  }
+
+  // Show info
+  const info = document.getElementById('fel102Info');
+  if (info) {
+    info.style.display = 'block';
+    const adminFmt = state.biayaAdmin.toLocaleString('id-ID');
+    info.innerHTML = `✓ <b>FEL 10+2</b> aktif · Bunga 0% · Admin Rp ${adminFmt} (10% dari harga, masuk cicilan) + Rp 12rb/bln · Bayar 10 bulan, 2 cicilan terakhir gratis`;
+  }
+
+  buildAndShowResult();
+  if (currentStep !== 3) showScreen(3);
+}
+
+/* ========== PROMO BUNGA RENDAH 0.99% (Furniture & Laptop) ========== */
+function toggleBungaRendah099() {
+  const panel = document.getElementById('bungaRendah099Panel');
+  const icon  = document.getElementById('bungaRendah099ToggleIcon');
+  if (!panel) return;
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+  icon.textContent = isOpen ? '＋' : '－';
+}
+
+function resetBungaRendah099Btn() {
+  const btn = document.getElementById('btnBungaRendah099');
+  if (btn) {
+    btn.style.background = 'white';
+    btn.style.borderColor = 'rgba(79,70,229,0.5)';
+    btn.style.transform = 'scale(1)';
+  }
+  const info = document.getElementById('bungaRendah099Info');
+  if (info) info.style.display = 'none';
+}
+
+function selectBungaRendah099() {
+  const harga = parseInt(state.hargaBarang) || 0;
+  const totalHarga = harga + getAddonTotal();
+  const cash = parseInt(state.cash) || 0;
+  const nominal = totalHarga - cash;
+
+  if (!harga || nominal <= 0) {
+    alert('⚠️ Masukkan harga barang terlebih dahulu!');
+    return;
+  }
+
+  // Validasi range nilai pembiayaan: Rp 6jt - Rp 30jt
+  if (nominal < 6000000 || nominal > 30000000) {
+    alert('⚠️ Bunga Rendah 0,99% hanya untuk pembiayaan Rp 6.000.000 - Rp 30.000.000\n\nNilai pembiayaan saat ini: ' + rupiah(nominal));
+    return;
+  }
+
+  // Bunga Rendah 0.99%: khusus Furniture & Laptop, tenor tetap 24 bulan,
+  // admin fee tier (sama seperti cicilan normal), biaya bulanan Rp 12rb
+  state.isBungaRendah099 = true;
+  state.isFEL102       = false;
+  state.isTripleZero   = false;
+  state.is1GP          = false;
+  state.mode1GP        = null;
+  state.isBungaRingan  = false;
+  state.bungaRinganMode = null;
+  state.bunga          = 0.0099; // 0.99%
+  state.biayaAdmin     = harga < 15000000 ? 299000 : 399000; // Admin fee tier, sama seperti promo lain
+  state.tenorList       = [24]; // Tenor tetap 24 bulan
+  state.nominal          = nominal;
+
+  // Reset bunga normal & manual
+  document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
+  const bungaManualInput = document.getElementById('bungaManualInput');
+  if (bungaManualInput) bungaManualInput.value = '';
+
+  // Reset Bunga Ringan
+  ['btnMPGG', 'btnFEL'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const brInfo = document.getElementById('bungaRinganInfo');
+  if (brInfo) brInfo.style.display = 'none';
+
+  // Reset 1GP
+  ['5+1','8+1','10+2'].forEach(m => {
+    const btn = document.getElementById('btn1GP_' + m.replace('+','_'));
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const info1gp = document.getElementById('promo1GPInfo');
+  if (info1gp) info1gp.style.display = 'none';
+
+  // Reset Triple Zero & FEL 10+2
+  resetTripleZeroBtn();
+  resetFEL102Btn();
+
+  // Highlight Bunga Rendah 0.99% button
+  const btn = document.getElementById('btnBungaRendah099');
+  if (btn) {
+    btn.style.background = 'linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%)';
+    btn.style.borderColor = '#4338ca';
+    btn.style.transform   = 'scale(1.02)';
+  }
+
+  // Show info
+  const info = document.getElementById('bungaRendah099Info');
+  if (info) {
+    info.style.display = 'block';
+    const adminFmt = state.biayaAdmin.toLocaleString('id-ID');
+    info.innerHTML = `✓ <b>Bunga Rendah 0,99%</b> aktif · Furniture & Laptop · Admin Rp ${adminFmt} (masuk cicilan) + Rp 12rb/bln · Tenor tetap 24 bulan`;
   }
 
   buildAndShowResult();
@@ -3444,6 +3750,8 @@ function selectTripleZero() {
   state.mode1GP       = null;
   state.isBungaRingan = false;
   state.bungaRinganMode = null;
+  state.isFEL102      = false;
+  state.isBungaRendah099 = false;
   state.bunga         = 0;
   state.biayaAdmin    = 0;   // Admin GRATIS
   state.tenorList     = [12]; // Bayar 12 bulan
@@ -3468,6 +3776,10 @@ function selectTripleZero() {
   });
   const info1gp = document.getElementById('promo1GPInfo');
   if (info1gp) info1gp.style.display = 'none';
+
+  // Reset FEL 10+2
+  resetFEL102Btn();
+  resetBungaRendah099Btn();
 
   // Highlight Triple Zero button
   const btn = document.getElementById('btnTripleZero');
@@ -3514,6 +3826,43 @@ function selectTenorManual() {
   if (!input.value || isNaN(value) || value < 1 || value > 60) {
     alert('Masukkan tenor antara 1 - 60 bulan');
     return;
+  }
+
+  // Jika promo dengan tenor tetap sedang aktif (Bunga Ringan/1GP/Triple Zero/FEL 10+2/Bunga Rendah 0.99%),
+  // ubah tenor manual akan menonaktifkan promo tsb karena tenornya sudah ketentuan baku.
+  if (state.isBungaRingan || state.is1GP || state.isTripleZero || state.isFEL102 || state.isBungaRendah099) {
+    const harga = parseInt(state.hargaBarang) || 0;
+    state.isBungaRingan = false;
+    state.bungaRinganMode = null;
+    state.is1GP = false;
+    state.mode1GP = null;
+    state.isTripleZero = false;
+    state.isFEL102 = false;
+    state.isBungaRendah099 = false;
+    state.bunga = state.bunga || 0;
+    state.biayaAdmin = harga < 15000000 ? 299000 : 399000;
+
+    const btnMPGG = document.getElementById('btnMPGG');
+    const btnFEL = document.getElementById('btnFEL');
+    if (btnMPGG && btnFEL) {
+      btnMPGG.style.background = 'white'; btnMPGG.style.borderColor = 'var(--border)'; btnMPGG.style.transform = 'scale(1)';
+      btnFEL.style.background = 'white'; btnFEL.style.borderColor = 'var(--border)'; btnFEL.style.transform = 'scale(1)';
+    }
+    const bungaRinganInfo = document.getElementById('bungaRinganInfo');
+    if (bungaRinganInfo) bungaRinganInfo.style.display = 'none';
+
+    ['5+1', '8+1', '10+2'].forEach(m => {
+      const btn = document.getElementById('btn1GP_' + m.replace('+', '_'));
+      if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+    });
+    const info1gp = document.getElementById('promo1GPInfo');
+    if (info1gp) info1gp.style.display = 'none';
+
+    resetTripleZeroBtn();
+    resetFEL102Btn();
+    resetBungaRendah099Btn();
+
+    alert('ℹ️ Tenor promo bersifat tetap sesuai ketentuan. Promo dinonaktifkan karena tenor diubah manual.');
   }
   
   document.querySelectorAll('.tenor-preset').forEach(b => b.classList.remove('selected'));
@@ -3578,7 +3927,7 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
 
   // ===== Kalkulasi =====
   let biayaAdmin = state.biayaAdmin;
-  let adminBulanan = state.isTripleZero ? 0 : 10000; // Triple Zero: biaya bulanan = 0
+  let adminBulanan = state.isTripleZero ? 0 : 12000; // Triple Zero: 0, lainnya (termasuk FEL 10+2): 12rb
   
   // SEMUA admin fee masuk ke cicilan (dikenakan bunga)
   // Baik untuk cicilan normal maupun Bunga Ringan (MPGG/FEL)
@@ -3622,12 +3971,16 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
     bungaRinganBadge = `<div style="display:inline-block;margin-left:8px;padding:3px 8px;background:linear-gradient(135deg,#b45309,#d97706);color:white;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:0.05em;">🎁 1GP ${labelMap1gp[state.mode1GP] || ''}</div>`;
   } else if (state.isTripleZero) {
     bungaRinganBadge = `<div style="display:inline-block;margin-left:6px;padding:3px 7px;background:linear-gradient(135deg,#0891b2,#06b6d4);color:white;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:0.04em;">🔵 TRIPLE ZERO</div><div style="display:inline-block;margin-left:4px;padding:3px 7px;background:#059669;color:white;border-radius:6px;font-size:9px;font-weight:700;">FREE ADMIN</div>`;
+  } else if (state.isFEL102) {
+    bungaRinganBadge = `<div style="display:inline-block;margin-left:8px;padding:3px 8px;background:linear-gradient(135deg,#be185d,#db2777);color:white;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:0.05em;">🎉 FEL 10+2</div>`;
+  } else if (state.isBungaRendah099) {
+    bungaRinganBadge = `<div style="display:inline-block;margin-left:8px;padding:3px 8px;background:linear-gradient(135deg,#4338ca,#6366f1);color:white;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:0.05em;">✨ 0,99%</div>`;
   }
 
   // WA message
   const harga = (parseInt(state.hargaBarang) || 0) + getAddonTotal();
   const dp = parseInt(state.cash) || 0;
-  const programInfo = state.isBungaRingan ? `\n🎁 Program: ${state.bungaRinganMode}` : (state.is1GP ? `\n🎁 Program: Bunga 0% - 1GP ${state.mode1GP}` : (state.isTripleZero ? `\n🔵 Program: Triple Zero (12+2 Bulan)` : ''));
+  const programInfo = state.isBungaRingan ? `\n🎁 Program: ${state.bungaRinganMode}` : (state.is1GP ? `\n🎁 Program: Bunga 0% - 1GP ${state.mode1GP}` : (state.isTripleZero ? `\n🔵 Program: Triple Zero (12+2 Bulan)` : (state.isFEL102 ? `\n🎉 Program: FEL 10+2 (Admin 10%)` : (state.isBungaRendah099 ? `\n✨ Program: Bunga Rendah 0,99% (Furniture/Laptop, 24 Bln)` : ''))));
   const waMsg = encodeURIComponent(
     `📱 *Simulasi Cicilan Home Credit*\n` +
     `────────────────\n` +
@@ -3644,6 +3997,8 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
   let adminFeeText = '';
   if (state.isTripleZero) {
     adminFeeText = `<span style="color:#0891b2;font-weight:700;">🔵 TRIPLE ZERO</span> · Biaya Admin: <code>Rp 0</code> · Biaya Bulanan: <code>Rp 0/bln</code><br>💡 Bayar <b>12 bulan</b>, gratis <b>2 bulan</b> (total 14 bulan)`;
+  } else if (state.isFEL102) {
+    adminFeeText = `<span style="color:#be185d;font-weight:700;">🎉 FEL 10+2</span> · Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (10% dari harga, masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code><br>💡 Bayar <b>10 bulan</b>, <b>2 cicilan terakhir gratis</b> jika tidak pernah telat (total 12 bulan)`;
   } else if (state.is1GP) {
     const totalBulan1gp = { '5+1': 6, '8+1': 9, '10+2': 12 };
     const totalBulan = totalBulan1gp[state.mode1GP] || tenor;
@@ -3652,6 +4007,8 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
     adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (3% dari harga, masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code>`;
   } else if (state.isBungaRingan && state.bungaRinganMode === 'MPGG') {
     adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (3% dari harga, masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code>`;
+  } else if (state.isBungaRendah099) {
+    adminFeeText = `<span style="color:#4338ca;font-weight:700;">✨ BUNGA RENDAH 0,99%</span> · Khusus Furniture & Laptop · Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code><br>💡 Tenor tetap <b>24 bulan</b> · Nilai pembiayaan Rp 6jt - Rp 30jt`;
   } else {
     adminFeeText = `Biaya Admin: <code>${rupiah(biayaAdminMasukBase)} (masuk cicilan)</code> + Admin Bulanan: <code>${rupiah(adminBulanan)}/bln × ${tenor} = ${rupiah(adminBulanan * tenor)}</code>`;
   }
@@ -3673,9 +4030,9 @@ function buildTenorCard(tenor, pokok, bunga, akujagaPerBulan, totalAsuransi, pro
 
   let html = `<div class="tenor-card fade">
     <div class="tenor-header" onclick="toggleTenor(${tenor})">
-      <div class="tenor-badge">${state.isTripleZero ? '12+2' : (state.is1GP ? `${state.mode1GP}` : tenor + ' BLN')}${bungaRinganBadge}</div>
+      <div class="tenor-badge">${state.isTripleZero ? '12+2' : (state.is1GP ? `${state.mode1GP}` : (state.isFEL102 ? '10+2' : tenor + ' BLN'))}${bungaRinganBadge}</div>
       <div class="tenor-title" style="flex:1;margin-left:12px;">
-        ${state.isTripleZero ? `<span style="font-size:10px;color:#0891b2;font-weight:700;display:block;margin-bottom:1px;">Cicilan Ringan - 2GP · Triple Zero</span>` : (state.is1GP ? `<span style="font-size:10px;color:#b45309;font-weight:700;display:block;margin-bottom:1px;">Cicilan Ringan - 1GP</span>` : '')}
+        ${state.isTripleZero ? `<span style="font-size:10px;color:#0891b2;font-weight:700;display:block;margin-bottom:1px;">Cicilan Ringan - 2GP · Triple Zero</span>` : (state.is1GP ? `<span style="font-size:10px;color:#b45309;font-weight:700;display:block;margin-bottom:1px;">Cicilan Ringan - 1GP</span>` : (state.isFEL102 ? `<span style="font-size:10px;color:#be185d;font-weight:700;display:block;margin-bottom:1px;">Cicilan Ringan - FEL 10+2</span>` : (state.isBungaRendah099 ? `<span style="font-size:10px;color:#4338ca;font-weight:700;display:block;margin-bottom:1px;">Bunga Rendah 0,99% - Furniture/Laptop</span>` : '')))}
         <strong style="${state.isTripleZero ? 'color:#0891b2;' : ''}">${rupiah(cicilan)}</strong><span style="font-size:12px;color:var(--muted);">/bln</span>
       </div>
       <div class="tenor-toggle-icon" id="${iconId}">▼</div>
@@ -3749,7 +4106,7 @@ function closeConfirmHome() {
 
 /* ========== RESET ========== */
 function resetAll() {
-  state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24], income: '', biayaAdmin: 299000, easyCoverTenor: 12, addons: { tecprotec: 0, aksesoris: 0, kartuprovider: 0 } };
+  state = { hargaBarang: '', cash: '', nominal: 0, asuransi: [], pakaProteksi: null, bunga: null, tenorList: [3, 6, 9, 12, 15, 18, 24], income: '', biayaAdmin: 299000, easyCoverTenor: 12, addons: { tecprotec: 0, aksesoris: 0, kartuprovider: 0 }, bungaRinganMode: null, isBungaRingan: false, is1GP: false, mode1GP: null, isTripleZero: false, isFEL102: false, isBungaRendah099: false };
   document.getElementById('hargaInput').value = '';
   document.getElementById('hargaInput').classList.remove('input-valid', 'input-error');
   const feedbackEl = document.getElementById('hargaFeedback');
@@ -3777,6 +4134,24 @@ function resetAll() {
   document.querySelectorAll('.tenor-preset').forEach(b => b.classList.remove('selected'));
   renderToggles();
   document.querySelectorAll('.bunga-btn').forEach(b => b.classList.remove('selected'));
+  // Reset visual promo buttons (Bunga Ringan, 1GP, Triple Zero, FEL 10+2)
+  const btnMPGGReset = document.getElementById('btnMPGG');
+  const btnFELReset = document.getElementById('btnFEL');
+  if (btnMPGGReset && btnFELReset) {
+    btnMPGGReset.style.background = 'white'; btnMPGGReset.style.borderColor = 'var(--border)'; btnMPGGReset.style.transform = 'scale(1)';
+    btnFELReset.style.background = 'white'; btnFELReset.style.borderColor = 'var(--border)'; btnFELReset.style.transform = 'scale(1)';
+  }
+  const bungaRinganInfoReset = document.getElementById('bungaRinganInfo');
+  if (bungaRinganInfoReset) bungaRinganInfoReset.style.display = 'none';
+  ['5+1', '8+1', '10+2'].forEach(m => {
+    const btn = document.getElementById('btn1GP_' + m.replace('+', '_'));
+    if (btn) { btn.style.background = 'white'; btn.style.borderColor = 'var(--border)'; btn.style.transform = 'scale(1)'; }
+  });
+  const info1gpReset = document.getElementById('promo1GPInfo');
+  if (info1gpReset) info1gpReset.style.display = 'none';
+  resetFEL102Btn();
+  resetBungaRendah099Btn();
+  resetTripleZeroBtn();
   displayActivityLog();
   showScreen(1);
 }
@@ -4043,7 +4418,7 @@ function buildSalesData() {
 
   return state.tenorList.map(tenor => {
     let biayaAdmin = state.biayaAdmin;
-    let adminBulanan = state.isTripleZero ? 0 : 10000; // Triple Zero: biaya bulanan = 0
+    let adminBulanan = state.isTripleZero ? 0 : 12000; // Triple Zero: 0, lainnya (termasuk FEL 10+2): 12rb
     
     // SEMUA admin fee masuk ke cicilan (dikenakan bunga)
     const biayaAdminMasukBase = biayaAdmin;
@@ -4056,7 +4431,7 @@ function buildSalesData() {
     const total = base + bungaTotal + biayaAdminDiLuar + (adminBulanan * tenor);
     const cicilan = total / tenor;
 
-    const programInfo = state.isBungaRingan ? `\n🎁 Program: ${state.bungaRinganMode}` : (state.is1GP ? `\n🎁 Program: Bunga 0% - 1GP ${state.mode1GP}` : (state.isTripleZero ? `\n🔵 Program: Triple Zero (12+2 Bulan)` : ''));
+    const programInfo = state.isBungaRingan ? `\n🎁 Program: ${state.bungaRinganMode}` : (state.is1GP ? `\n🎁 Program: Bunga 0% - 1GP ${state.mode1GP}` : (state.isTripleZero ? `\n🔵 Program: Triple Zero (12+2 Bulan)` : (state.isFEL102 ? `\n🎉 Program: FEL 10+2 (Admin 10%)` : (state.isBungaRendah099 ? `\n✨ Program: Bunga Rendah 0,99% (Furniture/Laptop, 24 Bln)` : ''))));
     const waMsg = encodeURIComponent(
       `📱 *Simulasi Cicilan Home Credit*\n` +
       `────────────────\n` +
